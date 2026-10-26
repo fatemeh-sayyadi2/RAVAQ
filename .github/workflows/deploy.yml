@@ -30,6 +30,8 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build site
+        env:
+          VITE_BASE_PATH: /RAVAQ/
         run: bun run build
 
       - name: Upload build
