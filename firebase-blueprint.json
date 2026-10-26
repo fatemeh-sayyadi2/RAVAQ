@@ -1,0 +1,226 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public/basic profile record for a registered RAVĀQ user.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID of the user",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Full name in Persian or Latin",
+          "maxLength": 100
+        },
+        "role": {
+          "type": "string",
+          "description": "User role (CUSTOMER or ADMIN)",
+          "enum": ["CUSTOMER", "ADMIN"],
+          "maxLength": 20
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["uid", "displayName", "role", "createdAt", "updatedAt"]
+    },
+    "UserPrivateInfo": {
+      "title": "UserPrivateInfo",
+      "description": "Isolated PII document containing email, mobile, and saved addresses.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Owner Firebase UID",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address",
+          "maxLength": 160
+        },
+        "mobile": {
+          "type": "string",
+          "description": "Normalized Iranian mobile number",
+          "maxLength": 20,
+          "pattern": "^09[0-9]{9}$"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["uid", "email", "updatedAt"]
+    },
+    "CustomerAddress": {
+      "title": "CustomerAddress",
+      "description": "Saved Iranian shipping address belonging to a specific user.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Owner Firebase UID",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "recipientName": {
+          "type": "string",
+          "description": "Recipient full name",
+          "maxLength": 100
+        },
+        "mobile": {
+          "type": "string",
+          "description": "Iranian mobile phone",
+          "maxLength": 20,
+          "pattern": "^09[0-9]{9}$"
+        },
+        "province": {
+          "type": "string",
+          "description": "Iranian province name",
+          "maxLength": 60
+        },
+        "city": {
+          "type": "string",
+          "description": "City name",
+          "maxLength": 60
+        },
+        "addressLine": {
+          "type": "string",
+          "description": "Street address and plaque details",
+          "maxLength": 300
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "10-digit Iranian postal code",
+          "maxLength": 10,
+          "pattern": "^[0-9]{10}$"
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether this is the default shipping address"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "recipientName", "mobile", "province", "city", "addressLine", "postalCode", "isDefault", "createdAt", "updatedAt"]
+    },
+    "OrderRecord": {
+      "title": "OrderRecord",
+      "description": "Customer order record synced to Firestore for authenticated order history.",
+      "type": "object",
+      "properties": {
+        "orderNumber": {
+          "type": "string",
+          "description": "Unique order reference number",
+          "maxLength": 40,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase UID",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["PENDING_PAYMENT", "PAID", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"],
+          "maxLength": 30
+        },
+        "paymentStatus": {
+          "type": "string",
+          "enum": ["PENDING", "SUCCEEDED", "FAILED", "CANCELLED", "EXPIRED"],
+          "maxLength": 30
+        },
+        "totalAmount": {
+          "type": "integer",
+          "description": "Final order total in integer Toman"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["orderNumber", "userId", "status", "paymentStatus", "totalAmount", "createdAt", "updatedAt"]
+    },
+    "ProductReview": {
+      "title": "ProductReview",
+      "description": "Verified customer product review.",
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "maxLength": 80,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorName": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "rating": {
+          "type": "integer",
+          "description": "Rating from 1 to 5"
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 600
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["productId", "userId", "authorName", "rating", "comment", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Public/basic user profile document."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/UserPrivateInfo" },
+      "description": "Isolated PII document for user email and phone."
+    },
+    "/users/{userId}/addresses/{addressId}": {
+      "schema": { "$ref": "#/entities/CustomerAddress" },
+      "description": "Saved Iranian addresses subcollection for a user."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/OrderRecord" },
+      "description": "Customer order mirror documents."
+    },
+    "/reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/ProductReview" },
+      "description": "Customer reviews on products."
+    }
+  }
+}

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="هدیه‌های مناسبتی نوروز و شب یلدا رَواق | RAVĀQ">
+  <defs>
+    <linearGradient id="occWall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF9F4" />
+      <stop offset="55%" stop-color="#F8F4EC" />
+      <stop offset="100%" stop-color="#E7DDD0" />
+    </linearGradient>
+    <linearGradient id="occWalnut" x1="0%" y1="0%" x2="100%" y2="10%">
+      <stop offset="0%" stop-color="#4A2F21" />
+      <stop offset="50%" stop-color="#5D3B2A" />
+      <stop offset="100%" stop-color="#3B2318" />
+    </linearGradient>
+    <linearGradient id="hamperBurgundy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#853543" />
+      <stop offset="50%" stop-color="#742E3A" />
+      <stop offset="100%" stop-color="#4C202B" />
+    </linearGradient>
+    <linearGradient id="occBrass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DFC796" />
+      <stop offset="50%" stop-color="#B89A62" />
+      <stop offset="100%" stop-color="#8A6E3B" />
+    </linearGradient>
+    <radialGradient id="occShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#190D09" stop-opacity="0.72" />
+      <stop offset="65%" stop-color="#190D09" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#190D09" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- 1. Studio Wall & Arch Niche -->
+  <rect width="800" height="600" fill="url(#occWall)" />
+  <polygon points="465,0 800,0 800,430 275,430" fill="#EFE5D6" opacity="0.45" />
+  <path d="M210 430V175C210 80 295 18 400 18C505 18 590 80 590 175V430H210Z" fill="#EFE5D6" fill-opacity="0.6" stroke="#E4DCCF" stroke-width="2" />
+  <path d="M232 430V182C232 98 307 38 400 38C493 38 568 98 568 182V430" fill="none" stroke="#B89A62" stroke-opacity="0.4" stroke-width="1.5" />
+
+  <!-- 2. Walnut Table -->
+  <rect x="0" y="430" width="800" height="140" fill="url(#occWalnut)" />
+  <rect x="0" y="570" width="800" height="30" fill="#2A1810" />
+  <line x1="0" y1="430" x2="800" y2="430" stroke="#B89A62" stroke-opacity="0.45" stroke-width="1.5" />
+
+  <!-- 3. Contact Shadow -->
+  <ellipse cx="400" cy="482" rx="255" ry="34" fill="url(#occShadow)" />
+
+  <!-- 4. Open Curated RAVĀQ Occasion Gift Hamper (Pistachios, Saffron, Sweets & Turquoise Ceramic Vessel) -->
+  <g transform="translate(150, 140)">
+    <!-- Upright Warm Ivory Lid Resting Behind Box -->
+    <rect x="46" y="0" width="408" height="210" rx="8" fill="#F8F4EC" stroke="url(#occBrass)" stroke-width="2.2" />
+    <rect x="64" y="16" width="372" height="178" rx="5" fill="none" stroke="#B89A62" stroke-opacity="0.45" stroke-width="1.2" />
+    <circle cx="250" cy="42" r="3.5" fill="#2D8C88" />
+    <text x="250" y="76" text-anchor="middle" fill="#292624" font-family="sans-serif" font-size="26" font-weight="700">رَواق</text>
+    <text x="250" y="100" text-anchor="middle" fill="#742E3A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11.5" font-weight="700" letter-spacing="4">RAVĀQ</text>
+
+    <!-- Compartmentalized Items Inside Hamper -->
+    <!-- Left Compartment: Saffron Apothecary Jar -->
+    <g transform="translate(76, 134)">
+      <rect x="14" y="0" width="56" height="18" rx="4" fill="url(#occBrass)" />
+      <rect x="4" y="18" width="76" height="104" rx="10" fill="#B81D2A" stroke="url(#occBrass)" stroke-width="1.5" />
+      <rect x="14" y="42" width="56" height="44" rx="4" fill="#F8F4EC" stroke="url(#occBrass)" stroke-width="1.2" />
+      <text x="42" y="68" text-anchor="middle" fill="#292624" font-family="sans-serif" font-size="13" font-weight="700">رَواق</text>
+    </g>
+
+    <!-- Center Compartment: Handcrafted Muted Turquoise Ceramic Bowl with Pistachios -->
+    <g transform="translate(182, 146)">
+      <ellipse cx="68" cy="36" rx="52" ry="18" fill="#689B4B" />
+      <ellipse cx="52" cy="32" rx="16" ry="9" fill="#F6EFE0" />
+      <ellipse cx="84" cy="34" rx="16" ry="9" fill="#F6EFE0" />
+      <path d="M8 40 C14 96, 42 114, 68 114 C94 114, 122 96, 128 40 Z" fill="#2D8C88" stroke="url(#occBrass)" stroke-width="2" />
+    </g>
+
+    <!-- Right Compartment: Burgundy Sweet & Dried Fruit Canister -->
+    <g transform="translate(336, 128)">
+      <rect x="12" y="0" width="68" height="18" rx="4" fill="url(#occBrass)" />
+      <rect x="4" y="18" width="84" height="110" rx="10" fill="#4C202B" stroke="url(#occBrass)" stroke-width="1.5" />
+      <rect x="16" y="44" width="60" height="48" rx="4" fill="#F8F4EC" stroke="url(#occBrass)" stroke-width="1.2" />
+      <text x="46" y="72" text-anchor="middle" fill="#742E3A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9" font-weight="700" letter-spacing="2.5">RAVĀQ</text>
+    </g>
+
+    <!-- Lower Burgundy Hamper Box Front & Brass Dividers -->
+    <polygon points="24,218 476,218 456,338 44,338" fill="url(#hamperBurgundy)" stroke="url(#occBrass)" stroke-width="2" />
+    <rect x="24" y="212" width="452" height="10" rx="3" fill="url(#occBrass)" />
+    <!-- Front Brass & Ivory Gift Plaque -->
+    <rect x="176" y="248" width="148" height="62" rx="5" fill="#F8F4EC" stroke="url(#occBrass)" stroke-width="1.8" />
+    <circle cx="250" cy="262" r="2.8" fill="#2D8C88" />
+    <text x="250" y="284" text-anchor="middle" fill="#292624" font-family="sans-serif" font-size="17" font-weight="700">پیشکش مناسبتی رَواق</text>
+    <text x="250" y="301" text-anchor="middle" fill="#742E3A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9" font-weight="700" letter-spacing="3">RAVĀQ</text>
+  </g>
+</svg>

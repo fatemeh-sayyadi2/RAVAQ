@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="شیرینی‌های سنتی ایران در بسته‌بندی رَواق | RAVĀQ">
+  <defs>
+    <linearGradient id="sweetsWall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF9F4" />
+      <stop offset="55%" stop-color="#F8F4EC" />
+      <stop offset="100%" stop-color="#E7DDD0" />
+    </linearGradient>
+    <linearGradient id="walnutSurfaceSweets" x1="0%" y1="0%" x2="100%" y2="10%">
+      <stop offset="0%" stop-color="#4A2F21" />
+      <stop offset="50%" stop-color="#5D3B2A" />
+      <stop offset="100%" stop-color="#3B2318" />
+    </linearGradient>
+    <linearGradient id="sweetBoxBurgundy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#853543" />
+      <stop offset="50%" stop-color="#742E3A" />
+      <stop offset="100%" stop-color="#4C202B" />
+    </linearGradient>
+    <linearGradient id="brassGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DFC796" />
+      <stop offset="50%" stop-color="#B89A62" />
+      <stop offset="100%" stop-color="#8A6E3B" />
+    </linearGradient>
+    <linearGradient id="sohanAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DDA246" />
+      <stop offset="55%" stop-color="#C48328" />
+      <stop offset="100%" stop-color="#9A6116" />
+    </linearGradient>
+    <radialGradient id="platterShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#190D09" stop-opacity="0.7" />
+      <stop offset="65%" stop-color="#190D09" stop-opacity="0.24" />
+      <stop offset="100%" stop-color="#190D09" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- 1. Studio Wall & Arch Niche -->
+  <rect width="800" height="600" fill="url(#sweetsWall)" />
+  <polygon points="460,0 800,0 800,430 270,430" fill="#EFE5D6" opacity="0.45" />
+  <path d="M210 430V180C210 85 295 20 400 20C505 20 590 85 590 180V430H210Z" fill="#EFE5D6" fill-opacity="0.58" stroke="#E4DCCF" stroke-width="2" />
+  <path d="M230 430V186C230 102 306 40 400 40C494 40 570 102 570 186V430" fill="none" stroke="#B89A62" stroke-opacity="0.38" stroke-width="1.5" />
+
+  <!-- 2. Natural Walnut Table -->
+  <rect x="0" y="430" width="800" height="140" fill="url(#walnutSurfaceSweets)" />
+  <rect x="0" y="570" width="800" height="30" fill="#2A1810" />
+  <line x1="0" y1="430" x2="800" y2="430" stroke="#B89A62" stroke-opacity="0.45" stroke-width="1.5" />
+
+  <!-- 3. Shadows -->
+  <ellipse cx="285" cy="462" rx="155" ry="24" fill="url(#platterShadow)" />
+  <ellipse cx="495" cy="492" rx="185" ry="28" fill="url(#platterShadow)" />
+
+  <!-- 4. Left Back: Burgundy & Ivory RAVĀQ Confectionery Box -->
+  <g transform="translate(135, 175)">
+    <polygon points="20,62 254,84 254,274 20,246" fill="url(#sweetBoxBurgundy)" stroke="url(#brassGold)" stroke-width="1.5" />
+    <polygon points="254,84 328,56 328,242 254,274" fill="#4C202B" stroke="url(#brassGold)" stroke-width="1.2" />
+    <polygon points="14,34 102,10 334,28 254,56" fill="#F8F4EC" stroke="url(#brassGold)" stroke-width="1.5" />
+    <polygon points="14,34 254,56 254,84 14,60" fill="#EFE5D6" stroke="url(#brassGold)" stroke-width="1.2" />
+    <polygon points="254,56 334,28 334,56 254,84" fill="#DFD3C0" stroke="url(#brassGold)" stroke-width="1.2" />
+    <!-- Brand Plaque -->
+    <g transform="translate(76, 114) skewY(5.5)">
+      <rect x="0" y="0" width="126" height="72" rx="5" fill="#F8F4EC" stroke="url(#brassGold)" stroke-width="1.8" />
+      <circle cx="63" cy="15" r="2.8" fill="#2D8C88" />
+      <text x="63" y="42" text-anchor="middle" fill="#292624" font-family="sans-serif" font-size="20" font-weight="700">رَواق</text>
+      <text x="63" y="60" text-anchor="middle" fill="#742E3A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9.5" font-weight="700" letter-spacing="3">RAVĀQ</text>
+    </g>
+  </g>
+
+  <!-- 5. Foreground Right: Warm Ivory Ceramic Platter with Antique Brass Rim & Persian Sweets -->
+  <g transform="translate(325, 345)">
+    <!-- Ceramic Platter Base & Rim -->
+    <ellipse cx="172" cy="128" rx="172" ry="42" fill="#E5DDD0" stroke="url(#brassGold)" stroke-width="3" />
+    <ellipse cx="172" cy="122" rx="158" ry="35" fill="#FAF7F0" stroke="#E4DCCF" stroke-width="1.2" />
+    <ellipse cx="172" cy="122" rx="134" ry="27" fill="none" stroke="#2D8C88" stroke-opacity="0.35" stroke-width="1.2" />
+
+    <!-- Isfahan Gaz Nougat Pieces (گز پسته اصفهان — Soft White Nougat with Emerald Pistachio Kernels) -->
+    <g transform="translate(46, 78)">
+      <rect x="0" y="14" width="66" height="34" rx="10" fill="#FCFBF9" stroke="#E4DCCF" stroke-width="1.5" />
+      <ellipse cx="33" cy="14" rx="33" ry="10" fill="#FFFFFF" stroke="#E8E0D4" stroke-width="1.2" />
+      <!-- Emerald Pistachio Kernels Inside Gaz -->
+      <ellipse cx="20" cy="28" rx="6" ry="3.8" transform="rotate(-15 20 28)" fill="#5E9242" />
+      <ellipse cx="38" cy="24" rx="5.5" ry="3.5" transform="rotate(12 38 24)" fill="#6CA14E" />
+      <ellipse cx="50" cy="32" rx="5" ry="3.2" fill="#528238" />
+      <ellipse cx="28" cy="12" rx="5" ry="2.5" fill="#6CA14E" />
+    </g>
+    <g transform="translate(88, 60)">
+      <rect x="0" y="14" width="64" height="32" rx="10" fill="#FAF8F4" stroke="#E4DCCF" stroke-width="1.5" />
+      <ellipse cx="32" cy="14" rx="32" ry="9" fill="#FFFFFF" stroke="#E8E0D4" stroke-width="1.2" />
+      <ellipse cx="22" cy="27" rx="5.5" ry="3.5" fill="#6CA14E" />
+      <ellipse cx="44" cy="25" rx="6" ry="3.5" transform="rotate(-18 44 25)" fill="#5E9242" />
+    </g>
+
+    <!-- Saffron Sohan Brittle Discs (سوهان زعفرانی با خلال پسته) -->
+    <g transform="translate(158, 72)">
+      <ellipse cx="42" cy="32" rx="40" ry="18" fill="url(#sohanAmber)" stroke="#8B5512" stroke-width="1.5" />
+      <!-- Slivered Green Pistachios & Saffron Garnish on Sohan -->
+      <ellipse cx="32" cy="29" rx="7" ry="2.6" transform="rotate(-20 32 29)" fill="#6CA14E" />
+      <ellipse cx="46" cy="27" rx="7" ry="2.6" transform="rotate(15 46 27)" fill="#78AD58" />
+      <ellipse cx="40" cy="34" rx="6.5" ry="2.4" transform="rotate(-5 40 34)" fill="#5E9242" />
+      <path d="M26 32 Q40 24 54 33" fill="none" stroke="#B81D2A" stroke-width="1.5" />
+    </g>
+
+    <!-- Diamond-Cut Persian Baklava (باقلوا لوزی قزوین و یزد) -->
+    <g transform="translate(226, 62)">
+      <polygon points="0,34 36,16 72,34 36,52" fill="#DFB26B" stroke="#B58338" stroke-width="1.4" />
+      <polygon points="0,34 36,52 36,68 0,50" fill="#C49145" stroke="#9E6E26" stroke-width="1.2" />
+      <polygon points="36,52 72,34 72,50 36,68" fill="#A9782E" stroke="#8C5E1B" stroke-width="1.2" />
+      <!-- Crushed Pistachio & Rose Petal Topping -->
+      <ellipse cx="36" cy="34" rx="11" ry="5.5" fill="#6CA14E" />
+      <circle cx="39" cy="33" r="2.5" fill="#742E3A" />
+    </g>
+  </g>
+</svg>

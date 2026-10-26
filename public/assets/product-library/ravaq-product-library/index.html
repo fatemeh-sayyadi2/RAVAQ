@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAVĀQ — Product Image Library</title>
+<style>
+  :root {
+    --burgundy: #742E3A;
+    --ivory: #F8F4EC;
+    --turquoise: #2D8C88;
+    --wine: #4C202B;
+    --card: #FFFDF8;
+    --line: rgba(116, 46, 58, .16);
+    --muted: rgba(76, 32, 43, .72);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--wine);
+    font-family: "Vazirmatn", "Vazir", "IRANSans", "Tahoma", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.8;
+  }
+  a { color: var(--turquoise); }
+  a:focus-visible { outline: 3px solid var(--turquoise); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+  header.top { padding: 56px 0 28px; border-bottom: 3px solid var(--turquoise); background: var(--ivory); }
+  h1 {
+    margin: 0 0 12px;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+    letter-spacing: .01em;
+    line-height: 1.25;
+    color: var(--burgundy);
+    text-align: center;
+  }
+  .lead { max-width: 62ch; margin: 0 auto 22px; text-align: center; color: var(--muted); }
+  .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  .stats li { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 6px 14px; font-size: .92rem; }
+  .stats b { color: var(--burgundy); }
+
+  nav.cats { padding: 18px 0; border-bottom: 1px solid var(--line); }
+  nav.cats ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  nav.cats a {
+    display: inline-block; padding: 5px 14px; border: 1px solid var(--burgundy); border-radius: 999px;
+    color: var(--burgundy); text-decoration: none; font-size: .94rem; background: transparent;
+  }
+  nav.cats a:hover { background: var(--burgundy); color: var(--ivory); }
+  nav.cats a span { opacity: .75; }
+
+  main { padding: 12px 0 56px; }
+  section { padding-top: 40px; }
+  h2 {
+    margin: 0 0 18px; padding-bottom: 8px; border-bottom: 1px solid var(--line);
+    font-size: 1.35rem; font-weight: 700; color: var(--burgundy);
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  }
+  h2 small { font-size: .85rem; font-weight: 400; color: var(--muted); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; }
+  .card { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .card img { display: block; width: 100%; height: auto; background: #EFE8DA; }
+  figcaption { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  figcaption h3 { margin: 0; font-size: 1.02rem; font-weight: 700; line-height: 1.65; color: var(--wine); }
+  .en { margin: 0; font-size: .88rem; color: var(--muted); text-align: left; line-height: 1.5; }
+  .meta { margin: auto 0 0; padding-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: .78rem; color: var(--muted); }
+  code {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: .78rem; background: rgba(45, 140, 136, .1); color: var(--wine);
+    padding: 2px 8px; border-radius: 6px; word-break: break-all;
+  }
+
+  section.review { margin-top: 12px; }
+  .review ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .review li { background: var(--card); border: 1px solid var(--line); border-right: 4px solid var(--turquoise); border-radius: 8px; padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+  .review li span { font-size: .93rem; }
+  .review p { margin: 0 0 14px; color: var(--muted); max-width: 70ch; }
+
+  footer { border-top: 1px solid var(--line); padding: 22px 0 40px; text-align: center; font-size: .86rem; color: var(--muted); }
+
+  @media (max-width: 560px) {
+    header.top { padding-top: 36px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1 lang="en" dir="ltr">RAVĀQ — Product Image Library</h1>
+      <p class="lead">آرشیو تصاویر محصولات برند RAVĀQ: آجیل و خشکبار، شیرینی‌های سنتی، چای و زعفران، پک‌های هدیه و صنایع‌دستی ایرانی. هر تصویر همراه با نام محصول و نام فایلش آمده تا در فروشگاه اینترنتی راحت پیدایش کنید.</p>
+      <ul class="stats">
+        <li>صفحه‌های PDF: <b>29</b></li>
+        <li>تصاویر استخراج‌شده: <b>31</b></li>
+        <li>تصاویر نمایش‌داده‌شده: <b>31</b></li>
+      </ul>
+    </div>
+  </header>
+
+  <nav class="cats" aria-label="دسته‌بندی تصاویر">
+    <div class="wrap">
+      <ul>
+        <li><a href="#nuts">آجیل و خشکبار <span>(8)</span></a></li>
+        <li><a href="#sweets">شیرینی‌های سنتی ایرانی <span>(10)</span></a></li>
+        <li><a href="#tea">چای، زعفران و دمنوش‌ها <span>(4)</span></a></li>
+        <li><a href="#gifts">پک‌های هدیه <span>(6)</span></a></li>
+        <li><a href="#crafts">صنایع‌دستی ایرانی <span>(2)</span></a></li>
+        <li><a href="#other">سایر محصولات <span>(1)</span></a></li>
+        <li><a href="#review">موارد نیازمند بررسی <span>(7)</span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="nuts" aria-labelledby="h-nuts">
+      <h2 id="h-nuts">آجیل و خشکبار <small>8 تصویر</small></h2>
+      <div class="grid">
+      <figure class="card">
+        <img src="images/pistachios-cluster.jpg" width="1024" height="572" alt="پسته (دانه‌های خندان و مغز سبز)" loading="lazy">
+        <figcaption>
+          <h3>پسته (دانه‌های خندان و مغز سبز)</h3>
+          <p class="en" lang="en" dir="ltr">Pistachios</p>
+          <p class="meta"><code dir="ltr">pistachios-cluster.jpg</code><span>صفحه 2 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/pistachios-bowl.jpg" width="1024" height="572" alt="پسته در کاسه سرامیکی" loading="lazy">
+        <figcaption>
+          <h3>پسته در کاسه سرامیکی</h3>
+          <p class="en" lang="en" dir="ltr">Pistachios in a Ceramic Bowl</p>
+          <p class="meta"><code dir="ltr">pistachios-bowl.jpg</code><span>صفحه 3 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/dried-fruits-nuts.jpg" width="1024" height="572" alt="مجموعه خشکبار و آجیل: انجیر، خرما، کشمش، بادام، گردو و پسته" loading="lazy">
+        <figcaption>
+          <h3>مجموعه خشکبار و آجیل: انجیر، خرما، کشمش، بادام، گردو و پسته</h3>
+          <p class="en" lang="en" dir="ltr">Dried Fruits &amp; Nuts Assortment</p>
+          <p class="meta"><code dir="ltr">dried-fruits-nuts.jpg</code><span>صفحه 5 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/almonds.jpg" width="1024" height="765" alt="بادام" loading="lazy">
+        <figcaption>
+          <h3>بادام</h3>
+          <p class="en" lang="en" dir="ltr">Almonds</p>
+          <p class="meta"><code dir="ltr">almonds.jpg</code><span>صفحه 20 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/walnuts.jpg" width="1024" height="765" alt="گردو" loading="lazy">
+        <figcaption>
+          <h3>گردو</h3>
+          <p class="en" lang="en" dir="ltr">Walnuts</p>
+          <p class="meta"><code dir="ltr">walnuts.jpg</code><span>صفحه 21 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/hazelnuts.jpg" width="1024" height="765" alt="فندق" loading="lazy">
+        <figcaption>
+          <h3>فندق</h3>
+          <p class="en" lang="en" dir="ltr">Hazelnuts</p>
+          <p class="meta"><code dir="ltr">hazelnuts.jpg</code><span>صفحه 22 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/cashews.jpg" width="1024" height="765" alt="بادام هندی" loading="lazy">
+        <figcaption>
+          <h3>بادام هندی</h3>
+          <p class="en" lang="en" dir="ltr">Cashews</p>
+          <p class="meta"><code dir="ltr">cashews.jpg</code><span>صفحه 23 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/pumpkin-seeds.jpg" width="1024" height="765" alt="مغز تخمه کدو" loading="lazy">
+        <figcaption>
+          <h3>مغز تخمه کدو</h3>
+          <p class="en" lang="en" dir="ltr">Pumpkin Seeds</p>
+          <p class="meta"><code dir="ltr">pumpkin-seeds.jpg</code><span>صفحه 24 از PDF</span></p>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+    <section id="sweets" aria-labelledby="h-sweets">
+      <h2 id="h-sweets">شیرینی‌های سنتی ایرانی <small>10 تصویر</small></h2>
+      <div class="grid">
+      <figure class="card">
+        <img src="images/sweets-platter.jpg" width="1024" height="572" alt="ظرف شیرینی سنتی: گز، سوهان و باقلوا" loading="lazy">
+        <figcaption>
+          <h3>ظرف شیرینی سنتی: گز، سوهان و باقلوا</h3>
+          <p class="en" lang="en" dir="ltr">Traditional Sweets Platter: Gaz, Sohan &amp; Baklava</p>
+          <p class="meta"><code dir="ltr">sweets-platter.jpg</code><span>صفحه 5 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/persian-gaz.jpg" width="1024" height="765" alt="گز پسته‌دار" loading="lazy">
+        <figcaption>
+          <h3>گز پسته‌دار</h3>
+          <p class="en" lang="en" dir="ltr">Persian Gaz Nougat with Pistachios</p>
+          <p class="meta"><code dir="ltr">persian-gaz.jpg</code><span>صفحه 11 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/pistachio-baklava.jpg" width="1024" height="765" alt="باقلوا با مغز پسته" loading="lazy">
+        <figcaption>
+          <h3>باقلوا با مغز پسته</h3>
+          <p class="en" lang="en" dir="ltr">Pistachio Baklava</p>
+          <p class="meta"><code dir="ltr">pistachio-baklava.jpg</code><span>صفحه 12 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/pulaki.jpg" width="1024" height="765" alt="پولکی" loading="lazy">
+        <figcaption>
+          <h3>پولکی</h3>
+          <p class="en" lang="en" dir="ltr">Pulaki (Thin Sugar Candy Discs)</p>
+          <p class="meta"><code dir="ltr">pulaki.jpg</code><span>صفحه 15 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/sohan.jpg" width="1024" height="765" alt="سوهان" loading="lazy">
+        <figcaption>
+          <h3>سوهان</h3>
+          <p class="en" lang="en" dir="ltr">Sohan (Saffron Brittle with Pistachio &amp; Almond)</p>
+          <p class="meta"><code dir="ltr">sohan.jpg</code><span>صفحه 16 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/basloq.jpg" width="1024" height="765" alt="باسلوق" loading="lazy">
+        <figcaption>
+          <h3>باسلوق</h3>
+          <p class="en" lang="en" dir="ltr">Basloq (Coconut-Coated Walnut Sweets)</p>
+          <p class="meta"><code dir="ltr">basloq.jpg</code><span>صفحه 25 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/qottab.jpg" width="1024" height="765" alt="قطاب" loading="lazy">
+        <figcaption>
+          <h3>قطاب</h3>
+          <p class="en" lang="en" dir="ltr">Qottab (Almond-Filled Fried Pastry)</p>
+          <p class="meta"><code dir="ltr">qottab.jpg</code><span>صفحه 26 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/nokhodchi.jpg" width="1024" height="765" alt="شیرینی نخودچی" loading="lazy">
+        <figcaption>
+          <h3>شیرینی نخودچی</h3>
+          <p class="en" lang="en" dir="ltr">Shirini Nokhodchi (Chickpea-Flour Cookies)</p>
+          <p class="meta"><code dir="ltr">nokhodchi.jpg</code><span>صفحه 27 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/nan-berenji.jpg" width="1024" height="765" alt="نان برنجی" loading="lazy">
+        <figcaption>
+          <h3>نان برنجی</h3>
+          <p class="en" lang="en" dir="ltr">Nan Berenji (Rice-Flour Cookies)</p>
+          <p class="meta"><code dir="ltr">nan-berenji.jpg</code><span>صفحه 28 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/kolompeh.jpg" width="1024" height="765" alt="کلمپه (کلوچه خرمایی)" loading="lazy">
+        <figcaption>
+          <h3>کلمپه (کلوچه خرمایی)</h3>
+          <p class="en" lang="en" dir="ltr">Kolompeh (Date-Filled Pastry)</p>
+          <p class="meta"><code dir="ltr">kolompeh.jpg</code><span>صفحه 29 از PDF</span></p>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+    <section id="tea" aria-labelledby="h-tea">
+      <h2 id="h-tea">چای، زعفران و دمنوش‌ها <small>4 تصویر</small></h2>
+      <div class="grid">
+      <figure class="card">
+        <img src="images/saffron-jar-ravaq.jpg" width="1024" height="572" alt="شیشه زعفران با برچسب RAVĀQ" loading="lazy">
+        <figcaption>
+          <h3>شیشه زعفران با برچسب RAVĀQ</h3>
+          <p class="en" lang="en" dir="ltr">Saffron Jar with RAVĀQ Label</p>
+          <p class="meta"><code dir="ltr">saffron-jar-ravaq.jpg</code><span>صفحه 4 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/saffron-bowl-jar.jpg" width="1024" height="765" alt="زعفران در کاسه و شیشه" loading="lazy">
+        <figcaption>
+          <h3>زعفران در کاسه و شیشه</h3>
+          <p class="en" lang="en" dir="ltr">Saffron Threads in Bowl and Jar</p>
+          <p class="meta"><code dir="ltr">saffron-bowl-jar.jpg</code><span>صفحه 10 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/persian-tea-teapot.jpg" width="1024" height="765" alt="چای ایرانی با گل محمدی و هل (قوری شیشه‌ای)" loading="lazy">
+        <figcaption>
+          <h3>چای ایرانی با گل محمدی و هل (قوری شیشه‌ای)</h3>
+          <p class="en" lang="en" dir="ltr">Persian Tea with Rose Petals &amp; Cardamom</p>
+          <p class="meta"><code dir="ltr">persian-tea-teapot.jpg</code><span>صفحه 13 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/persian-tea-loose-leaf.jpg" width="1024" height="765" alt="چای سیاه ایرانی (با شیشه برگ چای)" loading="lazy">
+        <figcaption>
+          <h3>چای سیاه ایرانی (با شیشه برگ چای)</h3>
+          <p class="en" lang="en" dir="ltr">Persian Black Tea with Loose Leaf Jar</p>
+          <p class="meta"><code dir="ltr">persian-tea-loose-leaf.jpg</code><span>صفحه 19 از PDF</span></p>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+    <section id="gifts" aria-labelledby="h-gifts">
+      <h2 id="h-gifts">پک‌های هدیه <small>6 تصویر</small></h2>
+      <div class="grid">
+      <figure class="card">
+        <img src="images/gift-box-plain.jpg" width="1024" height="572" alt="جعبه هدیه برگاندی و عاجی با روبان ساتن" loading="lazy">
+        <figcaption>
+          <h3>جعبه هدیه برگاندی و عاجی با روبان ساتن</h3>
+          <p class="en" lang="en" dir="ltr">Burgundy &amp; Ivory Gift Box with Satin Ribbon</p>
+          <p class="meta"><code dir="ltr">gift-box-plain.jpg</code><span>صفحه 1 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/gift-box-signature.jpg" width="1024" height="572" alt="جعبه هدیه امضایی RAVĀQ با پلاک برند" loading="lazy">
+        <figcaption>
+          <h3>جعبه هدیه امضایی RAVĀQ با پلاک برند</h3>
+          <p class="en" lang="en" dir="ltr">Signature Gift Box with Brand Plate</p>
+          <p class="meta"><code dir="ltr">gift-box-signature.jpg</code><span>صفحه 3 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/ribbon-packaging.jpg" width="1024" height="572" alt="جزئیات بسته‌بندی: روبان ساتن، کاغذ برجسته و جعبه هدیه" loading="lazy">
+        <figcaption>
+          <h3>جزئیات بسته‌بندی: روبان ساتن، کاغذ برجسته و جعبه هدیه</h3>
+          <p class="en" lang="en" dir="ltr">Packaging Detail: Satin Ribbon, Embossed Paper &amp; Gift Box</p>
+          <p class="meta"><code dir="ltr">ribbon-packaging.jpg</code><span>صفحه 7 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/gift-box-open-assortment.jpg" width="1024" height="765" alt="پک هدیه باز: خشکبار، آجیل و گز" loading="lazy">
+        <figcaption>
+          <h3>پک هدیه باز: خشکبار، آجیل و گز</h3>
+          <p class="en" lang="en" dir="ltr">Open Gift Box: Dried Fruits, Nuts &amp; Gaz</p>
+          <p class="meta"><code dir="ltr">gift-box-open-assortment.jpg</code><span>صفحه 14 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/nowruz-gift-box.jpg" width="1024" height="765" alt="پک هدیه نوروز" loading="lazy">
+        <figcaption>
+          <h3>پک هدیه نوروز</h3>
+          <p class="en" lang="en" dir="ltr">Nowruz Gift Box</p>
+          <p class="meta"><code dir="ltr">nowruz-gift-box.jpg</code><span>صفحه 17 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/corporate-gift-box.jpg" width="1024" height="765" alt="پک هدیه سازمانی" loading="lazy">
+        <figcaption>
+          <h3>پک هدیه سازمانی</h3>
+          <p class="en" lang="en" dir="ltr">Corporate Gift Box</p>
+          <p class="meta"><code dir="ltr">corporate-gift-box.jpg</code><span>صفحه 18 از PDF</span></p>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+    <section id="crafts" aria-labelledby="h-crafts">
+      <h2 id="h-crafts">صنایع‌دستی ایرانی <small>2 تصویر</small></h2>
+      <div class="grid">
+      <figure class="card">
+        <img src="images/artisan-objects.jpg" width="1024" height="572" alt="مجموعه اشیای هنری: کاسه سفالی فیروزه‌ای، سینی برنجی و قوطی تزئینی" loading="lazy">
+        <figcaption>
+          <h3>مجموعه اشیای هنری: کاسه سفالی فیروزه‌ای، سینی برنجی و قوطی تزئینی</h3>
+          <p class="en" lang="en" dir="ltr">Artisan Objects: Turquoise Glazed Bowl, Brass Tray &amp; Decorative Lidded Box</p>
+          <p class="meta"><code dir="ltr">artisan-objects.jpg</code><span>صفحه 6 از PDF</span></p>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <img src="images/handicrafts-trio.jpg" width="1024" height="765" alt="مجموعه صنایع‌دستی: جعبه خاتم‌کاری، گلدان میناکاری و سینی قلم‌زنی" loading="lazy">
+        <figcaption>
+          <h3>مجموعه صنایع‌دستی: جعبه خاتم‌کاری، گلدان میناکاری و سینی قلم‌زنی</h3>
+          <p class="en" lang="en" dir="ltr">Khatam Box, Minakari Vase &amp; Engraved Brass Tray</p>
+          <p class="meta"><code dir="ltr">handicrafts-trio.jpg</code><span>صفحه 9 از PDF</span></p>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+    <section id="other" aria-labelledby="h-other">
+      <h2 id="h-other">سایر محصولات <small>1 تصویر</small></h2>
+      <div class="grid">
+      <figure class="card">
+        <img src="images/boutique-hero.jpg" width="1024" height="434" alt="بنر برند: بانویی با جعبه هدیه در بوتیک" loading="lazy">
+        <figcaption>
+          <h3>بنر برند: بانویی با جعبه هدیه در بوتیک</h3>
+          <p class="en" lang="en" dir="ltr">Brand Hero Banner: Boutique Scene with Gift Box</p>
+          <p class="meta"><code dir="ltr">boutique-hero.jpg</code><span>صفحه 7 از PDF</span></p>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+
+    <section id="review" class="review" aria-labelledby="h-review">
+      <h2 id="h-review">موارد نیازمند بررسی <small>7 مورد</small></h2>
+      <p>این موارد را یک‌بار با چشم خودتان نگاه کنید. نام‌گذاری همه‌ی تصاویر از روی محتوای دیده‌شده انجام شده و با متن همراه هر تصویر در PDF مقایسه شده است. موردهای زیر یا ابهام دارند یا نامشان تا حدی به متن همراه تصویر تکیه دارد.</p>
+      <ul>
+        <li><code dir="ltr">artisan-objects.jpg</code><span>نوع و تکنیک ساخت قوطی تزئینی کوچک از روی تصویر مشخص نیست؛ فقط کاسه لعاب‌دار فیروزه‌ای و سینی برنجی قابل‌تشخیص است.</span></li>
+        <li><code dir="ltr">sweets-platter.jpg</code><span>سه شیرینی در یک ظرف است (گز، سوهان، باقلوا)، پس به‌عنوان مجموعه نام‌گذاری شد. نوع دقیق سوهان از روی تصویر قطعی نیست.</span></li>
+        <li><code dir="ltr">nowruz-gift-box.jpg</code><span>نام «نوروز» از نشانه‌های تصویر (سنبل، سبزه) و متن همراه تصویر در PDF آمده است.</span></li>
+        <li><code dir="ltr">corporate-gift-box.jpg</code><span>در خود تصویر نشانه‌ی روشنِ «سازمانی» نیست (کارت خالی برای لوگوی آینده)؛ این نام از متن همراه تصویر در PDF آمده است.</span></li>
+        <li><code dir="ltr">gift-box-plain.jpg</code><span>جعبه خالی است و محتوایی ندارد؛ نام فقط بسته‌بندی را توصیف می‌کند. زمینه سفید است و شفاف (transparent) نیست.</span></li>
+        <li><code dir="ltr">gift-box-signature.jpg</code><span>جعبه خالی است و محتوایی ندارد؛ نام فقط بسته‌بندی را توصیف می‌کند.</span></li>
+        <li><code dir="ltr">boutique-hero.jpg</code><span>این یک بنر برند است و محصول تکی نیست؛ شامل یک فرد و چند محصول در قفسه.</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">تصاویر بدون هیچ تغییری از PDF بیرون کشیده شده‌اند (فرمت اصلی JPEG). کلوچه فومن در صفحه ۲۹ PDF فقط متن دارد و تصویری برایش ساخته نشده است.</div>
+  </footer>
+</body>
+</html>

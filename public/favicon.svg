@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" role="img" aria-label="RAVĀQ Favicon">
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M10 56V28C10 15.297 20.297 5 33 5H31C43.703 5 54 15.297 54 28V56H47.5V28.5C47.5 18.835 39.665 11 30 11H34C24.335 11 16.5 18.835 16.5 28.5V56H10Z"
+    fill="#742E3A"
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M21.5 56V31.5C21.5 24.596 26.649 19 32 19C37.351 19 42.5 24.596 42.5 31.5V56H37.5V32C37.5 27.582 35.038 24 32 24C28.962 24 26.5 27.582 26.5 32V56H21.5Z"
+    fill="#B89A62"
+  />
+  <path
+    d="M32 11.8L35.2 15L32 18.2L28.8 15L32 11.8Z"
+    fill="#2D8C88"
+  />
+  <rect x="6" y="55" width="52" height="2.5" rx="1.25" fill="#742E3A" />
+</svg>
