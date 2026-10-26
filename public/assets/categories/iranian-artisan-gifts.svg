@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="صنایع‌دستی و هنر معاصر ایرانی رَواق | RAVĀQ">
+  <defs>
+    <linearGradient id="craftsWall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF9F4" />
+      <stop offset="55%" stop-color="#F8F4EC" />
+      <stop offset="100%" stop-color="#E7DDD0" />
+    </linearGradient>
+    <linearGradient id="walnutConsole" x1="0%" y1="0%" x2="100%" y2="10%">
+      <stop offset="0%" stop-color="#4A2F21" />
+      <stop offset="50%" stop-color="#5D3B2A" />
+      <stop offset="100%" stop-color="#3B2318" />
+    </linearGradient>
+    <linearGradient id="turquoiseGlaze" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3AA39F" />
+      <stop offset="52%" stop-color="#2D8C88" />
+      <stop offset="100%" stop-color="#1B5956" />
+    </linearGradient>
+    <linearGradient id="terracottaClay" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C87D55" />
+      <stop offset="55%" stop-color="#A85E3A" />
+      <stop offset="100%" stop-color="#7A3E22" />
+    </linearGradient>
+    <linearGradient id="brassRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DFC796" />
+      <stop offset="50%" stop-color="#B89A62" />
+      <stop offset="100%" stop-color="#8A6E3B" />
+    </linearGradient>
+    <radialGradient id="craftShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#190D09" stop-opacity="0.68" />
+      <stop offset="65%" stop-color="#190D09" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#190D09" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- 1. Studio Wall & Recessed Iranian Arch Niche -->
+  <rect width="800" height="600" fill="url(#craftsWall)" />
+  <polygon points="465,0 800,0 800,430 275,430" fill="#EFE5D6" opacity="0.45" />
+  <path d="M210 430V175C210 80 295 18 400 18C505 18 590 80 590 175V430H210Z" fill="#EFE5D6" fill-opacity="0.65" stroke="#E4DCCF" stroke-width="2" />
+  <path d="M232 430V182C232 98 307 38 400 38C493 38 568 98 568 182V430" fill="none" stroke="#B89A62" stroke-opacity="0.4" stroke-width="1.5" />
+
+  <!-- 2. Natural Walnut Wood Console -->
+  <rect x="0" y="430" width="800" height="140" fill="url(#walnutConsole)" />
+  <rect x="0" y="570" width="800" height="30" fill="#2A1810" />
+  <line x1="0" y1="430" x2="800" y2="430" stroke="#B89A62" stroke-opacity="0.45" stroke-width="1.5" />
+
+  <!-- 3. Handwoven Cream & Burgundy Iranian Linen Runner (#EFE5D6 & #742E3A) -->
+  <polygon points="150,430 650,430 710,570 90,570" fill="#F8F4EC" stroke="#E4DCCF" stroke-width="1.5" />
+  <polygon points="168,430 632,430 686,570 114,570" fill="none" stroke="#742E3A" stroke-opacity="0.55" stroke-width="2" />
+  <polygon points="180,430 620,430 670,570 130,570" fill="none" stroke="#B89A62" stroke-opacity="0.5" stroke-width="1" />
+
+  <!-- 4. Contact Shadows -->
+  <ellipse cx="305" cy="466" rx="115" ry="22" fill="url(#craftShadow)" />
+  <ellipse cx="485" cy="482" rx="145" ry="25" fill="url(#craftShadow)" />
+
+  <!-- 5. Left: Sculptural Terracotta Amphora Vessel (ظرف سفالی دست‌ساز) -->
+  <g transform="translate(215, 132)">
+    <!-- Narrow Flared Rim & Neck -->
+    <ellipse cx="90" cy="18" rx="34" ry="8" fill="#7A3E22" stroke="url(#brassRim)" stroke-width="2" />
+    <path d="M62 18 C66 56, 68 78, 52 98 H128 C112 78, 114 56, 118 18 Z" fill="url(#terracottaClay)" />
+    <!-- Sculpted Vessel Body -->
+    <path d="M52 98 C12 146, 18 258, 56 326 H124 C162 258, 168 146, 128 98 Z" fill="url(#terracottaClay)" stroke="#7A3E22" stroke-width="1.2" />
+    <!-- Subtle Carved Iranian Arch Relief & Turquoise Glaze Band -->
+    <path d="M30 176 Q90 194 150 176" fill="none" stroke="#2D8C88" stroke-width="5" opacity="0.85" />
+    <path d="M32 186 Q90 204 148 186" fill="none" stroke="url(#brassRim)" stroke-width="2" />
+    <!-- Foot Base -->
+    <rect x="52" y="324" width="76" height="12" rx="4" fill="url(#brassRim)" />
+  </g>
+
+  <!-- 6. Right Foreground: Handcrafted Muted Turquoise (#2D8C88) Glazed Ceramic Bowl with Brass Rim -->
+  <g transform="translate(355, 290)">
+    <!-- Travertine Display Plinth -->
+    <rect x="44" y="158" width="172" height="28" rx="5" fill="#EFE5D6" stroke="#D5C8B4" stroke-width="1.5" />
+    <!-- Glazed Turquoise Ceramic Bowl -->
+    <path d="M18 46 C24 128, 68 160, 130 160 C192 160, 236 128, 242 46 Z" fill="url(#turquoiseGlaze)" stroke="url(#brassRim)" stroke-width="2.5" />
+    <ellipse cx="130" cy="46" rx="112" ry="22" fill="#EFE5D6" stroke="url(#brassRim)" stroke-width="2.5" />
+    <ellipse cx="130" cy="48" rx="98" ry="17" fill="#23706D" opacity="0.25" />
+    <!-- Subtle Hand-Painted Iranian Geometric Motif on Exterior -->
+    <path d="M40 88 Q130 112 220 88" fill="none" stroke="#F8F4EC" stroke-opacity="0.65" stroke-width="2" />
+    <path d="M54 108 Q130 128 206 108" fill="none" stroke="url(#brassRim)" stroke-opacity="0.75" stroke-width="1.5" />
+    <!-- Small Brass RAVĀQ Tag Beside Plinth -->
+    <g transform="translate(88, 162)">
+      <rect x="0" y="0" width="84" height="20" rx="3" fill="#4C202B" stroke="url(#brassRim)" stroke-width="1.2" />
+      <text x="42" y="14" text-anchor="middle" fill="#F8F4EC" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9.5" font-weight="700" letter-spacing="3">RAVĀQ</text>
+    </g>
+  </g>
+</svg>

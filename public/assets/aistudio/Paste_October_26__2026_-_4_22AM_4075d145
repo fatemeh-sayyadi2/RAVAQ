@@ -1,0 +1,1532 @@
+# MASTER PROJECT SPECIFICATION — RAVĀQ | رَواق
+
+## 1. ROLE AND MISSION
+
+Act as a senior product designer, brand designer, UX/UI designer, senior full-stack engineer, e-commerce architect, database designer, QA engineer, and technical project lead.
+
+Your mission is to design and implement **RAVĀQ (رَواق)**, a premium, Persian-first Iranian e-commerce website specializing in curated Iranian food gifts, nuts and dried fruits, traditional sweets, saffron, regional products, handicrafts, and premium gift boxes.
+
+This must be a real, working, full-stack website, not a static mockup, landing-page-only project, or collection of disconnected UI components.
+
+The result should be suitable for:
+- A serious frontend/full-stack portfolio.
+- A polished commercial product prototype.
+- Demonstrating practical React, Next.js, TypeScript, database, authentication, cart, checkout, testing, and admin skills.
+- Future expansion into a real Iranian e-commerce business.
+
+Do not stop after generating a homepage or design preview. Implement the application, database models, functional user flows, seed data, validation, tests, documentation, and setup instructions.
+
+If the repository already exists, inspect it before making changes. Preserve useful existing work and avoid overwriting unrelated files.
+
+Do not claim a feature is implemented until its code and relevant tests or verification support that claim.
+
+---
+
+# 2. PRODUCT VISION AND BRAND POSITIONING
+
+## Brand name
+
+Primary Persian brand: **رَواق**
+
+Latin brand: **RAVĀQ**
+
+Use correct Persian typography and right-to-left layout. The brand name should feel elegant, confident, contemporary, Iranian, and premium.
+
+## Brand positioning
+
+RAVĀQ is a contemporary Iranian boutique that brings together the richness of Iranian flavors, regional craftsmanship, thoughtful gifting, and beautiful presentation.
+
+The brand must not look like:
+- A generic Shopify template.
+- A discount supermarket.
+- A traditional bazaar website with excessive ornamentation.
+- A generic Western luxury brand with Persian words pasted onto it.
+- A dark, overly purple, or gold-heavy website.
+- An artificial AI-generated design with inconsistent spacing and typography.
+
+The desired experience combines:
+- Contemporary Iranian identity.
+- Premium editorial art direction.
+- Warm hospitality.
+- Curated products and gifts.
+- Strong commercial usability.
+- Cinematic storytelling.
+- Modern, accessible e-commerce UX.
+
+## Target audience
+
+Persian-speaking customers in Iran who want to:
+- Buy quality Iranian nuts, dried fruits, sweets, and saffron.
+- Discover regional products.
+- Send elegant gifts.
+- Prepare gifts for Nowruz, Yalda, birthdays, weddings, visits, and corporate occasions.
+- Purchase premium products for entertaining and personal use.
+
+---
+
+# 3. VISUAL DESIGN SYSTEM
+
+Use these exact initial brand tokens. Centralize them in CSS variables or the project's design-token system.
+
+- Warm ivory: #F8F4EC
+- Cream: #EFE5D6
+- Burgundy: #742E3A
+- Dark wine: #4C202B
+- Iranian turquoise: #2D8C88
+- Antique gold: #B89A62
+- Warm charcoal: #292624
+- Muted text: #77716A
+- Subtle border: #E4DCCF
+- White: #FFFFFF
+- Soft success: #E5EEE6
+- Soft warning: #F5E9D7
+- Soft error: #F5E2E0
+
+Suggested visual balance:
+- Approximately 60% warm ivory and cream.
+- Approximately 25% product photography, wood, natural materials, and environmental colors.
+- Approximately 10% burgundy and dark wine.
+- Approximately 5% turquoise and antique gold accents.
+
+These proportions are directional, not rigid. Maintain readability and visual hierarchy.
+
+## Typography
+
+Use:
+- **Arad** as the primary Persian UI font.
+- **Ganjnameh** selectively for large editorial/display headlines if the available font files support the required glyphs and licensing.
+
+Do not use Ganjnameh for dense body text, product specifications, forms, or small labels if readability suffers.
+
+The logo should have separately designed/customized letterforms rather than merely relying on a font.
+
+Before implementation:
+1. Inspect available font files and licenses.
+2. Prefer properly licensed local WOFF2 files.
+3. Use `next/font/local` when compatible with the project's Next.js setup.
+4. Preserve license notices.
+5. Provide a sensible fallback font stack.
+6. If font files are not available, document that fact and use a temporary fallback instead of downloading random or unlicensed assets.
+
+Do not default to Vazirmatn.
+
+## Logo system
+
+Create a distinctive logo system containing:
+- Primary Persian wordmark: رَواق
+- Latin wordmark: RAVĀQ
+- A simple architectural arch or geometric Iranian-inspired emblem.
+- Horizontal and compact arrangements.
+- Light and dark variants.
+- Standalone emblem.
+- SVG favicon and suitable browser/app icons.
+
+The logo must remain readable at small sizes.
+
+Use original vector geometry or carefully customized typography. Do not use AI-generated illegible lettering as the final logo.
+
+Do not use excessive paisley, random Persian ornaments, or a generic mosque silhouette.
+
+## UI design rules
+
+- Persian is the primary language.
+- All Persian pages must use correct RTL layout.
+- Use consistent spacing, typography, radii, shadows, and component states.
+- Prefer restrained borders and soft shadows.
+- Product cards should have consistent image ratios and spacing.
+- Buttons need hover, active, focus, loading, disabled, and error states where applicable.
+- Use clear contrast and keyboard-accessible interactions.
+- Avoid excessive glassmorphism, giant rounded cards everywhere, unnecessary gradients, and constant animation.
+- Keep content widths readable.
+- Use a coherent responsive grid.
+- Never use emojis as substitutes for product photography or interface icons.
+- Use a consistent icon library such as Lucide React.
+
+Build a reusable design system with tokens for colors, typography, spacing, radii, shadows, breakpoints, and motion.
+
+---
+
+# 4. HOMEPAGE HERO — THE MOST IMPORTANT VISUAL REQUIREMENT
+
+## Concept: «بانوی رَواق»
+
+The homepage must open with a premium, cinematic, immersive Iranian boutique scene.
+
+The hero must occupy the **entire initial viewport width and height**. It must not be a half-width image next to a text column. It must not be a conventional split-screen hero.
+
+On a typical desktop screen, the hero should be edge-to-edge and approximately `100svh`, with appropriate handling of browser chrome and header positioning.
+
+The entire composition must feel like entering a beautiful contemporary Iranian boutique.
+
+## Main visual scene
+
+The scene includes:
+
+### The main character
+
+A beautiful adult Iranian woman with:
+- Naturally curly, dark hair.
+- Expressive, believable facial features.
+- An elegant contemporary-traditional Iranian outfit.
+- Rich burgundy, cream, and subtle turquoise textile details.
+- Fine, realistic fabric texture and embroidery.
+- A confident, warm, sophisticated presence.
+- Natural body proportions and expressive hands.
+- A premium, realistic-but-stylized 3D appearance.
+
+Her outfit should be tasteful and editorial. Do not turn the scene into a costume caricature.
+
+She is holding an elegant RAVĀQ gift box in burgundy and ivory, with realistic ribbon, packaging materials, and subtle brand details.
+
+The box must not contain AI-generated gibberish text. Render the actual logo and packaging typography separately using SVG, HTML, or a proper compositing workflow.
+
+### The boutique environment
+
+Create a coherent continuous environment containing:
+- Contemporary Iranian architectural arches.
+- Warm natural wood shelving.
+- Premium product displays.
+- Carefully arranged nuts and dried fruits.
+- Traditional Iranian sweets.
+- Saffron containers.
+- Gift boxes.
+- Ceramic and handcrafted decorative objects.
+- Restrained turquoise tile details.
+- Warm sunlight and soft cinematic shadows.
+- Natural textures such as wood, linen, ceramic, and paper.
+- Carefully composed depth and realistic materials.
+
+The environment should feel curated and premium rather than cluttered.
+
+### Composition
+
+Desktop:
+- Use a wide cinematic composition.
+- Position the main character in the right third or slightly right of center.
+- Reserve a clean negative-space area on the left for Persian headline, supporting copy, and CTA.
+- Keep the face and gift box visible.
+- Preserve the shelves and architectural environment.
+- Avoid important content being hidden behind navigation.
+- The background scene must extend across the entire viewport.
+
+Overlay the real text as HTML rather than baking it into the image.
+
+Suggested Persian copy:
+
+Eyebrow:
+«روایت تازه‌ای از زیبایی ایرانی»
+
+Headline:
+«هدیه‌ای از دلِ ایران»
+
+Supporting text:
+«از طعم‌های اصیل تا هنرهای ماندگار؛ انتخاب‌هایی برای لحظه‌هایی که ارزش به‌یادماندن دارند.»
+
+Primary CTA:
+«کشف محصولات»
+
+Secondary CTA:
+«دیدن جعبه‌های هدیه»
+
+Use elegant, readable typography and sufficient contrast. If needed, use a subtle localized gradient behind the text without covering the whole scene.
+
+### Mobile composition
+
+Do not simply scale down the desktop composition.
+
+Create a separately composed vertical or tall portrait version of the same visual world:
+- The character and gift box remain prominent.
+- The architectural arch and product shelves are still recognizable.
+- The headline appears in a safe upper area.
+- The CTA remains accessible.
+- The character's face and gift box are not obscured by text or navigation.
+- The scene still feels immersive and edge-to-edge.
+
+Use responsive art direction with separate desktop and mobile assets when possible.
+
+### Hero technical implementation
+
+First decide on the most reliable production-quality implementation:
+1. Optimized cinematic rendered scene or image.
+2. A short optimized looping video if it provides a clear benefit.
+3. Real-time 3D using Three.js / React Three Fiber only if the performance budget, actual assets, and implementation complexity justify it.
+
+Do not create a fake 3D scene using a pile of unrelated stock images.
+
+If genuine 3D assets are unavailable, create a high-quality visual implementation using appropriately licensed assets and clearly document which elements are placeholders. Do not claim a static render is an interactive 3D environment.
+
+Requirements:
+- Use modern image optimization.
+- Lazy-load noncritical media.
+- Provide responsive image sizes.
+- Prevent layout shifts.
+- Honor `prefers-reduced-motion`.
+- Provide a reliable fallback for mobile and low-powered devices.
+- Avoid blocking initial rendering on a large 3D model.
+- Keep the primary headline and CTA immediately usable.
+- Maintain legibility across the full range of supported viewport sizes.
+
+The scene itself, not a separate half-screen image, is the dominant first-screen experience.
+
+---
+
+# 5. HOMEPAGE STRUCTURE
+
+Build the following sections in this order.
+
+## A. Global navigation
+
+A transparent or visually integrated header over the hero that transitions to a solid ivory background after scrolling.
+
+Include:
+- RAVĀQ logo.
+- لینک خانه.
+- فروشگاه.
+- آجیل و خشکبار.
+- شیرینی سنتی.
+- زعفران و خوراکی‌ها.
+- صنایع‌دستی.
+- جعبه‌های هدیه.
+- درباره رواق.
+- Search.
+- Account.
+- Cart with live item count.
+
+On smaller screens, use a carefully designed mobile menu and a usable search/cart layout.
+
+Do not allow the header to obscure the hero headline or character.
+
+## B. Hero
+
+Implement the complete full-viewport scene described in Section 4.
+
+## C. Category showcase
+
+Heading:
+«از رواق چه می‌خواهید؟»
+
+Subheading:
+«انتخاب‌هایی برای هر سلیقه و هر مناسبت»
+
+Create six attractive category cards:
+1. آجیل و خشکبار
+2. شیرینی‌های سنتی
+3. زعفران و خوراکی‌های منتخب
+4. جعبه‌های هدیه
+5. صنایع‌دستی ایرانی
+6. هدیه‌های مناسبتی
+
+Each card must have:
+- A genuine category image.
+- Persian title.
+- Short supporting description.
+- Working navigation to the corresponding category.
+- A restrained hover effect on desktop.
+- A touch-friendly interaction on mobile.
+
+Use subtle staggered entrance animations when the section enters the viewport.
+
+## D. Featured products
+
+Heading:
+«انتخاب‌های محبوب رواق»
+
+Include a real product grid populated from the database.
+
+Each product card should contain:
+- Primary product image.
+- Product name.
+- Short descriptive text if space permits.
+- Current price in تومان.
+- Optional previous price only when a genuine discount exists.
+- Weight/variant selection when applicable.
+- Stock or availability status.
+- Add-to-cart button.
+- Optional wishlist button only if wishlist functionality is implemented.
+- Link to the product details page.
+
+If multiple variants exist, selecting a variant must update the displayed price and availability.
+
+Do not display fake star ratings, fake review counts, or fabricated discounts.
+
+If ratings are shown, build a real review model and aggregate actual stored reviews.
+
+## E. Gift box feature
+
+Create a visually rich section focused on curated Iranian gift boxes.
+
+Heading:
+«هدیه‌ای که قصه دارد»
+
+Explain that RAVĀQ combines Iranian flavors, crafts, and thoughtful presentation.
+
+Include:
+- Premium gift box image or composition.
+- Curated ready-made gift boxes.
+- Occasion labels such as Nowruz, Yalda, visiting gifts, and corporate gifts.
+- CTA «انتخاب جعبه هدیه».
+
+If custom box building is included, it must enforce real inventory and pricing rules. Do not display a configurator that only looks interactive.
+
+## F. Brand story
+
+Heading:
+«رواق؛ جایی برای انتخاب‌های اصیل»
+
+Explain the brand philosophy through concise, credible copy.
+
+Include:
+- Product curation.
+- Iranian flavors and crafts.
+- Thoughtful gifting.
+- Attention to packaging and presentation.
+
+Use subtle Iranian architectural or textile references.
+
+Do not make unverifiable claims about sourcing, organic certification, handmade production, or quality certifications.
+
+## G. Trust and service strip
+
+Show only policies and capabilities that actually exist.
+
+Potential items:
+- پرداخت آزمایشی امن
+- پیگیری سفارش
+- بسته‌بندی هدیه
+- پشتیبانی مشتریان
+
+If real shipping or return policies are not configured, clearly mark them as demo policies in the development environment instead of presenting them as verified commercial services.
+
+## H. Newsletter / updates
+
+An optional newsletter form with:
+- Email validation.
+- Duplicate handling.
+- Server-side persistence if implemented.
+- Clear success and error states.
+
+Do not create a fake form that always reports success.
+
+## I. Footer
+
+Include:
+- Logo and short brand statement.
+- Product category links.
+- Customer service links.
+- About RAVĀQ.
+- Contact information from centralized configuration.
+- Social links only when actual destinations are configured.
+- Privacy policy.
+- Terms and conditions.
+- Shipping and returns policy.
+- Copyright year generated dynamically.
+
+Never invent a real address, phone number, social profile, or official certification.
+
+---
+
+# 6. COMPLETE PRODUCT CATALOG
+
+Create distinct product categories, product records, variants, realistic sample inventory, prices, and carefully written Persian descriptions.
+
+Prices are demo seed data, not claims about current market prices. Store monetary values as integers in تومان, use clear formatting, and document that prices are illustrative.
+
+Do not invent a verified region of origin, certification, nutritional claim, or ingredient statement. Mark unknown information as unavailable rather than fabricating it.
+
+## Category 1: آجیل و خشکبار
+
+Create the following products:
+
+1. پسته
+2. مغز پسته
+3. بادام درختی
+4. گردو
+5. مغز گردو
+6. آجیل مخلوط
+7. آجیل پذیرایی
+8. میوه خشک مخلوط
+9. برگه زردآلو
+10. انجیر خشک
+11. کشمش
+12. توت خشک
+13. آلبالو خشک
+14. زرشک
+
+Important naming rule:
+The generic product must be named «پسته». Do not rename it «پسته اکبری» or imply a specific cultivar without verified data.
+
+Possible variants:
+- ۲۵۰ گرم
+- ۵۰۰ گرم
+- ۱ کیلوگرم
+
+Use only the variants configured for each product.
+
+## Category 2: شیرینی‌های سنتی
+
+Keep this category separate from nuts and dried fruits.
+
+Create:
+
+1. گز اصفهان
+2. سوهان
+3. باقلوا
+4. نان برنجی
+5. نان نخودچی
+6. قطاب
+7. کلمپه
+8. کلوچه سنتی
+9. باسلوق
+10. پولکی
+11. مسقطی
+12. مجموعه شیرینی سنتی پذیرایی
+
+Possible variants:
+- جعبه کوچک
+- جعبه متوسط
+- جعبه بزرگ
+- وزن مشخص‌شده در محصول
+
+Do not assign the same size options to every product if they do not make sense.
+
+## Category 3: زعفران و خوراکی‌های منتخب
+
+Create:
+
+1. زعفران
+2. دمنوش گیاهی منتخب
+3. ترکیب زعفران و خشکبار
+4. مجموعه خوراکی‌های ایرانی
+5. بسته پذیرایی ایرانی
+
+Variants may include weight, packaging, or bundle size where appropriate.
+
+Do not make unsupported health claims about herbal teas or saffron.
+
+## Category 4: صنایع‌دستی ایرانی
+
+Create:
+
+1. ظرف سفالی
+2. کاسه یا بشقاب سرامیکی
+3. رانر یا رومیزی ایرانی
+4. شیء تزئینی ایرانی
+5. مجموعه هدیه صنایع‌دستی
+
+Product information should include dimensions, material, care instructions, and fragility warnings where applicable.
+
+Do not claim every object is handmade unless that information is verified.
+
+## Category 5: جعبه‌های هدیه
+
+Create:
+
+1. جعبه هدیه آجیل و خشکبار
+2. جعبه هدیه شیرینی سنتی
+3. جعبه هدیه زعفران
+4. جعبه هدیه خوراکی و صنایع‌دستی
+5. جعبه هدیه نوروز
+6. جعبه هدیه شب یلدا
+7. جعبه هدیه مهمانی و دیدار
+8. جعبه هدیه سازمانی
+
+Each box should have:
+- Its own product page.
+- A specific inventory strategy.
+- A clear list of included items.
+- Packaging details.
+- Price and availability.
+- Optional message card only if that feature is implemented.
+
+If a gift box contains other inventory-managed products, implement a consistent bundle inventory strategy. Prevent overselling individual items through gift bundles.
+
+## Catalog data quality
+
+Aim for at least 24 well-defined products across the categories, with the above items as the requested initial catalog scope. If time or asset limitations require a staged catalog, prioritize representative products from every category and document the remaining work.
+
+For every product, include appropriate fields:
+- Name.
+- Slug.
+- Category.
+- Short description.
+- Full description.
+- Base price.
+- Active/published status.
+- SKU.
+- Variants.
+- Stock.
+- Product images.
+- Ingredients or materials where applicable.
+- Allergen information where applicable.
+- Storage instructions where applicable.
+- Dimensions or weight.
+- Verified origin if known.
+- SEO title and description.
+- Created and updated timestamps.
+
+Use honest, natural Persian copy. Avoid repetitive AI-generated descriptions.
+
+---
+
+# 7. PRODUCT IMAGES AND MEDIA
+
+Use a coherent commercial art direction.
+
+## Product-card images
+
+- Clean warm-ivory background.
+- Centered product composition.
+- Consistent lighting and crop.
+- Clear silhouette and texture.
+- Premium, realistic product appearance.
+- Minimal decorative clutter.
+- Consistent image ratios.
+
+## Product detail galleries
+
+Use image roles:
+- `primary`
+- `detail`
+- `packaging`
+- `lifestyle`
+
+For nuts and sweets, show the product texture and packaging clearly.
+
+For saffron, show realistic saffron threads and packaging.
+
+For handicrafts, show the object's form, material, dimensions or scale, and detail.
+
+For gift boxes, show the open box, closed packaging, included items, and a lifestyle composition.
+
+Each image must have appropriate Persian alternative text.
+
+## Asset rules
+
+- Prefer original assets, properly licensed assets, or generated assets whose usage rights are suitable for the project.
+- Do not hotlink random images from other websites.
+- Do not use one generic image for every product.
+- Do not invent product packaging labels with gibberish text.
+- Keep image files optimized and use responsive delivery.
+- Document placeholder assets.
+- Provide an asset manifest or consistent asset naming convention.
+
+If a suitable image is unavailable, use a deliberate neutral placeholder that is visually consistent and clearly replaceable. Never present a placeholder as a verified photograph of a specific real product.
+
+---
+
+# 8. REQUIRED PAGES AND ROUTES
+
+Implement all of the following.
+
+## Public pages
+
+1. `/` — Homepage.
+2. `/shop` — Full product catalog.
+3. `/category/[slug]` — Category page.
+4. `/product/[slug]` — Product details.
+5. `/search` — Search results.
+6. `/gift-boxes` — Gift box collection.
+7. `/gift-boxes/[slug]` — Individual gift box details if this is distinct from the general product route.
+8. `/cart` — Shopping cart.
+9. `/checkout` — Checkout.
+10. `/checkout/result` — Payment result and order status.
+11. `/track-order` — Order tracking.
+12. `/about` — Brand story.
+13. `/contact` — Contact form.
+14. `/faq` — Frequently asked questions.
+15. `/shipping` — Shipping policy.
+16. `/returns` — Returns and refunds policy.
+17. `/privacy` — Privacy policy.
+18. `/terms` — Terms and conditions.
+
+## Authentication pages
+
+19. `/login`
+20. `/register`
+21. `/forgot-password`
+22. `/reset-password` if the configured authentication approach supports it.
+
+Implement a consistent, secure authentication flow. Do not fake authentication by merely changing a displayed username.
+
+For a portfolio/demo environment, choose a practical authentication library compatible with the current Next.js version and document its setup.
+
+If email delivery is unavailable, provide a development-only password reset flow that does not expose reset tokens publicly in production.
+
+## Customer account pages
+
+23. `/account`
+24. `/account/profile`
+25. `/account/addresses`
+26. `/account/orders`
+27. `/account/orders/[id]`
+
+Customers must only access their own data.
+
+## Admin pages
+
+28. `/admin`
+29. `/admin/products`
+30. `/admin/products/new`
+31. `/admin/products/[id]`
+32. `/admin/categories`
+33. `/admin/orders`
+34. `/admin/orders/[id]`
+35. `/admin/customers`
+36. `/admin/coupons`
+37. `/admin/inventory`
+38. `/admin/reviews` if reviews are implemented.
+39. `/admin/settings`
+
+Admin routes must be protected on the server, not merely hidden in the UI.
+
+---
+
+# 9. PRODUCT LISTING AND SEARCH
+
+The shop page must support:
+- Search by product name and relevant searchable text.
+- Category filtering.
+- Price range filtering.
+- Availability filtering.
+- Sorting by newest, price ascending, and price descending.
+- Pagination or accessible incremental loading.
+- Empty states.
+- Loading states.
+- Error states.
+- URL query parameters for shareable filters when practical.
+
+Search should be debounced where appropriate and must not fire excessive requests.
+
+Do not implement filters that only change their own appearance without changing the actual product results.
+
+Keep the selected filters visible and easy to clear.
+
+---
+
+# 10. PRODUCT DETAIL PAGE
+
+Include:
+- Breadcrumbs.
+- Product image gallery.
+- Product title.
+- Price.
+- Variant selector.
+- Current stock and availability.
+- Quantity control with limits.
+- Add-to-cart action.
+- Product description.
+- Ingredients or materials.
+- Allergens when applicable.
+- Storage and care instructions.
+- Shipping information.
+- Related products from the same or complementary categories.
+
+Changing variants must update the price and stock information.
+
+Prevent adding more units than available stock.
+
+Validate every purchase-critical value on the server. Never trust client-supplied prices, stock values, discounts, or totals.
+
+---
+
+# 11. CART
+
+Implement a functional cart with:
+- Add item.
+- Remove item.
+- Update quantity.
+- Change product variant.
+- Persistent cart for returning users.
+- Cart item count in the header.
+- Subtotal.
+- Coupon field.
+- Shipping estimate when rules are configured.
+- Clear empty-cart state.
+- Checkout CTA.
+
+Guest carts may use local storage or another appropriate client-side persistence mechanism, but local storage must never be treated as authoritative for prices or stock.
+
+For signed-in users, implement a deliberate cart persistence/merge strategy.
+
+When proceeding to checkout, reload authoritative product and variant information from the server.
+
+If a product becomes unavailable or its price changes, show the customer an understandable message and require confirmation when necessary.
+
+Avoid duplicate cart items for the same product variant unless the cart model deliberately supports them.
+
+---
+
+# 12. CHECKOUT AND ORDER CREATION
+
+Implement a multi-step or clearly structured checkout.
+
+Required information:
+- Customer name.
+- Valid Iranian mobile number.
+- Province.
+- City.
+- Address.
+- Postal code.
+- Optional order note.
+- Delivery method if configured.
+- Accepted policy checkbox where appropriate.
+
+Support guest checkout if it can be implemented securely. Logged-in users should be able to select saved addresses.
+
+Requirements:
+- Server-side validation.
+- Clear field-level Persian errors.
+- Correct handling of Persian and Latin numerals in inputs.
+- Prevent duplicate order creation.
+- Calculate totals on the server.
+- Validate coupon eligibility on the server.
+- Recheck inventory before order creation and payment initiation.
+- Store an immutable order-item snapshot containing the purchased item name, SKU, variant, quantity, and unit price.
+- Use a transaction for operations that must succeed or fail together.
+- Prevent stock overselling.
+- Do not collect or store real payment-card numbers, CVVs, bank passwords, or real gateway secrets.
+
+Do not mark an order as paid merely because the browser reaches a success URL.
+
+---
+
+# 13. SIMULATED PAYMENT GATEWAY
+
+This is a mandatory part of the project.
+
+Implement a clearly labeled **test payment gateway**. It is a simulation, not a connection to a real bank or Iranian payment provider.
+
+Never claim that real money was transferred or that a real payment gateway was integrated.
+
+The payment flow must be a real application flow backed by persistent database records.
+
+## Payment scenarios
+
+Support:
+1. Successful simulated payment.
+2. Declined or failed payment.
+3. User cancellation.
+4. Expired payment attempt.
+5. Retry after failure.
+6. Refreshing or revisiting the result page.
+7. Duplicate callback or confirmation requests.
+8. Network failure or an interrupted browser flow.
+
+## Payment UI
+
+Create a test payment page with:
+- Order reference.
+- Amount in تومان.
+- Payment attempt reference.
+- Clear “آزمایشی / Test” labeling.
+- Button for simulated success.
+- Button for simulated failure.
+- Button for cancellation.
+- Clear explanation that no real money is transferred.
+- No real bank-card form.
+
+Make it visually polished and integrated with the RAVĀQ brand.
+
+## Server-side payment rules
+
+- Generate unique payment attempt references server-side.
+- Persist payment attempts.
+- Associate every attempt with the correct order.
+- Verify order ownership or valid guest-order access.
+- Verify amount and currency against server-side order data.
+- Enforce valid state transitions.
+- Make confirmation idempotent.
+- Prevent a second success request from charging or deducting stock again.
+- Prevent cancelled or failed attempts from silently becoming successful without a new valid attempt.
+- Ensure an order can only become paid once.
+- Prevent client-side manipulation of amount, order status, and payment status.
+- Use transactions where appropriate.
+- Record failure and cancellation reasons safely.
+- Do not log sensitive information.
+- Do not accept arbitrary status updates from public client requests.
+
+Use a documented payment state machine, for example:
+
+`PENDING → SUCCEEDED | FAILED | CANCELLED | EXPIRED`
+
+An order should have a separate order state, such as:
+
+`PENDING_PAYMENT → PAID → PROCESSING → SHIPPED → DELIVERED`
+
+Include cancellation/refund-related states only where their behavior is actually implemented.
+
+If a payment attempt fails, the order should remain unpaid and eligible for a controlled retry when appropriate.
+
+If the user refreshes a result page, show the persisted status instead of creating a new order or marking payment successful again.
+
+Create automated tests for duplicate success requests, invalid transitions, forged amounts, cancelled attempts, retries, and stock deduction.
+
+---
+
+# 14. COUPONS AND DISCOUNTS
+
+Implement coupons with:
+- Unique code.
+- Fixed or percentage discount.
+- Start and end time.
+- Active/inactive state.
+- Minimum order amount.
+- Maximum discount where applicable.
+- Usage limit.
+- Per-customer limit where practical.
+- Category/product restrictions if included in scope.
+
+Validate coupons on the server.
+
+Recalculate the total after applying or removing a coupon.
+
+Prevent expired, exhausted, or ineligible coupons from being used.
+
+Do not display fictional discounts unless a real coupon or compare-at price exists in the seeded data.
+
+---
+
+# 15. ORDER MANAGEMENT AND INVENTORY
+
+Implement:
+- Order number generation.
+- Persistent order records.
+- Order item snapshots.
+- Payment attempts.
+- Order status history.
+- Inventory updates.
+- Stock validation.
+- Inventory movement records or an equivalent auditable mechanism.
+
+Define exactly when stock is reserved and deducted.
+
+Avoid double deductions after repeated payment callbacks.
+
+Handle failed payment, cancelled order, retry, and expiration without creating inventory inconsistencies.
+
+If inventory reservation expiry is implemented, use a reliable server-side mechanism. Do not rely on a client-side timer to release stock.
+
+The admin should be able to:
+- Inspect an order.
+- Inspect its payment attempts.
+- Update allowed fulfillment states.
+- Search and filter orders.
+- See inventory changes.
+- Avoid manually marking an order as paid without a deliberate, audited administrative workflow.
+
+---
+
+# 16. AUTHENTICATION AND SECURITY
+
+Use a secure, maintained authentication solution compatible with the selected stack.
+
+Requirements:
+- Password hashing with a suitable maintained implementation if using passwords.
+- Secure session handling.
+- Server-side role checks.
+- Protected admin endpoints.
+- Ownership checks for customer data.
+- Input validation using a schema-validation library.
+- Safe database queries through the ORM.
+- Protection against unauthorized order access.
+- Rate limiting for sensitive endpoints when practical.
+- Safe handling of authentication errors.
+- No secrets in frontend bundles.
+- No real API keys committed to source control.
+- Environment variables documented in `.env.example`.
+- No production credentials in seed data.
+- Safe HTML rendering and validation of user-generated content.
+- CSRF protection appropriate to the chosen authentication architecture.
+
+Create a development-only admin seed account using environment variables or a documented local setup process. Do not hardcode a reusable production password.
+
+---
+
+# 17. ADMIN DASHBOARD
+
+Build a polished Persian RTL admin dashboard with a distinct but consistent visual language.
+
+## Dashboard overview
+
+Display real database-derived metrics:
+- Total orders.
+- Pending payments.
+- Paid orders.
+- Total products.
+- Low-stock products.
+- Recent orders.
+- Sales totals based only on paid orders.
+
+Do not invent dashboard metrics or use hardcoded numbers once the database is available.
+
+## Product management
+
+Implement:
+- Product list.
+- Search.
+- Category filters.
+- Create/edit product.
+- Variant management.
+- Price management.
+- Stock management.
+- Publish/unpublish.
+- Image management or a documented media workflow.
+- Validation and error feedback.
+
+## Category management
+
+Implement category creation/editing, slugs, display order, active status, and safe deletion rules.
+
+## Orders
+
+Implement:
+- Order list.
+- Search by order number.
+- Status filters.
+- Order detail.
+- Customer and address snapshot.
+- Payment attempt history.
+- Order status history.
+- Controlled fulfillment updates.
+
+## Customers
+
+Implement customer listing and relevant order history while respecting privacy and access controls.
+
+## Coupons
+
+Implement create/edit/disable and usage statistics based on actual records.
+
+## Inventory
+
+Implement stock levels, low-stock alerts, and auditable stock adjustments.
+
+## Settings
+
+Centralize editable store settings that are actually supported, such as:
+- Store display name.
+- Contact details.
+- Shipping rules.
+- Minimum order threshold if applicable.
+- Demo-mode indicator.
+- Configured social links.
+
+Do not create buttons or forms that look functional but do nothing.
+
+---
+
+# 18. CUSTOMER ACCOUNT
+
+Provide:
+- Profile overview.
+- Profile editing.
+- Saved addresses.
+- Order history.
+- Order detail.
+- Payment status.
+- Order tracking.
+- Secure logout.
+
+A customer must never be able to view or modify another customer's account, address, order, or payment data by changing a URL or request payload.
+
+---
+
+# 19. ORDER TRACKING
+
+Implement an order-tracking page that accepts an order number and the appropriate verification mechanism.
+
+Do not expose full addresses, phone numbers, or other sensitive customer information to anyone who merely knows an order number.
+
+Show a clear timeline using the actual order and status-history records.
+
+Use Persian labels and dates appropriate to the user's locale.
+
+---
+
+# 20. SEARCH, SEO, AND CONTENT
+
+Implement:
+- Persian page titles and meta descriptions.
+- Canonical URLs where appropriate.
+- Open Graph metadata.
+- Product metadata.
+- Product structured data only when supported by actual product data.
+- Sitemap.
+- Robots configuration.
+- Descriptive slugs.
+- Accessible alternative text.
+- Empty, loading, error, and not-found states.
+- Helpful not-found page with a path back to the shop.
+
+Do not invent reviews, ratings, stock, delivery promises, certifications, or product origins for SEO markup.
+
+---
+
+# 21. PERSIAN RTL AND IRANIAN LOCALIZATION
+
+All customer-facing interfaces must be designed for Persian first.
+
+Requirements:
+- Set appropriate document language and RTL direction.
+- Correct RTL layout and alignment.
+- Use Persian copy consistently.
+- Format prices in تومان.
+- Store monetary values as integer تومان for this project and document the convention.
+- Store timestamps in a consistent standard format, such as UTC, and convert them for display.
+- Display dates in the Solar Hijri calendar where appropriate.
+- Handle Persian and Arabic letter variants in search when practical.
+- Normalize Persian and Latin numerals for phone numbers, postal codes, and numeric inputs.
+- Use realistic Iranian address fields.
+- Validate Iranian mobile numbers appropriately.
+- Do not use placeholder English text throughout the Persian interface.
+- Keep technical identifiers, URLs, database values, and machine-readable states stable regardless of display language.
+
+Use a reliable maintained date/calendar solution if necessary. Do not write fragile date-conversion logic without tests.
+
+---
+
+# 22. TECHNICAL STACK
+
+Use the following stack unless repository inspection reveals a concrete incompatibility:
+
+- Next.js with App Router.
+- React.
+- TypeScript with strict mode.
+- PostgreSQL.
+- Prisma ORM, using a version compatible with the selected Next.js and database setup.
+- A maintained authentication solution.
+- Zod or another appropriate schema-validation library.
+- Tailwind CSS plus custom design tokens and reusable components.
+- Lucide React icons.
+- Motion for React for restrained interface animation.
+- React Hook Form where forms benefit from it.
+- Vitest or Jest for unit tests.
+- Playwright for essential end-to-end flows where the environment supports it.
+
+Use server components by default where appropriate. Add client components only where interactivity requires them.
+
+Do not turn the entire application into one giant client-side component.
+
+Use a clean, understandable folder structure.
+
+Suggested structure:
+
+`src/app/`
+- Public pages and route layouts.
+- API route handlers where appropriate.
+- Admin routes.
+- Customer account routes.
+- Authentication routes.
+
+`src/components/`
+- Shared UI.
+- Navigation.
+- Product cards.
+- Product gallery.
+- Cart.
+- Checkout.
+- Forms.
+- Admin components.
+- Feedback states.
+
+`src/lib/`
+- Database client.
+- Authentication.
+- Validation.
+- Pricing.
+- Inventory.
+- Coupons.
+- Payment simulation.
+- Order services.
+- Date and currency formatting.
+- Access-control utilities.
+
+`prisma/`
+- Schema.
+- Seed script.
+- Migrations where applicable.
+
+`tests/`
+- Unit tests.
+- Integration tests.
+- E2E tests.
+
+Adjust the exact structure to the current framework conventions. Maintain clear separation of UI, business logic, and data access.
+
+---
+
+# 23. DATABASE MODEL
+
+Design and implement a coherent relational schema.
+
+Include appropriate models for:
+- User.
+- Role or role field.
+- Session/account records required by the authentication library.
+- Address.
+- Category.
+- Product.
+- ProductVariant.
+- ProductImage.
+- Cart and CartItem, if using database-persisted carts.
+- Order.
+- OrderItem.
+- PaymentAttempt.
+- Coupon.
+- CouponRedemption.
+- InventoryMovement.
+- OrderStatusHistory.
+- Review if reviews are implemented.
+- NewsletterSubscription if the newsletter is implemented.
+- StoreSettings if settings are editable.
+
+Add:
+- Primary keys.
+- Foreign keys.
+- Appropriate unique constraints.
+- Indexes for search/filter patterns.
+- Timestamps.
+- Explicit monetary and quantity fields.
+- Proper deletion and archival rules.
+
+Use decimal or integer types appropriately for monetary values. For this project, integer تومان is acceptable and preferred for simplicity, provided the convention is consistent.
+
+Store order-item prices and product details as snapshots so historical orders do not change when a product is edited.
+
+Keep payment status separate from order fulfillment status.
+
+Use database transactions for operations that must be atomic.
+
+Do not use a production database schema that exists only in memory or disappears on restart.
+
+---
+
+# 24. API AND SERVER ACTIONS
+
+Create well-structured, validated server operations for:
+- Product and category retrieval.
+- Product search.
+- Cart validation.
+- Coupon application.
+- Checkout and order creation.
+- Payment attempt creation.
+- Simulated payment completion/failure/cancellation.
+- Order retrieval and tracking.
+- Customer profile and address management.
+- Admin product/category management.
+- Inventory changes.
+- Order fulfillment updates.
+
+Use consistent response shapes and appropriate HTTP status codes.
+
+Validate all untrusted input at the server boundary.
+
+Use explicit authentication and authorization checks.
+
+Avoid duplicate business logic across API routes and server actions. Put core business rules in reusable service functions.
+
+Do not expose internal exception details, stack traces, secrets, or database errors to customers.
+
+---
+
+# 25. ACCESSIBILITY AND RESPONSIVE DESIGN
+
+Target:
+- Mobile.
+- Tablet.
+- Desktop.
+- Large desktop.
+
+Use mobile-first responsive behavior.
+
+Test at representative widths such as:
+- 360px.
+- 390px.
+- 768px.
+- 1024px.
+- 1440px.
+
+Requirements:
+- Keyboard navigation.
+- Visible focus indicators.
+- Semantic HTML.
+- Accessible labels.
+- Appropriate image alternative text.
+- Correct color contrast.
+- Accessible dialogs and menus.
+- Clear form errors.
+- Reduced-motion support.
+- Touch-friendly targets.
+- No horizontal overflow.
+- No hidden primary actions on mobile.
+
+The mobile design must be intentionally composed, not merely a compressed desktop layout.
+
+---
+
+# 26. ANIMATION AND INTERACTION
+
+Use motion to improve storytelling and feedback, not to distract from shopping.
+
+Allowed examples:
+- Subtle category-card reveal.
+- Gentle product-image hover zoom.
+- Smooth dropdown and modal transitions.
+- Cart confirmation feedback.
+- Small entrance animation for editorial sections.
+- Tasteful hero motion if a real, optimized asset supports it.
+
+Avoid:
+- Constant floating elements.
+- Excessive parallax.
+- Long entrance animations that delay shopping.
+- Motion that interferes with scrolling.
+- Animation that causes layout shifts.
+- Animation that ignores reduced-motion settings.
+
+All critical functionality must work even when animation is disabled.
+
+---
+
+# 27. PERFORMANCE AND RELIABILITY
+
+- Use responsive optimized images.
+- Minimize unnecessary client JavaScript.
+- Avoid unnecessary dependencies.
+- Prevent layout shift.
+- Use appropriate loading states and caching.
+- Do not cache user-specific or sensitive data publicly.
+- Avoid N+1 database queries where practical.
+- Paginate admin and product lists when appropriate.
+- Add indexes based on query patterns.
+- Handle database connection lifecycle correctly.
+- Provide friendly errors.
+- Avoid hydration mismatches.
+- Keep the homepage hero performant.
+- Document any major performance compromises.
+
+Do not optimize by removing required functionality.
+
+---
+
+# 28. TESTING AND ACCEPTANCE CRITERIA
+
+Write and run tests for the most important business rules.
+
+At minimum test:
+- Price calculations.
+- Variant selection.
+- Quantity limits.
+- Coupon validation.
+- Checkout validation.
+- Inventory consistency.
+- Duplicate order prevention.
+- Payment success.
+- Payment failure.
+- Payment cancellation.
+- Payment retry.
+- Expired attempts.
+- Idempotent repeated payment confirmation.
+- Forged payment amount rejection.
+- Authorization and ownership checks.
+- Admin access protection.
+- Persian numeral normalization where implemented.
+
+## Essential end-to-end flow
+
+A new user must be able to:
+1. Open the homepage.
+2. Browse categories.
+3. Open a product.
+4. Select a valid variant.
+5. Add it to the cart.
+6. Change quantity.
+7. Proceed to checkout.
+8. Submit valid Iranian customer and address details.
+9. Create an order.
+10. Enter the explicitly labeled test payment page.
+11. Complete a simulated success or failure scenario.
+12. View the correct persisted result.
+13. See the order in the appropriate account/admin views.
+
+Also test a failed payment followed by a retry.
+
+Test refreshing the payment result page and repeating the confirmation request. Neither action may create a duplicate paid order or deduct stock twice.
+
+## Definition of done
+
+The project is not complete merely because the development server starts.
+
+Before claiming completion:
+- Install dependencies successfully.
+- Run database migrations.
+- Seed the database.
+- Run linting.
+- Run TypeScript checks.
+- Run unit/integration tests.
+- Run the available E2E suite.
+- Build the production application.
+- Fix all critical errors.
+- Verify essential routes.
+- Verify the cart and test-payment flow.
+- Check responsive behavior.
+- Document any tests or flows that could not be run due to environment limitations.
+
+Never report a successful command or test unless it actually ran successfully.
+
+---
+
+# 29. SEED DATA AND DEMO EXPERIENCE
+
+Create a seed script that inserts:
+- All categories.
+- At least 24 product records or a clearly documented staged subset.
+- Valid variants and illustrative prices.
+- Realistic stock quantities.
+- Proper product descriptions.
+- Image paths and roles.
+- A small set of explicitly labeled demo coupons.
+- A development-only admin account configured through environment variables.
+
+Make the homepage look complete immediately after seeding.
+
+Use a consistent image asset strategy. If some assets are unavailable, identify those items clearly in the seed data or asset manifest.
+
+The demo must be usable without real payment credentials.
+
+Do not require an external paid API for the core application to run.
+
+---
+
+# 30. ENVIRONMENT AND DOCUMENTATION
+
+Provide:
+- `README.md`.
+- `.env.example`.
+- Database setup instructions.
+- Migration commands.
+- Seed commands.
+- Development commands.
+- Production build commands.
+- Test commands.
+- Demo admin setup.
+- Payment simulation explanation.
+- Architecture overview.
+- Known limitations.
+- Asset replacement guide.
+- Deployment requirements.
+
+Never include actual secrets in `.env.example`.
+
+Document whether the chosen database requires Docker, a locally installed PostgreSQL server, or a hosted database.
+
+If the execution environment cannot provide PostgreSQL, clearly document the limitation and use a development setup that does not falsely claim to be production-ready. Do not silently replace PostgreSQL with an in-memory store while claiming the requested database is implemented.
+
+---
+
+# 31. IMPLEMENTATION WORKFLOW
+
+Do not attempt to generate the entire application in one enormous, unverified code dump.
+
+Work in clear phases and maintain a progress checklist.
+
+## Phase 1 — Inspect and plan
+
+- Inspect the repository and existing files.
+- Check installed versions and available commands.
+- Identify missing dependencies and environment limitations.
+- Propose a concise implementation plan.
+- Define the data model and route structure.
+- Identify the most important technical risks.
+- Start implementation after the inspection; do not stop at planning.
+
+## Phase 2 — Foundation
+
+- Configure Next.js, TypeScript, Tailwind, fonts, and design tokens.
+- Set up PostgreSQL and Prisma.
+- Create the schema and migrations.
+- Implement seed data.
+- Create reusable layout and UI primitives.
+
+## Phase 3 — Brand and storefront
+
+- Implement the logo system.
+- Build the global header/footer.
+- Build the full-viewport homepage hero.
+- Implement category cards and product sections.
+- Build catalog, search, filters, and product details.
+- Verify responsive layouts.
+
+## Phase 4 — Commerce
+
+- Implement cart persistence.
+- Implement variants and pricing.
+- Implement address handling.
+- Implement checkout validation.
+- Implement order creation and inventory rules.
+- Implement coupons.
+
+## Phase 5 — Authentication and customer area
+
+- Implement authentication.
+- Implement profile and addresses.
+- Implement customer order history.
+- Enforce ownership rules.
+
+## Phase 6 — Test payment gateway
+
+- Implement persistent payment attempts.
+- Implement the payment state machine.
+- Implement success, failure, cancellation, expiration, and retry.
+- Implement idempotency.
+- Write tests for security and consistency.
+
+## Phase 7 — Admin
+
+- Implement dashboard metrics.
+- Implement products, categories, orders, customers, coupons, and inventory.
+- Protect all admin routes and server operations.
+
+## Phase 8 — Quality and delivery
+
+- Run all checks.
+- Test key user journeys.
+- Fix errors.
+- Inspect mobile and desktop.
+- Verify database persistence.
+- Document setup and known limitations.
+
+After each phase, report:
+- What was completed.
+- Files and major components created or changed.
+- Commands and tests actually run.
+- Errors and blockers.
+- The next phase.
+
+Keep a project checklist in the repository, such as `PROJECT_STATUS.md`, and update it as work progresses.
+
+---
+
+# 32. FINAL QUALITY BAR
+
+Prioritize the following, in order:
+
+1. Correct, secure, working core commerce flows.
+2. Premium, coherent visual design and a genuinely full-viewport cinematic homepage.
+3. Reliable database, pricing, inventory, and simulated payment behavior.
+4. Excellent Persian RTL and mobile experience.
+5. Maintainable architecture and tests.
+6. Useful admin tooling.
+7. Additional polish and optional features.
+
+Do not sacrifice payment correctness or security for visual polish.
+
+Do not sacrifice the distinctive brand identity for generic template convenience.
+
+Do not create dead buttons, fake success states, hardcoded dashboard metrics, fake reviews, or nonfunctional filters.
+
+Do not use fake real-world contact details or claim a real payment integration.
+
+The final result should feel like a credible contemporary Iranian premium boutique with a distinctive visual identity and a technically defensible implementation.
+
+Begin by inspecting the repository and environment, then execute the phases systematically. Do not stop after producing a plan or a homepage mockup.

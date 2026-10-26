@@ -1,0 +1,6 @@
+{
+  "name": "رَواق | RAVĀQ — بوتیک هدایا و خوراکی‌های اصیل ایرانی",
+  "description": "فروشگاه اینترنتی رواق؛ گزیده‌ای از آجیل و خشکبار، شیرینی‌های سنتی، زعفران، صنایع‌دستی ایرانی و جعبه‌های هدیه ممتاز.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
