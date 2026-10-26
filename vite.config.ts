@@ -8,9 +8,11 @@ const rootDir = typeof import.meta.dirname === 'string'
   ? import.meta.dirname
   : path.dirname(fileURLToPath(import.meta.url));
 
+const basePath = process.env.VITE_BASE_PATH || '/';
+
 export default defineConfig(() => {
   return {
-    base: '/RAVAQ/',
+    base: basePath,
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
