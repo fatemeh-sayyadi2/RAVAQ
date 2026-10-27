@@ -9,13 +9,18 @@ import {
   ShieldCheck,
   KeyRound,
 } from 'lucide-react';
+import { AUTHORIZED_ADMIN_EMAIL } from '../lib/firebase.ts';
 import {
-  auth,
-  googleProvider,
-  signInWithPopup,
-  syncFirebaseUserToFirestore,
-  saveAddressToFirestore,
-} from '../lib/firebase.ts';
+  apiGoogleLogin,
+  apiEmailLogin,
+  apiEmailRegister,
+  apiForgotPassword,
+  apiResetPassword,
+  apiUpdateProfile,
+  apiAddAddress,
+  apiDeleteAddress,
+  apiGetOrderDetail,
+} from '../lib/api-client.ts';
 import { CustomerAddressRecord, Order } from '../lib/types.ts';
 import {
   formatToman,
@@ -26,6 +31,7 @@ import {
 
 interface AuthPageProps {
   mode: 'login' | 'register' | 'forgot-password' | 'reset-password';
+  redirectTo?: string;
   onAuthSuccess: (
     user: {
       uid: string;
@@ -41,6 +47,7 @@ interface AuthPageProps {
 
 export const AuthPage: React.FC<AuthPageProps> = ({
   mode,
+  redirectTo,
   onAuthSuccess,
   onNavigate,
 }) => {
@@ -58,21 +65,15 @@ export const AuthPage: React.FC<AuthPageProps> = ({
     setError('');
     setLoading(true);
     try {
-      const cred = await signInWithPopup(auth, googleProvider);
-      await syncFirebaseUserToFirestore(cred.user);
-      const isAdmin = cred.user.email === 'fawti.tiri2@gmail.com';
-      onAuthSuccess(
-        {
-          uid: cred.user.uid,
-          displayName: cred.user.displayName || 'کاربر رواق',
-          email: cred.user.email || '',
-          role: isAdmin ? 'ADMIN' : 'CUSTOMER',
-        },
-        null
-      );
-      onNavigate('/account');
-    } catch (err: any) {
-      setError('ورود با حساب گوگل انجام نشد. می‌توانید از فرم ایمیل و رمز عبور استفاده کنید.');
+      const { user, token } = await apiGoogleLogin();
+      onAuthSuccess(user, token);
+      if (redirectTo) {
+        onNavigate(redirectTo);
+      } else {
+        onNavigate(user.role === 'ADMIN' ? '/admin' : '/account');
+      }
+    } catch {
+      setError('ورود با حساب گوگل انجام نشد. لطفاً مجدداً تلاش کنید یا از فرم زیر استفاده نمایید.');
     } finally {
       setLoading(false);
     }
@@ -86,81 +87,35 @@ export const AuthPage: React.FC<AuthPageProps> = ({
 
     try {
       if (mode === 'login') {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          setError(data.error || 'خطا در ورود.');
+        const { user, token } = await apiEmailLogin(email, password);
+        onAuthSuccess(user, token);
+        if (redirectTo) {
+          onNavigate(redirectTo);
         } else {
-          onAuthSuccess(data.user, data.token);
-          onNavigate(data.user.role === 'ADMIN' ? '/admin' : '/account');
+          onNavigate(user.role === 'ADMIN' ? '/admin' : '/account');
         }
       } else if (mode === 'register') {
-        const res = await fetch('/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ displayName, email, mobile, password }),
+        const { user, token } = await apiEmailRegister({
+          displayName,
+          email,
+          mobile,
+          password,
         });
-        const data = await res.json();
-        if (!res.ok) {
-          setError(data.error || 'خطا در ثبت‌نام.');
-        } else {
-          onAuthSuccess(data.user, data.token);
-          onNavigate('/account');
-        }
+        onAuthSuccess(user, token);
+        onNavigate(redirectTo || '/account');
       } else if (mode === 'forgot-password') {
-        const res = await fetch('/api/auth/forgot-password', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        });
-        const data = await res.json();
+        const data = await apiForgotPassword(email);
         setInfoMsg(data.message);
         if (data.devResetCode) {
           setDevCodeHint(data.devResetCode);
         }
       } else if (mode === 'reset-password') {
-        const res = await fetch('/api/auth/reset-password', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ code: resetCode, newPassword: password }),
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          setError(data.error || 'خطا در بازنشانی رمز عبور.');
-        } else {
-          setInfoMsg(data.message);
-          setTimeout(() => onNavigate('/login'), 1200);
-        }
+        const data = await apiResetPassword(resetCode, password);
+        setInfoMsg(data.message);
+        setTimeout(() => onNavigate('/login'), 1200);
       }
-    } catch {
-      setError('خطا در ارتباط با سرور.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleQuickDemoAdminLogin = async () => {
-    setEmail('fawti.tiri2@gmail.com');
-    setPassword('RavaqAdmin1405!');
-    setLoading(true);
-    try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: 'fawti.tiri2@gmail.com',
-          password: 'RavaqAdmin1405!',
-        }),
-      });
-      const data = await res.json();
-      if (res.ok && data.user) {
-        onAuthSuccess(data.user, data.token);
-        onNavigate('/admin');
-      }
+    } catch (err: any) {
+      setError(err?.message || 'خطا در احراز هویت.');
     } finally {
       setLoading(false);
     }
@@ -176,16 +131,18 @@ export const AuthPage: React.FC<AuthPageProps> = ({
               : mode === 'register'
               ? 'ایجاد حساب کاربری در رَواق'
               : mode === 'forgot-password'
-              ? 'بازیابی رمز عبور (محیط توسعه)'
+              ? 'بازیابی رمز عبور'
               : 'تعیین رمز عبور جدید'}
           </h1>
           <p className="text-xs text-[#77716A]">
-            برای مدیریت سفارش‌ها، نشانی‌های منتخب و پیگیری خرید وارد شوید.
+            {redirectTo === '/checkout'
+              ? 'برای ثبت نهایی سفارش و ورود به درگاه آزمایشی، وارد حساب کاربری خود شوید.'
+              : 'برای مدیریت سفارش‌ها، نشانی‌های منتخب و پیگیری خرید وارد شوید.'}
           </p>
         </div>
 
         {error && (
-          <div className="bg-[#F5E2E0] border border-[#742E3A] text-[#4C202B] p-3 rounded-xl text-xs">
+          <div className="bg-[#F5E2E0] border border-[#742E3A] text-[#4C202B] p-3 rounded-xl text-xs leading-relaxed">
             {error}
           </div>
         )}
@@ -219,17 +176,11 @@ export const AuthPage: React.FC<AuthPageProps> = ({
               disabled={loading}
               className="w-full py-2.5 px-4 bg-[#F8F4EC] border border-[#E4DCCF] rounded-lg text-xs font-bold text-[#292624] hover:border-[#742E3A] transition-colors cursor-pointer"
             >
-              ورود با حساب گوگل (Firebase Auth)
+              ورود امن با حساب گوگل (Firebase Authentication)
             </button>
-
-            <button
-              type="button"
-              onClick={handleQuickDemoAdminLogin}
-              disabled={loading}
-              className="w-full py-2 px-4 bg-[#EFE5D6] text-[#4C202B] rounded-lg text-xs font-medium hover:bg-[#E4DCCF] transition-colors cursor-pointer"
-            >
-              ورود سریع با حساب مدیر آزمایشی (Demo Admin)
-            </button>
+            <p className="text-[11px] text-[#77716A] text-center">
+              حساب مدیر تاییدشده پروژه: <span dir="ltr" className="font-mono">{AUTHORIZED_ADMIN_EMAIL}</span>
+            </p>
           </div>
         )}
 
@@ -419,17 +370,12 @@ export const AccountPage: React.FC<AccountPageProps> = ({
 
   useEffect(() => {
     if (subRoute === 'order-detail' && orderIdParam && user) {
-      const headers: Record<string, string> = {};
-      if (authToken) headers.Authorization = `Bearer ${authToken}`;
-      headers['x-firebase-uid'] = user.uid;
-      headers['x-firebase-email'] = user.email;
-      fetch(`/api/account/orders/${encodeURIComponent(orderIdParam)}`, { headers })
-        .then((r) => r.json().then((d) => ({ ok: r.ok, d })))
-        .then(({ ok, d }) => {
-          if (!ok) setOrderDetailError(d.error || 'خطا در دسترسی به سفارش.');
-          else setOrderDetailData(d);
-        })
-        .catch(() => setOrderDetailError('خطا در دریافت اطلاعات سفارش.'));
+      setOrderDetailError('');
+      apiGetOrderDetail(orderIdParam, authToken)
+        .then((d) => setOrderDetailData(d))
+        .catch((err: any) =>
+          setOrderDetailError(err?.message || 'خطا در دسترسی به سفارش.')
+        );
     }
   }, [subRoute, orderIdParam, user, authToken]);
 
@@ -450,79 +396,49 @@ export const AccountPage: React.FC<AccountPageProps> = ({
     );
   }
 
-  const getHeaders = () => {
-    const h: Record<string, string> = { 'Content-Type': 'application/json' };
-    if (authToken) h.Authorization = `Bearer ${authToken}`;
-    h['x-firebase-uid'] = user.uid;
-    h['x-firebase-email'] = user.email;
-    h['x-firebase-name'] = user.displayName;
-    return h;
-  };
-
   const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     setProfileMsg('');
-    const res = await fetch('/api/account/profile', {
-      method: 'PUT',
-      headers: getHeaders(),
-      body: JSON.stringify({ displayName: editName, mobile: editMobile }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      setProfileMsg(data.error || 'خطا در بروزرسانی مشخصات.');
-    } else {
+    try {
+      await apiUpdateProfile({ displayName: editName, mobile: editMobile }, authToken);
       setProfileMsg('مشخصات حساب کاربری با موفقیت ذخیره شد.');
       onRefreshAccount();
+    } catch (err: any) {
+      setProfileMsg(err?.message || 'خطا در بروزرسانی مشخصات.');
     }
   };
 
   const handleAddAddress = async (e: React.FormEvent) => {
     e.preventDefault();
     setAddrError('');
-    const res = await fetch('/api/account/addresses', {
-      method: 'POST',
-      headers: getHeaders(),
-      body: JSON.stringify({
-        recipientName,
-        mobile: addrMobile,
-        province,
-        city,
-        addressLine,
-        postalCode,
-        isDefault,
-      }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      setAddrError(data.error || 'خطا در ثبت نشانی.');
-    } else {
-      if (auth.currentUser && data.address) {
-        try {
-          await saveAddressToFirestore(auth.currentUser.uid, data.address.id, {
-            recipientName: data.address.recipientName,
-            mobile: data.address.mobile,
-            province: data.address.province,
-            city: data.address.city,
-            addressLine: data.address.addressLine,
-            postalCode: data.address.postalCode,
-            isDefault: data.address.isDefault,
-          });
-        } catch {
-          // Handled by server persistence fallback
-        }
-      }
+    try {
+      await apiAddAddress(
+        {
+          recipientName,
+          mobile: addrMobile,
+          province,
+          city,
+          addressLine,
+          postalCode,
+          isDefault,
+        },
+        authToken
+      );
       setAddressLine('');
       setPostalCode('');
       onRefreshAccount();
+    } catch (err: any) {
+      setAddrError(err?.message || 'خطا در ثبت نشانی.');
     }
   };
 
   const handleDeleteAddress = async (id: string) => {
-    await fetch(`/api/account/addresses/${id}`, {
-      method: 'DELETE',
-      headers: getHeaders(),
-    });
-    onRefreshAccount();
+    try {
+      await apiDeleteAddress(id, authToken);
+      onRefreshAccount();
+    } catch {
+      // ignore
+    }
   };
 
   const tabs = [

@@ -124,10 +124,10 @@ const VERIFIED_PRODUCT_JPG_MAP: Record<
     lifestyle: '/assets/products/dried-fruits-nuts.jpg',
   },
   'mixed-nuts': {
-    primary: '/assets/products/cashews.jpg',
-    detail: '/assets/products/hazelnuts.jpg',
+    primary: '/assets/products/dried-fruits-nuts.jpg',
+    detail: '/assets/products/pistachios-bowl.jpg',
     packaging: '/assets/products/ribbon-packaging.jpg',
-    lifestyle: '/assets/products/dried-fruits-nuts.jpg',
+    lifestyle: '/assets/products/cashews.jpg',
   },
   'hospitality-nuts': {
     primary: '/assets/products/dried-fruits-nuts.jpg',
@@ -137,7 +137,7 @@ const VERIFIED_PRODUCT_JPG_MAP: Record<
   },
   'dried-fruit': {
     primary: '/assets/products/dried-fruits-nuts.jpg',
-    detail: '/assets/products/hazelnuts.jpg',
+    detail: '/assets/products/almonds.jpg',
     packaging: '/assets/products/ribbon-packaging.jpg',
     lifestyle: '/assets/products/persian-tea-teapot.jpg',
   },
@@ -154,14 +154,14 @@ const VERIFIED_PRODUCT_JPG_MAP: Record<
     lifestyle: '/assets/products/persian-tea-teapot.jpg',
   },
   raisins: {
-    primary: '/assets/products/hazelnuts.jpg',
-    detail: '/assets/products/dried-fruits-nuts.jpg',
+    primary: '/assets/products/dried-fruits-nuts.jpg',
+    detail: '/assets/products/walnuts.jpg',
     packaging: '/assets/products/ribbon-packaging.jpg',
     lifestyle: '/assets/products/persian-tea-teapot.jpg',
   },
   mulberry: {
-    primary: '/assets/products/pumpkin-seeds.jpg',
-    detail: '/assets/products/dried-fruits-nuts.jpg',
+    primary: '/assets/products/dried-fruits-nuts.jpg',
+    detail: '/assets/products/pistachios-bowl.jpg',
     packaging: '/assets/products/ribbon-packaging.jpg',
     lifestyle: '/assets/products/persian-tea-teapot.jpg',
   },
@@ -172,10 +172,10 @@ const VERIFIED_PRODUCT_JPG_MAP: Record<
     lifestyle: '/assets/products/persian-tea-teapot.jpg',
   },
   barberry: {
-    primary: '/assets/products/saffron-bowl-jar.jpg',
-    detail: '/assets/products/pistachios-cluster.jpg',
+    primary: '/assets/products/dried-fruits-nuts.jpg',
+    detail: '/assets/products/saffron-bowl-jar.jpg',
     packaging: '/assets/products/saffron-jar-ravaq.jpg',
-    lifestyle: '/assets/products/dried-fruits-nuts.jpg',
+    lifestyle: '/assets/products/persian-tea-teapot.jpg',
   },
 
   // Category 2: شیرینی‌های سنتی (Traditional Sweets)

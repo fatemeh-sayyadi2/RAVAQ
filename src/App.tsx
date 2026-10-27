@@ -21,7 +21,18 @@ import {
   INITIAL_REVIEWS,
   INITIAL_STORE_SETTINGS,
 } from './lib/seed-catalog.ts';
-import { auth, onAuthStateChanged, signOut, syncFirebaseUserToFirestore } from './lib/firebase.ts';
+import {
+  auth,
+  onAuthStateChanged,
+  signOut,
+  syncFirebaseUserToFirestore,
+  isVerifiedFirebaseAdmin,
+} from './lib/firebase.ts';
+import {
+  apiBootstrap,
+  apiValidateCart,
+  apiGetAccountOverview,
+} from './lib/api-client.ts';
 import { Header, Footer } from './components/Layout.tsx';
 import { HomePage } from './pages/HomePage.tsx';
 import { CatalogPage, ProductDetailPage } from './pages/CatalogAndProductPages.tsx';
@@ -37,7 +48,6 @@ import { StaticContentPage } from './pages/StaticContentPages.tsx';
 
 const CART_STORAGE_KEY = 'ravaq_cart_v1';
 const COUPON_STORAGE_KEY = 'ravaq_coupon_v1';
-const AUTH_SESSION_STORAGE_KEY = 'ravaq_auth_session_v1';
 
 interface AppUser {
   uid: string;
@@ -66,7 +76,7 @@ export default function App() {
   const [reviews, setReviews] = useState<ReviewRecord[]>(INITIAL_REVIEWS);
   const [settings, setSettings] = useState<StoreSettings>(INITIAL_STORE_SETTINGS);
 
-  // Cart & Coupon State
+  // Cart & Coupon State (localStorage used for non-sensitive guest cart preferences only)
   const [cartItems, setCartItems] = useState<CartItemInput[]>(() => {
     try {
       const saved = localStorage.getItem(CART_STORAGE_KEY);
@@ -86,31 +96,9 @@ export default function App() {
   const [cartValidation, setCartValidation] = useState<CartValidationResult | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Auth & Account State
-  const [user, setUser] = useState<AppUser | null>(() => {
-    try {
-      const raw = localStorage.getItem(AUTH_SESSION_STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        return parsed.user || null;
-      }
-    } catch {
-      // ignore
-    }
-    return null;
-  });
-  const [authToken, setAuthToken] = useState<string | null>(() => {
-    try {
-      const raw = localStorage.getItem(AUTH_SESSION_STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        return parsed.token || null;
-      }
-    } catch {
-      // ignore
-    }
-    return null;
-  });
+  // Auth & Account State (Derived from verified Firebase Auth or active local dev session; never localStorage)
+  const [user, setUser] = useState<AppUser | null>(null);
+  const [authToken, setAuthToken] = useState<string | null>(null);
   const [addresses, setAddresses] = useState<CustomerAddressRecord[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
 
@@ -131,17 +119,14 @@ export default function App() {
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
-  // Load initial catalog from server
+  // Load initial catalog from Firestore / seed
   const fetchBootstrap = useCallback(async () => {
     try {
-      const res = await fetch('/api/bootstrap');
-      if (res.ok) {
-        const data = await res.json();
-        if (data.categories) setCategories(data.categories);
-        if (data.products) setProducts(data.products);
-        if (data.reviews) setReviews(data.reviews);
-        if (data.settings) setSettings(data.settings);
-      }
+      const data = await apiBootstrap();
+      if (data.categories) setCategories(data.categories);
+      if (data.products) setProducts(data.products);
+      if (data.reviews) setReviews(data.reviews);
+      if (data.settings) setSettings(data.settings);
     } catch {
       // Fallback to seed catalog already loaded
     }
@@ -151,24 +136,35 @@ export default function App() {
     fetchBootstrap();
   }, [fetchBootstrap]);
 
-  // Listen to Firebase Auth state for Google Sign-In
+  // Listen to Firebase Auth state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
       if (fbUser) {
-        const synced = await syncFirebaseUserToFirestore(fbUser);
-        const appUser: AppUser = {
-          uid: synced.uid,
-          displayName: synced.displayName,
-          email: synced.email,
-          role: synced.role,
-        };
-        setUser(appUser);
+        try {
+          const synced = await syncFirebaseUserToFirestore(fbUser);
+          const isAdmin = await isVerifiedFirebaseAdmin(fbUser);
+          setUser({
+            uid: synced.uid,
+            displayName: synced.displayName,
+            email: synced.email,
+            mobile: synced.mobile,
+            role: isAdmin ? 'ADMIN' : 'CUSTOMER',
+          });
+        } catch {
+          const isAdmin = await isVerifiedFirebaseAdmin(fbUser);
+          setUser({
+            uid: fbUser.uid,
+            displayName: fbUser.displayName || 'کاربر رواق',
+            email: fbUser.email || '',
+            role: isAdmin ? 'ADMIN' : 'CUSTOMER',
+          });
+        }
       }
     });
     return () => unsubscribe();
   }, []);
 
-  // Fetch Account Orders & Addresses when user changes
+  // Fetch Account Orders & Addresses from Firestore when user changes
   const fetchAccountData = useCallback(async () => {
     if (!user) {
       setAddresses([]);
@@ -176,28 +172,31 @@ export default function App() {
       return;
     }
     try {
-      const headers: Record<string, string> = {};
-      if (authToken) headers.Authorization = `Bearer ${authToken}`;
-      headers['x-firebase-uid'] = user.uid;
-      headers['x-firebase-email'] = user.email;
-      headers['x-firebase-name'] = user.displayName;
-
-      const res = await fetch('/api/account/summary', { headers });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.addresses) setAddresses(data.addresses);
-        if (data.orders) setOrders(data.orders);
+      const data = await apiGetAccountOverview(authToken);
+      if (data.addresses) setAddresses(data.addresses);
+      if (data.orders) setOrders(data.orders);
+      if (data.profile) {
+        setUser((prev) =>
+          prev
+            ? {
+                ...prev,
+                displayName: data.profile.displayName || prev.displayName,
+                mobile: data.profile.mobile ?? prev.mobile,
+                role: data.profile.role,
+              }
+            : prev
+        );
       }
     } catch {
-      // ignore
+      // ignore if user has no records yet
     }
-  }, [user, authToken]);
+  }, [user?.uid, authToken]);
 
   useEffect(() => {
     fetchAccountData();
   }, [fetchAccountData]);
 
-  // Sync Cart with localStorage and Server Authoritative Validator
+  // Sync Cart with localStorage (guest cart preference) and Authoritative Validator
   useEffect(() => {
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
@@ -206,26 +205,19 @@ export default function App() {
       // ignore
     }
 
-    const validateOnServer = async () => {
+    const validateAuthoritatively = async () => {
       try {
-        const res = await fetch('/api/cart/validate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            items: cartItems,
-            couponCode: couponCode || undefined,
-          }),
+        const data = await apiValidateCart({
+          items: cartItems,
+          couponCode: couponCode || undefined,
         });
-        if (res.ok) {
-          const data: CartValidationResult = await res.json();
-          setCartValidation(data);
-        }
+        setCartValidation(data);
       } catch {
         // ignore
       }
     };
 
-    validateOnServer();
+    validateAuthoritatively();
   }, [cartItems, couponCode]);
 
   // Cart manipulation handlers
@@ -314,14 +306,6 @@ export default function App() {
   const handleAuthSuccess = (newUser: AppUser, token: string | null) => {
     setUser(newUser);
     setAuthToken(token);
-    try {
-      localStorage.setItem(
-        AUTH_SESSION_STORAGE_KEY,
-        JSON.stringify({ user: newUser, token })
-      );
-    } catch {
-      // ignore
-    }
   };
 
   const handleLogout = async () => {
@@ -334,11 +318,6 @@ export default function App() {
     setAuthToken(null);
     setAddresses([]);
     setOrders([]);
-    try {
-      localStorage.removeItem(AUTH_SESSION_STORAGE_KEY);
-    } catch {
-      // ignore
-    }
     navigate('/');
   };
 
@@ -506,10 +485,12 @@ export default function App() {
     }
 
     // Auth routes
+    const redirectParam = searchParams.get('redirect') || undefined;
     if (pathname === '/login') {
       return (
         <AuthPage
           mode="login"
+          redirectTo={redirectParam}
           onAuthSuccess={handleAuthSuccess}
           onNavigate={navigate}
         />
@@ -519,6 +500,7 @@ export default function App() {
       return (
         <AuthPage
           mode="register"
+          redirectTo={redirectParam}
           onAuthSuccess={handleAuthSuccess}
           onNavigate={navigate}
         />
@@ -528,6 +510,7 @@ export default function App() {
       return (
         <AuthPage
           mode="forgot-password"
+          redirectTo={redirectParam}
           onAuthSuccess={handleAuthSuccess}
           onNavigate={navigate}
         />
@@ -537,6 +520,7 @@ export default function App() {
       return (
         <AuthPage
           mode="reset-password"
+          redirectTo={redirectParam}
           onAuthSuccess={handleAuthSuccess}
           onNavigate={navigate}
         />

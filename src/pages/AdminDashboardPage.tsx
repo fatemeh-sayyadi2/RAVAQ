@@ -21,6 +21,19 @@ import {
   formatJalaliDate,
 } from '../lib/persian.ts';
 import { OrderStatus } from '../lib/types.ts';
+import { AUTHORIZED_ADMIN_EMAIL } from '../lib/firebase.ts';
+import {
+  apiGetAdminDashboard,
+  apiAdminCreateProduct,
+  apiAdminUpdateProduct,
+  apiAdminCreateCategory,
+  apiAdminDeleteCategory,
+  apiAdminUpdateOrderStatus,
+  apiAdminAdjustInventory,
+  apiAdminCreateCoupon,
+  apiAdminToggleCoupon,
+  apiAdminSaveSettings,
+} from '../lib/api-client.ts';
 
 interface AdminDashboardPageProps {
   currentPath: string;
@@ -79,39 +92,27 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
   // Settings form state
   const [settingsForm, setSettingsForm] = useState<any>({});
 
-  const getHeaders = () => {
-    const h: Record<string, string> = { 'Content-Type': 'application/json' };
-    if (authToken) h.Authorization = `Bearer ${authToken}`;
-    if (user) {
-      h['x-firebase-uid'] = user.uid;
-      h['x-firebase-email'] = user.email;
-      h['x-firebase-name'] = user.displayName;
-    }
-    return h;
-  };
-
   const fetchAdminData = async () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/admin/dashboard', { headers: getHeaders() });
-      const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || 'شما دسترسی مدیر به این بخش را ندارید.');
-      } else {
-        setAdminData(data);
-        setSettingsForm(data.settings || {});
-      }
-    } catch {
-      setError('خطا در دریافت اطلاعات پنل مدیریت.');
+      const data = await apiGetAdminDashboard(authToken);
+      setAdminData(data);
+      setSettingsForm(data.settings || {});
+    } catch (err: any) {
+      setError(err?.message || 'شما دسترسی مدیر به این بخش را ندارید.');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchAdminData();
-  }, [user, authToken]);
+    if (user && user.role === 'ADMIN') {
+      fetchAdminData();
+    } else {
+      setLoading(false);
+    }
+  }, [user?.uid, user?.role, authToken]);
 
   if (!user || user.role !== 'ADMIN') {
     return (
@@ -122,14 +123,14 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             دسترسی محدود به مدیر فروشگاه رَواق
           </h1>
           <p className="text-xs text-[#77716A] leading-relaxed">
-            این مسیر در سمت سرور محافظت شده است. برای بررسی پنل مدیریت، با حساب مدیر آزمایشی (Demo Admin) وارد شوید.
+            این مسیر توسط قوانین امنیتی Firebase Authentication و Firestore محافظت شده و تنها برای حساب مدیر تاییدشده (<span dir="ltr" className="font-mono">{AUTHORIZED_ADMIN_EMAIL}</span>) مجاز است.
           </p>
           <button
             type="button"
             onClick={() => onNavigate('/login')}
             className="px-6 py-2.5 bg-[#742E3A] text-[#F8F4EC] text-xs font-bold rounded-lg cursor-pointer"
           >
-            ورود با حساب مدیر آزمایشی
+            ورود با حساب مدیر تاییدشده
           </button>
         </div>
       </div>
@@ -159,22 +160,18 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
   const handleCreateProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     setFeedback('');
-    const res = await fetch('/api/admin/products', {
-      method: 'POST',
-      headers: getHeaders(),
-      body: JSON.stringify({
-        name: newProdName,
-        slug: newProdSlug,
-        categorySlug: newProdCat,
-        basePrice: Number(newProdPrice),
-        initialStock: Number(newProdStock),
-        shortDescription: newProdShortDesc,
-      }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      setFeedback(data.error || 'خطا در ایجاد محصول.');
-    } else {
+    try {
+      await apiAdminCreateProduct(
+        {
+          name: newProdName,
+          slug: newProdSlug,
+          categorySlug: newProdCat,
+          basePrice: Number(newProdPrice),
+          initialStock: Number(newProdStock),
+          shortDescription: newProdShortDesc,
+        },
+        authToken
+      );
       setFeedback('محصول جدید با موفقیت ثبت شد.');
       setNewProdName('');
       setNewProdSlug('');
@@ -182,144 +179,133 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
       await fetchAdminData();
       onDataMutated();
       onNavigate('/admin/products');
+    } catch (err: any) {
+      setFeedback(err?.message || 'خطا در ایجاد محصول.');
     }
   };
 
   const handleToggleProductPublish = async (prod: any) => {
-    await fetch(`/api/admin/products/${prod.id}`, {
-      method: 'PUT',
-      headers: getHeaders(),
-      body: JSON.stringify({ published: !prod.published }),
-    });
-    await fetchAdminData();
-    onDataMutated();
+    try {
+      await apiAdminUpdateProduct(prod.id, { published: !prod.published }, authToken);
+      await fetchAdminData();
+      onDataMutated();
+    } catch (err: any) {
+      setFeedback(err?.message || 'خطا در ویرایش وضعیت محصول.');
+    }
   };
 
   const handleCreateCategory = async (e: React.FormEvent) => {
     e.preventDefault();
     setFeedback('');
-    const res = await fetch('/api/admin/categories', {
-      method: 'POST',
-      headers: getHeaders(),
-      body: JSON.stringify({
-        name: newCatName,
-        slug: newCatSlug,
-        shortDescription: newCatDesc,
-      }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      setFeedback(data.error || 'خطا در ایجاد دسته‌بندی.');
-    } else {
+    try {
+      await apiAdminCreateCategory(
+        {
+          name: newCatName,
+          slug: newCatSlug,
+          shortDescription: newCatDesc,
+        },
+        authToken
+      );
       setFeedback('دسته‌بندی جدید اضافه شد.');
       setNewCatName('');
       setNewCatSlug('');
       setNewCatDesc('');
       await fetchAdminData();
       onDataMutated();
+    } catch (err: any) {
+      setFeedback(err?.message || 'خطا در ایجاد دسته‌بندی.');
     }
   };
 
   const handleDeleteCategory = async (id: string) => {
     setFeedback('');
-    const res = await fetch(`/api/admin/categories/${id}`, {
-      method: 'DELETE',
-      headers: getHeaders(),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      setFeedback(data.error || 'خطا در حذف دسته‌بندی.');
-    } else {
+    try {
+      await apiAdminDeleteCategory(id, authToken);
       setFeedback('دسته‌بندی حذف شد.');
       await fetchAdminData();
       onDataMutated();
+    } catch (err: any) {
+      setFeedback(err?.message || 'خطا در حذف دسته‌بندی.');
     }
   };
 
   const handleOrderFulfillmentUpdate = async (orderId: string, status: OrderStatus) => {
     setFeedback('');
-    const res = await fetch(`/api/admin/orders/${orderId}/status`, {
-      method: 'POST',
-      headers: getHeaders(),
-      body: JSON.stringify({ status }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      setFeedback(data.error || 'خطا در بروزرسانی وضعیت سفارش.');
-    } else {
+    try {
+      await apiAdminUpdateOrderStatus(orderId, status, authToken);
       setFeedback('وضعیت سفارش بروزرسانی شد.');
       await fetchAdminData();
       onDataMutated();
+    } catch (err: any) {
+      setFeedback(err?.message || 'خطا در بروزرسانی وضعیت سفارش.');
     }
   };
 
   const handleCreateCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
     setFeedback('');
-    const res = await fetch('/api/admin/coupons', {
-      method: 'POST',
-      headers: getHeaders(),
-      body: JSON.stringify({
-        code: newCouponCode,
-        description: newCouponDesc,
-        discountType: newCouponType,
-        discountValue: Number(newCouponVal),
-        minOrderAmount: Number(newCouponMin),
-      }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      setFeedback(data.error || 'خطا در ایجاد کد تخفیف.');
-    } else {
+    try {
+      await apiAdminCreateCoupon(
+        {
+          code: newCouponCode,
+          description: newCouponDesc,
+          discountType: newCouponType,
+          discountValue: Number(newCouponVal),
+          minOrderAmount: Number(newCouponMin),
+        },
+        authToken
+      );
       setFeedback('کد تخفیف جدید ثبت شد.');
       setNewCouponCode('');
       setNewCouponDesc('');
       await fetchAdminData();
       onDataMutated();
+    } catch (err: any) {
+      setFeedback(err?.message || 'خطا در ایجاد کد تخفیف.');
     }
   };
 
   const handleToggleCoupon = async (id: string) => {
-    await fetch(`/api/admin/coupons/${id}/toggle`, {
-      method: 'PUT',
-      headers: getHeaders(),
-    });
-    await fetchAdminData();
-    onDataMutated();
+    try {
+      await apiAdminToggleCoupon(id, authToken);
+      await fetchAdminData();
+      onDataMutated();
+    } catch (err: any) {
+      setFeedback(err?.message || 'خطا در تغییر وضعیت کد تخفیف.');
+    }
   };
 
   const handleAdjustInventory = async (productId: string, variantId: string) => {
     const key = `${productId}::${variantId}`;
     const val = invAdjustStock[key];
     if (val === undefined) return;
-    const res = await fetch('/api/admin/inventory/adjust', {
-      method: 'POST',
-      headers: getHeaders(),
-      body: JSON.stringify({
-        productId,
-        variantId,
-        newStock: Number(val),
-        referenceNote: 'اصلاح موجودی توسط مدیر در پنل انبار',
-      }),
-    });
-    if (res.ok) {
+    try {
+      await apiAdminAdjustInventory(
+        {
+          productId,
+          variantId,
+          newStock: Number(val),
+          referenceNote: 'اصلاح موجودی توسط مدیر در پنل انبار',
+        },
+        authToken
+      );
       setFeedback('موجودی انبار بروزرسانی و در تاریخچه گردش انبار ثبت شد.');
       await fetchAdminData();
       onDataMutated();
+    } catch (err: any) {
+      setFeedback(err?.message || 'خطا در اصلاح موجودی انبار.');
     }
   };
 
   const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch('/api/admin/settings', {
-      method: 'PUT',
-      headers: getHeaders(),
-      body: JSON.stringify(settingsForm),
-    });
-    if (res.ok) {
+    try {
+      await apiAdminSaveSettings(settingsForm, authToken);
       setFeedback('تنظیمات مرکزی فروشگاه ذخیره شد.');
       await fetchAdminData();
       onDataMutated();
+    } catch (err: any) {
+      setFeedback(err?.message || 'خطا در ذخیره تنظیمات فروشگاه.');
     }
   };
 

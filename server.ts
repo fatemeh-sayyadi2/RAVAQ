@@ -113,6 +113,8 @@ if (adminUser && !adminUser.passwordHash) {
   saveDatabase(dbState);
 }
 
+const AUTHORIZED_ADMIN_EMAIL = 'fawti.tiri2@gmail.com';
+
 function getAuthenticatedUser(req: Request): SessionRecord | null {
   const authHeader = req.headers.authorization;
   if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -120,33 +122,7 @@ function getAuthenticatedUser(req: Request): SessionRecord | null {
     const session = sessions.get(token);
     if (session) return session;
   }
-  const firebaseUid = req.headers['x-firebase-uid'] as string | undefined;
-  const firebaseEmail = req.headers['x-firebase-email'] as string | undefined;
-  if (firebaseUid && firebaseEmail) {
-    let user = dbState.users.find((u) => u.uid === firebaseUid || u.email === firebaseEmail);
-    const isAdmin = firebaseEmail === 'fawti.tiri2@gmail.com' || user?.role === 'ADMIN';
-    if (!user) {
-      user = {
-        id: `usr-${Date.now()}`,
-        uid: firebaseUid,
-        email: firebaseEmail,
-        displayName: (req.headers['x-firebase-name'] as string) || 'کاربر رواق',
-        role: isAdmin ? 'ADMIN' : 'CUSTOMER',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      dbState.users.push(user);
-      saveDatabase(dbState);
-    }
-    return {
-      token: 'firebase-bridge',
-      userId: user.id,
-      uid: user.uid,
-      email: user.email,
-      role: isAdmin ? 'ADMIN' : user.role,
-      createdAt: new Date().toISOString(),
-    };
-  }
+  // Never grant ADMIN privileges based on unverified client-provided headers.
   return null;
 }
 
@@ -244,12 +220,12 @@ async function startServer() {
         mobileImage: findVerifiedAsset('hero', 'ravaq-hero-mobile', ['webp', 'jpg', 'jpeg', 'png']),
       },
       categories: {
-        'gift-boxes': findVerifiedAsset('categories', 'ravaq-gift-box', ['webp', 'jpg', 'png', 'svg']),
-        'nuts-dried-fruits': findVerifiedAsset('categories', 'iranian-pistachios-dried-fruits', ['webp', 'jpg', 'png', 'svg']),
-        'saffron-select-foods': findVerifiedAsset('categories', 'saffron-packaging', ['webp', 'jpg', 'png', 'svg']),
-        'traditional-sweets': findVerifiedAsset('categories', 'persian-traditional-sweets', ['webp', 'jpg', 'png', 'svg']),
-        'iranian-handicrafts': findVerifiedAsset('categories', 'iranian-artisan-gifts', ['webp', 'jpg', 'png', 'svg']),
-        'occasion-gifts': findVerifiedAsset('categories', 'occasion-gifts', ['webp', 'jpg', 'png', 'svg']),
+        'gift-boxes': findVerifiedAsset('categories', 'ravaq-gift-box', ['webp', 'jpg', 'png']),
+        'nuts-dried-fruits': findVerifiedAsset('categories', 'iranian-pistachios-dried-fruits', ['webp', 'jpg', 'png']),
+        'saffron-select-foods': findVerifiedAsset('categories', 'saffron-packaging', ['webp', 'jpg', 'png']),
+        'traditional-sweets': findVerifiedAsset('categories', 'persian-traditional-sweets', ['webp', 'jpg', 'png']),
+        'iranian-handicrafts': findVerifiedAsset('categories', 'iranian-artisan-gifts', ['webp', 'jpg', 'png']),
+        'occasion-gifts': findVerifiedAsset('categories', 'occasion-gifts', ['webp', 'jpg', 'png']),
       },
     });
   });
@@ -257,16 +233,23 @@ async function startServer() {
   app.get('/api/bootstrap', (_req, res) => {
     const seededRef = createInitialDatabaseState();
     const seededUrlBySlug = new Map(
-      seededRef.products.map((sp) => [sp.slug, sp.images[0]?.url || '/assets/categories/ravaq-gift-box.svg'])
+      seededRef.products.map((sp) => [sp.slug, sp.images[0]?.url || '/assets/products/gift-box-signature.jpg'])
     );
 
     const enrichedProducts = dbState.products
       .filter((p) => p.published)
       .map((p) => {
-        const verifiedFallback = seededUrlBySlug.get(p.slug) || '/assets/categories/ravaq-gift-box.svg';
+        const verifiedFallback = seededUrlBySlug.get(p.slug) || '/assets/products/gift-box-signature.jpg';
         const images = p.images.map((img) => ({
           ...img,
-          url: img.url.startsWith('/assets/ravaq/') ? verifiedFallback : img.url,
+          url:
+            !img.url ||
+            img.url.startsWith('/assets/ravaq/') ||
+            img.url.startsWith('/assets/categories/') ||
+            img.url.endsWith('.svg') ||
+            img.url.endsWith('.webp')
+              ? verifiedFallback
+              : img.url,
         }));
         return {
           ...p,
@@ -498,7 +481,7 @@ async function startServer() {
     }
 
     const nowIso = new Date().toISOString();
-    const isAdmin = cleanEmail === 'fawti.tiri2@gmail.com';
+    // Self-registration always creates a CUSTOMER account; only the pre-seeded fawti.tiri2@gmail.com admin account holds ADMIN privileges.
     const newUser = {
       id: `usr-${Date.now()}`,
       uid: `uid-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
@@ -506,7 +489,7 @@ async function startServer() {
       displayName: cleanName.slice(0, 100),
       mobile: cleanMobile || undefined,
       passwordHash: hashPassword(cleanPass),
-      role: (isAdmin ? 'ADMIN' : 'CUSTOMER') as 'CUSTOMER' | 'ADMIN',
+      role: 'CUSTOMER' as const,
       createdAt: nowIso,
       updatedAt: nowIso,
     };
@@ -1068,6 +1051,18 @@ async function startServer() {
     saveDatabase(dbState);
     res.json({ settings: dbState.settings });
   });
+
+  // Serve static media assets (including /assets/hero/*.mp4 with HTTP Range support) directly
+  const publicAssetsPath = path.resolve(process.cwd(), 'public', 'assets');
+  if (fs.existsSync(publicAssetsPath)) {
+    app.use(
+      '/assets',
+      express.static(publicAssetsPath, {
+        acceptRanges: true,
+        maxAge: '1h',
+      })
+    );
+  }
 
   // Mount Vite dev server or static build
   if (process.env.NODE_ENV !== 'production') {

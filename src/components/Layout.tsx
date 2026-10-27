@@ -7,6 +7,7 @@ import { RavaqLogo } from './RavaqVisuals.tsx';
 import { StoreSettings } from '../lib/types.ts';
 import { toPersianDigits } from '../lib/persian.ts';
 import { SiteHeader } from './homepage/SiteHeader.tsx';
+import { apiSubscribeNewsletter } from '../lib/api-client.ts';
 
 export { SiteHeader, SiteHeader as Header };
 
@@ -26,28 +27,16 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
     e.preventDefault();
     setNewsletterState({ status: 'loading' });
     try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: newsletterEmail }),
+      const data = await apiSubscribeNewsletter(newsletterEmail);
+      setNewsletterEmail('');
+      setNewsletterState({
+        status: 'success',
+        message: data.message || 'ایمیل شما با موفقیت ثبت شد.',
       });
-      const data = await res.json();
-      if (!res.ok) {
-        setNewsletterState({
-          status: 'error',
-          message: data.error || 'خطا در ثبت ایمیل.',
-        });
-      } else {
-        setNewsletterEmail('');
-        setNewsletterState({
-          status: 'success',
-          message: data.message || 'ایمیل شما با موفقیت ثبت شد.',
-        });
-      }
-    } catch {
+    } catch (err: any) {
       setNewsletterState({
         status: 'error',
-        message: 'ارتباط با سرور برقرار نشد.',
+        message: err?.message || 'خطا در ثبت ایمیل.',
       });
     }
   };

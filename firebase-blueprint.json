@@ -37,7 +37,7 @@
     },
     "UserPrivateInfo": {
       "title": "UserPrivateInfo",
-      "description": "Isolated PII document containing email, mobile, and saved addresses.",
+      "description": "Isolated PII document containing email and mobile.",
       "type": "object",
       "properties": {
         "uid": {
@@ -124,23 +124,101 @@
       },
       "required": ["uid", "recipientName", "mobile", "province", "city", "addressLine", "postalCode", "isDefault", "createdAt", "updatedAt"]
     },
-    "OrderRecord": {
-      "title": "OrderRecord",
-      "description": "Customer order record synced to Firestore for authenticated order history.",
+    "CategoryRecord": {
+      "title": "CategoryRecord",
+      "description": "Product category in the RAVĀQ catalog.",
       "type": "object",
       "properties": {
-        "orderNumber": {
-          "type": "string",
-          "description": "Unique order reference number",
-          "maxLength": 40,
-          "pattern": "^[a-zA-Z0-9_\\-]+$"
-        },
-        "userId": {
-          "type": "string",
-          "description": "Owner Firebase UID",
-          "maxLength": 128,
-          "pattern": "^[a-zA-Z0-9_\\-]+$"
-        },
+        "id": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "maxLength": 120 },
+        "slug": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "shortDescription": { "type": "string", "maxLength": 300 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "displayOrder": { "type": "integer" },
+        "active": { "type": "boolean" },
+        "illustrationKey": { "type": "string", "maxLength": 60 }
+      },
+      "required": ["id", "name", "slug", "shortDescription", "description", "displayOrder", "active", "illustrationKey"]
+    },
+    "ProductRecord": {
+      "title": "ProductRecord",
+      "description": "Catalog product with variants, stock, and optional gift-box bundle components.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "maxLength": 160 },
+        "slug": { "type": "string", "maxLength": 120, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "categorySlug": { "type": "string", "maxLength": 80 },
+        "categoryName": { "type": "string", "maxLength": 120 },
+        "shortDescription": { "type": "string", "maxLength": 400 },
+        "fullDescription": { "type": "string", "maxLength": 2000 },
+        "basePrice": { "type": "integer" },
+        "published": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "sku": { "type": "string", "maxLength": 60 },
+        "variants": { "type": "array" },
+        "images": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "slug", "categorySlug", "categoryName", "shortDescription", "fullDescription", "basePrice", "published", "featured", "sku", "variants", "images", "createdAt", "updatedAt"]
+    },
+    "CouponRecord": {
+      "title": "CouponRecord",
+      "description": "Discount coupon code configuration and usage counter.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "code": { "type": "string", "maxLength": 40 },
+        "description": { "type": "string", "maxLength": 300 },
+        "discountType": { "type": "string", "enum": ["PERCENTAGE", "FIXED"], "maxLength": 20 },
+        "discountValue": { "type": "integer" },
+        "minOrderAmount": { "type": "integer" },
+        "startsAt": { "type": "string", "maxLength": 40 },
+        "endsAt": { "type": "string", "maxLength": 40 },
+        "active": { "type": "boolean" },
+        "usageLimit": { "type": "integer" },
+        "usedCount": { "type": "integer" },
+        "perCustomerLimit": { "type": "integer" }
+      },
+      "required": ["id", "code", "description", "discountType", "discountValue", "minOrderAmount", "startsAt", "endsAt", "active", "usageLimit", "usedCount", "perCustomerLimit"]
+    },
+    "CouponRedemptionRecord": {
+      "title": "CouponRedemptionRecord",
+      "description": "Audit record of a coupon redemption tied to a paid order.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "couponId": { "type": "string", "maxLength": 80 },
+        "couponCode": { "type": "string", "maxLength": 40 },
+        "orderId": { "type": "string", "maxLength": 80 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "customerMobile": { "type": "string", "maxLength": 20 },
+        "discountAmount": { "type": "integer" },
+        "redeemedAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["id", "couponId", "couponCode", "orderId", "userId", "customerMobile", "discountAmount", "redeemedAt"]
+    },
+    "OrderRecord": {
+      "title": "OrderRecord",
+      "description": "Full customer order document with address snapshot, line items, and simulated payment state.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "orderNumber": { "type": "string", "maxLength": 40, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "customerMobile": { "type": "string", "maxLength": 20, "pattern": "^09[0-9]{9}$" },
+        "province": { "type": "string", "maxLength": 60 },
+        "city": { "type": "string", "maxLength": 60 },
+        "addressLine": { "type": "string", "maxLength": 300 },
+        "postalCode": { "type": "string", "maxLength": 10, "pattern": "^[0-9]{10}$" },
+        "deliveryMethod": { "type": "string", "enum": ["STANDARD", "EXPRESS_TEHRAN"], "maxLength": 30 },
+        "items": { "type": "array" },
+        "subtotal": { "type": "integer" },
+        "discountAmount": { "type": "integer" },
+        "shippingCost": { "type": "integer" },
+        "totalAmount": { "type": "integer" },
         "status": {
           "type": "string",
           "enum": ["PENDING_PAYMENT", "PAID", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"],
@@ -151,54 +229,139 @@
           "enum": ["PENDING", "SUCCEEDED", "FAILED", "CANCELLED", "EXPIRED"],
           "maxLength": 30
         },
-        "totalAmount": {
-          "type": "integer",
-          "description": "Final order total in integer Toman"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time"
-        }
+        "stockDeducted": { "type": "boolean" },
+        "isSimulatedDemo": { "type": "boolean" },
+        "lastAttemptRef": { "type": "string", "maxLength": 80 },
+        "createdAt": { "type": "string", "maxLength": 40 },
+        "updatedAt": { "type": "string", "maxLength": 40 }
       },
-      "required": ["orderNumber", "userId", "status", "paymentStatus", "totalAmount", "createdAt", "updatedAt"]
+      "required": ["id", "orderNumber", "userId", "customerName", "customerMobile", "province", "city", "addressLine", "postalCode", "deliveryMethod", "items", "subtotal", "discountAmount", "shippingCost", "totalAmount", "status", "paymentStatus", "stockDeducted", "createdAt", "updatedAt"]
+    },
+    "PaymentAttemptRecord": {
+      "title": "PaymentAttemptRecord",
+      "description": "Explicitly simulated demo payment attempt record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "attemptRef": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "orderId": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "orderNumber": { "type": "string", "maxLength": 40, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "amount": { "type": "integer" },
+        "status": {
+          "type": "string",
+          "enum": ["PENDING", "SUCCEEDED", "FAILED", "CANCELLED", "EXPIRED"],
+          "maxLength": 30
+        },
+        "isSimulatedDemo": { "type": "boolean" },
+        "createdAt": { "type": "string", "maxLength": 40 },
+        "updatedAt": { "type": "string", "maxLength": 40 },
+        "expiresAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["id", "attemptRef", "orderId", "orderNumber", "userId", "amount", "status", "createdAt", "updatedAt", "expiresAt"]
+    },
+    "OrderStatusHistoryRecord": {
+      "title": "OrderStatusHistoryRecord",
+      "description": "Audit log entry for order and payment status transitions.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "orderId": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128 },
+        "status": { "type": "string", "maxLength": 30 },
+        "paymentStatus": { "type": "string", "maxLength": 30 },
+        "note": { "type": "string", "maxLength": 500 },
+        "actor": { "type": "string", "maxLength": 160 },
+        "createdAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["id", "orderId", "userId", "status", "paymentStatus", "note", "actor", "createdAt"]
+    },
+    "OrderTrackingSummary": {
+      "title": "OrderTrackingSummary",
+      "description": "PII-masked order tracking summary keyed by orderNumber_customerMobile.",
+      "type": "object",
+      "properties": {
+        "trackingKey": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "orderNumber": { "type": "string", "maxLength": 40 },
+        "status": { "type": "string", "maxLength": 30 },
+        "paymentStatus": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "string", "maxLength": 40 },
+        "updatedAt": { "type": "string", "maxLength": 40 },
+        "city": { "type": "string", "maxLength": 60 },
+        "province": { "type": "string", "maxLength": 60 },
+        "maskedRecipient": { "type": "string", "maxLength": 80 },
+        "maskedMobile": { "type": "string", "maxLength": 20 },
+        "totalAmount": { "type": "integer" },
+        "items": { "type": "array" },
+        "history": { "type": "array" }
+      },
+      "required": ["trackingKey", "orderNumber", "status", "paymentStatus", "createdAt", "updatedAt", "city", "province", "maskedRecipient", "maskedMobile", "totalAmount", "items", "history"]
+    },
+    "InventoryMovementRecord": {
+      "title": "InventoryMovementRecord",
+      "description": "Auditable inventory movement log entry.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "productId": { "type": "string", "maxLength": 80 },
+        "productName": { "type": "string", "maxLength": 160 },
+        "variantId": { "type": "string", "maxLength": 80 },
+        "variantLabel": { "type": "string", "maxLength": 120 },
+        "sku": { "type": "string", "maxLength": 60 },
+        "delta": { "type": "integer" },
+        "previousStock": { "type": "integer" },
+        "newStock": { "type": "integer" },
+        "reason": { "type": "string", "enum": ["ORDER_PAID", "BUNDLE_COMPONENT_PAID", "ADMIN_ADJUSTMENT", "INITIAL_SEED"], "maxLength": 40 },
+        "referenceId": { "type": "string", "maxLength": 160 },
+        "createdAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["id", "productId", "productName", "variantId", "variantLabel", "sku", "delta", "previousStock", "newStock", "reason", "referenceId", "createdAt"]
     },
     "ProductReview": {
       "title": "ProductReview",
       "description": "Verified customer product review.",
       "type": "object",
       "properties": {
-        "productId": {
-          "type": "string",
-          "maxLength": 80,
-          "pattern": "^[a-zA-Z0-9_\\-]+$"
-        },
-        "userId": {
-          "type": "string",
-          "maxLength": 128,
-          "pattern": "^[a-zA-Z0-9_\\-]+$"
-        },
-        "authorName": {
-          "type": "string",
-          "maxLength": 80
-        },
-        "rating": {
-          "type": "integer",
-          "description": "Rating from 1 to 5"
-        },
-        "comment": {
-          "type": "string",
-          "maxLength": 600
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time"
-        }
+        "id": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "productId": { "type": "string", "maxLength": 80, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "productSlug": { "type": "string", "maxLength": 120 },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "authorName": { "type": "string", "maxLength": 80 },
+        "rating": { "type": "integer" },
+        "comment": { "type": "string", "maxLength": 600 },
+        "createdAt": { "type": "string", "maxLength": 40 }
       },
       "required": ["productId", "userId", "authorName", "rating", "comment", "createdAt"]
+    },
+    "NewsletterSubscriptionRecord": {
+      "title": "NewsletterSubscriptionRecord",
+      "description": "Customer newsletter email subscription.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 120 },
+        "email": { "type": "string", "format": "email", "maxLength": 160 },
+        "createdAt": { "type": "string", "maxLength": 40 }
+      },
+      "required": ["id", "email", "createdAt"]
+    },
+    "StoreSettingsRecord": {
+      "title": "StoreSettingsRecord",
+      "description": "Global storefront configuration.",
+      "type": "object",
+      "properties": {
+        "storeName": { "type": "string", "maxLength": 120 },
+        "storeTagline": { "type": "string", "maxLength": 240 },
+        "supportEmail": { "type": "string", "maxLength": 160 },
+        "supportHours": { "type": "string", "maxLength": 160 },
+        "freeShippingThreshold": { "type": "integer" },
+        "standardShippingCost": { "type": "integer" },
+        "expressTehranShippingCost": { "type": "integer" },
+        "minOrderAmount": { "type": "integer" },
+        "demoModeNotice": { "type": "string", "maxLength": 500 },
+        "instagramUrl": { "type": "string", "maxLength": 200 },
+        "telegramUrl": { "type": "string", "maxLength": 200 }
+      },
+      "required": ["storeName", "storeTagline", "supportEmail", "supportHours", "freeShippingThreshold", "standardShippingCost", "expressTehranShippingCost", "minOrderAmount", "demoModeNotice"]
     }
   },
   "firestore": {
@@ -214,13 +377,53 @@
       "schema": { "$ref": "#/entities/CustomerAddress" },
       "description": "Saved Iranian addresses subcollection for a user."
     },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/CategoryRecord" },
+      "description": "Catalog categories."
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/ProductRecord" },
+      "description": "Catalog products and variant inventory."
+    },
+    "/coupons/{couponId}": {
+      "schema": { "$ref": "#/entities/CouponRecord" },
+      "description": "Discount coupons."
+    },
+    "/couponRedemptions/{redemptionId}": {
+      "schema": { "$ref": "#/entities/CouponRedemptionRecord" },
+      "description": "Customer coupon redemption records."
+    },
     "/orders/{orderId}": {
       "schema": { "$ref": "#/entities/OrderRecord" },
-      "description": "Customer order mirror documents."
+      "description": "Customer orders."
+    },
+    "/paymentAttempts/{attemptRef}": {
+      "schema": { "$ref": "#/entities/PaymentAttemptRecord" },
+      "description": "Simulated demo payment attempts."
+    },
+    "/orderStatusHistory/{historyId}": {
+      "schema": { "$ref": "#/entities/OrderStatusHistoryRecord" },
+      "description": "Audit log of order status transitions."
+    },
+    "/orderTracking/{trackingKey}": {
+      "schema": { "$ref": "#/entities/OrderTrackingSummary" },
+      "description": "PII-masked order tracking documents keyed by orderNumber_mobile."
+    },
+    "/inventoryMovements/{movementId}": {
+      "schema": { "$ref": "#/entities/InventoryMovementRecord" },
+      "description": "Inventory movement audit trail."
     },
     "/reviews/{reviewId}": {
       "schema": { "$ref": "#/entities/ProductReview" },
       "description": "Customer reviews on products."
+    },
+    "/newsletterSubscriptions/{subId}": {
+      "schema": { "$ref": "#/entities/NewsletterSubscriptionRecord" },
+      "description": "Newsletter subscriptions."
+    },
+    "/settings/{docId}": {
+      "schema": { "$ref": "#/entities/StoreSettingsRecord" },
+      "description": "Storefront configuration settings."
     }
   }
 }

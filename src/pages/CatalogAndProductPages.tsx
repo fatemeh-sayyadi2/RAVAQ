@@ -507,26 +507,21 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     setReviewError('');
     setReviewSubmitting(true);
     try {
-      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-      if (authToken) headers.Authorization = `Bearer ${authToken}`;
-      const res = await fetch('/api/reviews', {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
+      const { apiCreateReview } = await import('../lib/api-client.ts');
+      const data = await apiCreateReview(
+        {
           productId: product.id,
           rating: reviewRating,
           comment: reviewComment,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setReviewError(data.error || 'خطا در ثبت دیدگاه.');
-      } else if (data.review) {
+        },
+        authToken
+      );
+      if (data.review) {
         onReviewAdded(data.review);
         setReviewComment('');
       }
-    } catch {
-      setReviewError('خطا در برقراری ارتباط با سرور.');
+    } catch (err: any) {
+      setReviewError(err?.message || 'خطا در ثبت دیدگاه.');
     } finally {
       setReviewSubmitting(false);
     }
@@ -609,34 +604,46 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             <ProductIllustration
               illustrationKey={product.images[0]?.illustrationKey || 'nuts'}
               role={selectedRole}
+              imageUrl={
+                product.images.find((img) => img.role === selectedRole)?.url ||
+                product.images[0]?.url
+              }
               title={`${product.name} - ${selectedRole}`}
             />
           </div>
 
           <div className="grid grid-cols-4 gap-3">
-            {galleryRoles.map((item) => (
-              <button
-                key={item.role}
-                type="button"
-                onClick={() => setSelectedRole(item.role)}
-                className={`p-1.5 rounded-xl border text-center transition-colors cursor-pointer ${
-                  selectedRole === item.role
-                    ? 'border-[#742E3A] bg-[#EFE5D6]/60'
-                    : 'border-[#E4DCCF] bg-[#FFFFFF] hover:border-[#B89A62]'
-                }`}
-              >
-                <div className="aspect-[4/3] rounded-lg overflow-hidden mb-1">
-                  <ProductIllustration
-                    illustrationKey={product.images[0]?.illustrationKey || 'nuts'}
-                    role={item.role}
-                    title={item.label}
-                  />
-                </div>
-                <span className="text-[11px] font-medium text-[#292624] block truncate">
-                  {item.label}
-                </span>
-              </button>
-            ))}
+            {galleryRoles.map((item) => {
+              const roleImage = product.images.find((img) => img.role === item.role);
+              return (
+                <button
+                  key={item.role}
+                  type="button"
+                  onClick={() => setSelectedRole(item.role)}
+                  className={`p-1.5 rounded-xl border text-center transition-colors cursor-pointer ${
+                    selectedRole === item.role
+                      ? 'border-[#742E3A] bg-[#EFE5D6]/60'
+                      : 'border-[#E4DCCF] bg-[#FFFFFF] hover:border-[#B89A62]'
+                  }`}
+                >
+                  <div className="aspect-[4/3] rounded-lg overflow-hidden mb-1">
+                    <ProductIllustration
+                      illustrationKey={
+                        roleImage?.illustrationKey ||
+                        product.images[0]?.illustrationKey ||
+                        'nuts'
+                      }
+                      role={item.role}
+                      imageUrl={roleImage?.url}
+                      title={item.label}
+                    />
+                  </div>
+                  <span className="text-[11px] font-medium text-[#292624] block truncate">
+                    {item.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
