@@ -329,7 +329,7 @@ export const RavaqLuxuryGiftBox3D: React.FC<{
   className?: string;
   size?: 'md' | 'lg';
 }> = ({ className = '', size = 'lg' }) => {
-  const [photoError, setPhotoError] = useState(false);
+  const [useFallbackPhoto, setUseFallbackPhoto] = useState(false);
 
   return (
     <div
@@ -337,133 +337,22 @@ export const RavaqLuxuryGiftBox3D: React.FC<{
         size === 'lg' ? 'w-[280px] sm:w-[320px]' : 'w-[220px]'
       } ${className}`}
     >
-      {!photoError ? (
-        <div className="relative rounded-xl overflow-hidden border border-[#B89A62]/45 shadow-2xl bg-[#292624]">
-          <img
-            src="/assets/products/gift-box-signature.jpg"
-            alt="جعبه هدیه زرشکی و عاجی رواق با روبان ابریشمی و پلاک طلایی"
-            className="w-full h-auto object-cover"
-            onError={() => setPhotoError(true)}
-          />
-          <div className="absolute bottom-2.5 inset-x-2.5 bg-[#F8F4EC]/95 backdrop-blur-xs border border-[#B89A62]/60 rounded-lg px-3 py-1.5 flex items-center justify-center shadow-md">
-            <RavaqLogo variant="dark" layout="bilingual" size="sm" />
-          </div>
-        </div>
-      ) : (
-        <>
-          <svg
-            viewBox="0 0 360 260"
-            fill="none"
-            className="w-full h-auto drop-shadow-2xl"
-            role="img"
-            aria-label="جعبه هدیه زرشکی و عاجی رواق با روبان ابریشمی و پلاک طلایی"
-          >
-            <defs>
-              <linearGradient id="boxFrontBurgundy" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#863644" />
-                <stop offset="45%" stopColor="#742E3A" />
-                <stop offset="100%" stopColor="#461C26" />
-              </linearGradient>
-              <linearGradient id="boxSideBurgundy" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#58232E" />
-                <stop offset="100%" stopColor="#35141C" />
-              </linearGradient>
-              <linearGradient id="lidTopIvory" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#FBF9F5" />
-                <stop offset="60%" stopColor="#F8F4EC" />
-                <stop offset="100%" stopColor="#E4DCCF" />
-              </linearGradient>
-              <linearGradient id="lidRimIvory" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#F8F4EC" />
-                <stop offset="70%" stopColor="#EFE5D6" />
-                <stop offset="100%" stopColor="#D5C8B4" />
-              </linearGradient>
-              <linearGradient id="antiqueGoldFoil" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#D6BC88" />
-                <stop offset="50%" stopColor="#B89A62" />
-                <stop offset="100%" stopColor="#8E723E" />
-              </linearGradient>
-              <radialGradient id="floorShadow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#14080B" stopOpacity="0.72" />
-                <stop offset="65%" stopColor="#14080B" stopOpacity="0.28" />
-                <stop offset="100%" stopColor="#14080B" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-
-            <ellipse cx="180" cy="232" rx="155" ry="22" fill="url(#floorShadow)" />
-            <polygon
-              points="38,96 226,120 226,226 38,196"
-              fill="url(#boxFrontBurgundy)"
-              stroke="#B89A62"
-              strokeOpacity="0.45"
-              strokeWidth="1"
-            />
-            <polygon
-              points="226,120 326,88 326,190 226,226"
-              fill="url(#boxSideBurgundy)"
-              stroke="#B89A62"
-              strokeOpacity="0.35"
-              strokeWidth="1"
-            />
-            <polygon points="38,94 226,118 226,125 38,101" fill="url(#antiqueGoldFoil)" />
-            <polygon points="226,118 326,86 326,93 226,125" fill="#8E723E" />
-            <polygon
-              points="32,64 142,36 332,56 226,88"
-              fill="url(#lidTopIvory)"
-              stroke="#B89A62"
-              strokeOpacity="0.55"
-              strokeWidth="1.2"
-            />
-            <polygon
-              points="56,63 144,41 306,58 220,83"
-              fill="none"
-              stroke="#B89A62"
-              strokeOpacity="0.45"
-              strokeWidth="1"
-            />
-            <polygon
-              points="32,64 226,88 226,118 32,93"
-              fill="url(#lidRimIvory)"
-              stroke="#B89A62"
-              strokeOpacity="0.5"
-              strokeWidth="1"
-            />
-            <polygon
-              points="226,88 332,56 332,85 226,118"
-              fill="#DFD3C0"
-              stroke="#B89A62"
-              strokeOpacity="0.4"
-              strokeWidth="1"
-            />
-            <polygon points="118,42 142,37 250,81 226,88" fill="#742E3A" opacity="0.95" />
-            <polygon points="116,75 142,78 142,212 116,208" fill="url(#antiqueGoldFoil)" opacity="0.92" />
-            <polygon points="268,75 286,70 286,203 268,209" fill="#8E723E" opacity="0.75" />
-            <path
-              d="M178 60C146 38 118 52 138 66C150 74 168 65 178 60Z"
-              fill="#742E3A"
-              stroke="#B89A62"
-              strokeWidth="1.2"
-            />
-            <path
-              d="M178 60C210 38 238 52 218 66C206 74 188 65 178 60Z"
-              fill="#5E232E"
-              stroke="#B89A62"
-              strokeWidth="1.2"
-            />
-            <circle cx="178" cy="60" r="6" fill="url(#antiqueGoldFoil)" />
-            <circle cx="178" cy="60" r="2.5" fill="#2D8C88" />
-          </svg>
-
-          <div
-            className="absolute left-[18%] top-[51%] w-[42%] -rotate-[-7deg] bg-[#F8F4EC] border border-[#B89A62] rounded-md px-2.5 py-1.5 shadow-md flex flex-col items-center justify-center"
-            style={{ transform: 'perspective(500px) rotateY(12deg) rotateZ(7deg)' }}
-          >
-            <div className="w-full border border-[#E4DCCF] rounded-xs py-1 px-1.5 flex flex-col items-center">
-              <RavaqLogo variant="dark" layout="compact" size="sm" />
-            </div>
-          </div>
-        </>
-      )}
+      <div className="relative rounded-xl overflow-hidden border border-[#B89A62]/45 shadow-2xl bg-[#F8F4EC]">
+        <img
+          src={
+            useFallbackPhoto
+              ? '/assets/products/gift-box-plain.jpg'
+              : '/assets/products/gift-box-signature.jpg'
+          }
+          alt="جعبه هدیه زرشکی و عاجی رواق با روبان ابریشمی"
+          className="w-full h-auto object-cover"
+          onError={() => {
+            if (!useFallbackPhoto) {
+              setUseFallbackPhoto(true);
+            }
+          }}
+        />
+      </div>
     </div>
   );
 };
@@ -478,7 +367,7 @@ interface ProductIllustrationProps {
 
 /**
  * Commercial Studio Still-Life & Packaging Renderer for Category Cards, Product Cards, and Galleries.
- * Prioritizes verified real product photography in /assets/products/*.jpg.
+ * Always renders verified real product photography in /assets/products/*.jpg without overlaid text or cartoon SVGs.
  */
 function resolveVerifiedAssetForKey(illustrationKey: string, role: ImageRole = 'primary'): string {
   return resolveVerifiedCategoryAsset(illustrationKey, role);
@@ -492,384 +381,45 @@ export const ProductIllustration: React.FC<ProductIllustrationProps> = ({
   className = '',
 }) => {
   const [imgFailed, setImgFailed] = useState(false);
-  const baseKey = illustrationKey.replace(/-(detail|packaging|lifestyle)$/, '');
 
-  const isLegacyPlaceholderUrl =
+  React.useEffect(() => {
+    setImgFailed(false);
+  }, [imageUrl, illustrationKey, role]);
+
+  const canonicalFallbackUrl = resolveVerifiedAssetForKey(illustrationKey, role);
+
+  const isLegacyOrStaleUrl =
     !imageUrl ||
     imageUrl.startsWith('/assets/ravaq/') ||
-    imageUrl.endsWith('.svg');
+    imageUrl.startsWith('/assets/categories/') ||
+    imageUrl.endsWith('.svg') ||
+    imageUrl.endsWith('.webp');
 
-  const effectiveImageUrl = !isLegacyPlaceholderUrl
-    ? imageUrl
-    : resolveVerifiedAssetForKey(illustrationKey, role);
-
-  const showRealPhoto = Boolean(effectiveImageUrl) && !imgFailed;
-
-  // Determine material palette by product family
-  const isGiftOrOccasion =
-    baseKey.startsWith('gift') || baseKey === 'giftbox' || baseKey === 'occasion';
-  const isSaffronFamily =
-    baseKey.includes('saffron') ||
-    baseKey.includes('herbal') ||
-    baseKey.includes('pantry') ||
-    baseKey.includes('hospitality-pack');
-  const isCraftFamily =
-    baseKey === 'crafts' ||
-    baseKey === 'pottery' ||
-    baseKey === 'ceramic-bowl' ||
-    baseKey === 'runner' ||
-    baseKey === 'arch-decor' ||
-    baseKey === 'craft-set';
-  const isSweetFamily =
-    baseKey === 'sweets' ||
-    baseKey === 'gaz' ||
-    baseKey === 'sohan' ||
-    baseKey === 'baklava' ||
-    baseKey === 'nan-berenji' ||
-    baseKey === 'nokhodchi' ||
-    baseKey === 'qottab' ||
-    baseKey === 'kolompeh' ||
-    baseKey === 'koloocheh' ||
-    baseKey === 'baslogh' ||
-    baseKey === 'poolaki' ||
-    baseKey === 'masghati' ||
-    baseKey === 'sweet-assortment';
-
-  const primaryVesselColor = isGiftOrOccasion
-    ? '#742E3A'
-    : isSaffronFamily
-    ? '#8B232D'
-    : isCraftFamily
-    ? '#2D8C88'
-    : isSweetFamily
-    ? '#B89A62'
-    : '#5C3D2E';
-
-  const secondaryTone = isGiftOrOccasion
-    ? '#4C202B'
-    : isSaffronFamily
-    ? '#4C202B'
-    : isCraftFamily
-    ? '#1F6360'
-    : isSweetFamily
-    ? '#8E723E'
-    : '#3F291F';
-
-  const familyKicker = isGiftOrOccasion
-    ? 'بسته‌بندی هدیه رواق'
-    : isSaffronFamily
-    ? 'زعفران و خوراکی‌های منتخب'
-    : isCraftFamily
-    ? 'صنایع‌دستی و هنر ایرانی'
-    : isSweetFamily
-    ? 'شیرینی‌های سنتی ایران'
-    : 'آجیل و خشکبار دست‌چین';
-
-  const roleBadgeLabel =
-    role === 'detail'
-      ? 'نمای نزدیک بافت و جزئیات'
-      : role === 'packaging'
-      ? 'بسته‌بندی اختصاصی رواق'
-      : role === 'lifestyle'
-      ? 'چیدمان پذیرایی ایرانی'
-      : null;
+  const effectiveImageUrl =
+    !imgFailed && !isLegacyOrStaleUrl ? imageUrl : canonicalFallbackUrl;
 
   return (
     <div
       className={`relative w-full h-full bg-[#F8F4EC] overflow-hidden flex items-center justify-center select-none ${className}`}
     >
-      {showRealPhoto ? (
-        <img
-          src={effectiveImageUrl}
-          alt={title || 'تصویر محصول رواق'}
-          loading="lazy"
-          referrerPolicy="no-referrer"
-          onError={() => setImgFailed(true)}
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <svg
-          viewBox="0 0 420 315"
-          className="w-full h-full object-cover"
-          role="img"
-          aria-label={title || 'تصویر محصول در فروشگاه رواق'}
-        >
-          <defs>
-            <linearGradient
-              id={`studioWall-${illustrationKey}-${role}`}
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#FAF7F1" />
-              <stop offset="55%" stopColor="#F8F4EC" />
-              <stop offset="100%" stopColor="#EAE0D0" />
-            </linearGradient>
-            <linearGradient
-              id={`travertineBase-${illustrationKey}-${role}`}
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="#EFE5D6" />
-              <stop offset="50%" stopColor="#E4DCCF" />
-              <stop offset="100%" stopColor="#D6C9B6" />
-            </linearGradient>
-            <linearGradient
-              id={`vesselBody-${illustrationKey}-${role}`}
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor={primaryVesselColor} />
-              <stop offset="100%" stopColor={secondaryTone} />
-            </linearGradient>
-            <linearGradient
-              id={`goldTrim-${illustrationKey}-${role}`}
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#D6BC88" />
-              <stop offset="50%" stopColor="#B89A62" />
-              <stop offset="100%" stopColor="#8E723E" />
-            </linearGradient>
-          </defs>
-
-          {/* Studio Warm Ivory Backdrop */}
-          <rect
-            width="420"
-            height="315"
-            fill={`url(#studioWall-${illustrationKey}-${role})`}
-          />
-
-          {/* Directional Window Sunlight Shadow Cast on Plaster Wall */}
-          <polygon
-            points="250,0 420,0 420,235 160,235"
-            fill="#EFE5D6"
-            opacity="0.55"
-          />
-
-          {/* Recessed Iranian Architectural Arch Niche */}
-          <path
-            d="M115 235V102C115 50 156 14 210 14C264 14 305 50 305 102V235H115Z"
-            fill="#EFE5D6"
-            fillOpacity="0.65"
-            stroke="#E4DCCF"
-            strokeWidth="1.5"
-          />
-          <path
-            d="M128 235V106C128 60 164 27 210 27C256 27 292 60 292 106V235"
-            fill="none"
-            stroke="#B89A62"
-            strokeOpacity="0.3"
-            strokeWidth="1"
-          />
-
-          {/* Travertine Stone Plinth / Table Surface */}
-          <rect
-            x="0"
-            y="235"
-            width="420"
-            height="80"
-            fill={`url(#travertineBase-${illustrationKey}-${role})`}
-          />
-          <line x1="0" y1="235" x2="420" y2="235" stroke="#E4DCCF" strokeWidth="1.5" />
-
-          {/* Plinth Contact Shadow */}
-          <ellipse
-            cx="210"
-            cy="252"
-            rx="105"
-            ry="13"
-            fill="#292624"
-            opacity="0.16"
-          />
-
-          {/* 3D Perspective Boutique Packaging / Vessel Presentation */}
-          {isGiftOrOccasion ? (
-            <g transform="translate(88, 86)">
-              {/* Perspective Luxury Box */}
-              <polygon
-                points="20,42 162,58 162,158 20,138"
-                fill={`url(#vesselBody-${illustrationKey}-${role})`}
-              />
-              <polygon points="162,58 232,36 232,134 162,158" fill={secondaryTone} />
-              <polygon
-                points="16,24 94,6 236,20 162,42"
-                fill="#F8F4EC"
-                stroke="#B89A62"
-                strokeWidth="1.2"
-              />
-              <polygon
-                points="16,24 162,42 162,58 16,40"
-                fill="#EFE5D6"
-                stroke="#B89A62"
-                strokeWidth="1"
-              />
-              <polygon
-                points="162,42 236,20 236,36 162,58"
-                fill="#DFD3C0"
-                stroke="#B89A62"
-                strokeWidth="1"
-              />
-              {/* Gold Ribbon & Seal */}
-              <polygon
-                points="82,32 98,34 98,148 82,146"
-                fill={`url(#goldTrim-${illustrationKey}-${role})`}
-              />
-              <rect
-                x="52"
-                y="74"
-                width="76"
-                height="44"
-                rx="4"
-                fill="#F8F4EC"
-                stroke="#B89A62"
-                strokeWidth="1.5"
-              />
-              <circle cx="90" cy="84" r="2.2" fill="#2D8C88" />
-              <text
-                x="90"
-                y="101"
-                textAnchor="middle"
-                fill="#4C202B"
-                fontSize="13"
-                fontWeight="700"
-              >
-                رَواق
-              </text>
-              <text
-                x="90"
-                y="112"
-                textAnchor="middle"
-                fill="#77716A"
-                fontSize="6.5"
-                letterSpacing="1.8"
-              >
-                RAVĀQ
-              </text>
-            </g>
-          ) : isCraftFamily ? (
-            <g transform="translate(115, 76)">
-              {/* Sculpted Architectural Turquoise Glazed Vessel & Travertine Pedestal */}
-              <rect
-                x="30"
-                y="148"
-                width="130"
-                height="24"
-                rx="3"
-                fill="#F8F4EC"
-                stroke="#E4DCCF"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M42 78C42 126 65 148 95 148C125 148 148 126 148 78H42Z"
-                fill={`url(#vesselBody-${illustrationKey}-${role})`}
-                stroke="#B89A62"
-                strokeWidth="1.5"
-              />
-              <ellipse
-                cx="95"
-                cy="78"
-                rx="53"
-                ry="12"
-                fill="#EFE5D6"
-                stroke="#B89A62"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M55 102Q95 116 135 102"
-                stroke="#F8F4EC"
-                strokeOpacity="0.65"
-                strokeWidth="1.5"
-                fill="none"
-              />
-            </g>
-          ) : (
-            <g transform="translate(112, 70)">
-              {/* Cylindrical / Faceted Boutique Canister + Companion Ceramic Dish */}
-              <rect
-                x="44"
-                y="34"
-                width="108"
-                height="142"
-                rx="12"
-                fill={`url(#vesselBody-${illustrationKey}-${role})`}
-                stroke="#B89A62"
-                strokeWidth="1.5"
-              />
-              {/* Brushed Antique Brass Lid */}
-              <rect
-                x="50"
-                y="18"
-                width="96"
-                height="20"
-                rx="5"
-                fill={`url(#goldTrim-${illustrationKey}-${role})`}
-              />
-              {/* Warm Ivory Wrap-Around Boutique Label */}
-              <rect
-                x="54"
-                y="64"
-                width="88"
-                height="78"
-                rx="5"
-                fill="#F8F4EC"
-                stroke="#B89A62"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M78 86V78C78 70 86 64 98 64C110 64 118 70 118 78V86"
-                fill="none"
-                stroke="#B89A62"
-                strokeOpacity="0.45"
-                strokeWidth="1"
-              />
-              <circle cx="98" cy="79" r="2.2" fill="#2D8C88" />
-              <text
-                x="98"
-                y="102"
-                textAnchor="middle"
-                fill="#292624"
-                fontSize="15"
-                fontWeight="700"
-              >
-                رَواق
-              </text>
-              <text
-                x="98"
-                y="115"
-                textAnchor="middle"
-                fill="#77716A"
-                fontSize="7"
-                letterSpacing="2"
-              >
-                RAVĀQ
-              </text>
-              <line
-                x1="70"
-                y1="124"
-                x2="126"
-                y2="124"
-                stroke="#E4DCCF"
-                strokeWidth="1"
-              />
-            </g>
-          )}
-        </svg>
-      )}
-
-      {/* Subtle Family / Role Caption */}
-      <div className="absolute inset-x-3 bottom-2.5 flex items-center justify-between pointer-events-none">
-        <span className="text-[11px] font-medium text-[#77716A] bg-[#F8F4EC]/90 backdrop-blur-xs px-2.5 py-0.5 rounded border border-[#E4DCCF]/80">
-          {roleBadgeLabel || familyKicker}
-        </span>
-      </div>
+      <img
+        src={effectiveImageUrl}
+        alt={title || 'تصویر محصول رواق'}
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        onError={(e) => {
+          if (!imgFailed) {
+            setImgFailed(true);
+          } else {
+            const target = e.currentTarget;
+            if (!target.src.endsWith('/assets/products/pistachios-bowl.jpg')) {
+              target.src = '/assets/products/pistachios-bowl.jpg';
+            }
+          }
+        }}
+        className="w-full h-full object-cover"
+      />
     </div>
   );
 };
+

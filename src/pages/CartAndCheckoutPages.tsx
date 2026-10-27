@@ -26,6 +26,13 @@ import {
   formatJalaliDate,
   IRAN_PROVINCES,
 } from '../lib/persian.ts';
+import {
+  apiCreateOrder,
+  apiGetPaymentStatus,
+  apiProcessPaymentAttempt,
+  apiRetryPaymentAttempt,
+  apiTrackOrder,
+} from '../lib/api-client.ts';
 
 interface CartPageProps {
   cartItems: CartItemInput[];
@@ -139,6 +146,7 @@ export const CartPage: React.FC<CartPageProps> = ({
                     <ProductIllustration
                       illustrationKey={item.illustrationKey}
                       role="primary"
+                      imageUrl={fullProduct?.images[0]?.url}
                       title={item.productName}
                     />
                   </div>
@@ -441,18 +449,8 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
     setSubmitting(true);
 
     try {
-      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-      if (authToken) headers.Authorization = `Bearer ${authToken}`;
-      if (user) {
-        headers['x-firebase-uid'] = user.uid;
-        headers['x-firebase-email'] = user.email;
-        headers['x-firebase-name'] = user.displayName;
-      }
-
-      const res = await fetch('/api/orders', {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
+      const data = await apiCreateOrder(
+        {
           customerName,
           customerMobile,
           customerEmail,
@@ -467,18 +465,18 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
           idempotencyKey,
           userId: user?.uid,
           items: cartItems,
-        }),
-      });
+        },
+        authToken
+      );
 
-      const data = await res.json();
-      if (!res.ok || !data.success) {
+      if (!data.success) {
         if (data.fieldErrors) setFieldErrors(data.fieldErrors);
         setFormError(data.error || 'خطا در ثبت سفارش. لطفاً مقادیر واردشده را بررسی کنید.');
       } else if (data.order && data.paymentAttempt) {
         onOrderCreated(data.order.orderNumber, data.paymentAttempt.attemptRef);
       }
     } catch {
-      setFormError('خطا در برقراری ارتباط با سرور.');
+      setFormError('خطا در ثبت سفارش در پایگاه داده.');
     } finally {
       setSubmitting(false);
     }
@@ -506,9 +504,31 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
           تکمیل اطلاعات ارسال و ثبت سفارش
         </h1>
         <p className="text-xs sm:text-sm text-[#77716A] mt-1">
-          امکان ثبت سفارش هم برای کاربران مهمان و هم برای اعضای رواق فراهم است. اعداد فارسی و انگلیسی به‌طور خودکار استانداردسازی می‌شوند.
+          اعداد فارسی و انگلیسی به‌طور خودکار استانداردسازی می‌شوند و موجودی و کوپن‌ها پیش از ثبت سفارش اعتبارسنجی می‌گردند.
         </p>
       </div>
+
+      {/* Clear Guest Sign-In Guidance Banner when Authentication is Required for Firestore Order Persistence */}
+      {!user && (
+        <div className="mb-6 bg-[#EFE5D6] border border-[#B89A62] rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <h2 className="text-sm font-bold text-[#4C202B] flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-[#742E3A] shrink-0" />
+              <span>راهنمای ثبت سفارش امن در پایگاه داده ابری (Firebase Auth)</span>
+            </h2>
+            <p className="text-xs text-[#292624]/85 leading-relaxed">
+              شما می‌توانید به عنوان مهمان محصولات را مرور و سبد خرید خود را تکمیل کنید؛ اما برای ثبت دائمی سفارش در Cloud Firestore و ورود به درگاه آزمایشی شبیه‌سازی‌شده، لطفاً ابتدا وارد حساب کاربری خود شوید. اقلام سبد خرید شما کاملاً حفظ خواهند شد.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => onNavigate('/login?redirect=/checkout')}
+            className="px-5 py-2.5 bg-[#742E3A] text-[#F8F4EC] text-xs font-bold rounded-xl hover:bg-[#4C202B] transition-colors shrink-0 cursor-pointer"
+          >
+            ورود به حساب و ادامه تسویه‌حساب
+          </button>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div className="lg:col-span-8 bg-[#FFFFFF] border border-[#E4DCCF] rounded-2xl p-6 sm:p-8 space-y-6">
@@ -807,15 +827,10 @@ export const PaymentGatewayAndResultPage: React.FC<PaymentGatewayPageProps> = ({
     setLoading(true);
     setErrorMsg('');
     try {
-      const res = await fetch(`/api/payments/${encodeURIComponent(ref)}`);
-      const json = await res.json();
-      if (!res.ok) {
-        setErrorMsg(json.error || 'اطلاعات تلاش پرداخت یافت نشد.');
-      } else {
-        setData(json);
-      }
-    } catch {
-      setErrorMsg('خطا در دریافت وضعیت پرداخت از سرور.');
+      const json = await apiGetPaymentStatus(ref);
+      setData(json);
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'اطلاعات تلاش پرداخت یافت نشد.');
     } finally {
       setLoading(false);
     }
@@ -834,25 +849,18 @@ export const PaymentGatewayAndResultPage: React.FC<PaymentGatewayPageProps> = ({
     setProcessingAction(action);
     setErrorMsg('');
     try {
-      const res = await fetch(
-        `/api/payments/${encodeURIComponent(data.paymentAttempt.attemptRef)}/action`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action,
-            expectedAmount: data.order.totalAmount,
-          }),
-        }
-      );
-      const json = await res.json();
-      if (!res.ok) {
+      const json = await apiProcessPaymentAttempt({
+        attemptRef: data.paymentAttempt.attemptRef,
+        action,
+        expectedAmount: data.order.totalAmount,
+      });
+      if (!json.success) {
         setErrorMsg(json.error || 'عملیات پرداخت آزمایشی با خطا روبه‌رو شد.');
       }
       await fetchPaymentStatus(data.paymentAttempt.attemptRef);
       onPaymentStateChanged();
-    } catch {
-      setErrorMsg('ارتباط با سرور قطع شد. می‌توانید صفحه را مجدداً بارگذاری کنید.');
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'ارتباط با پایگاه داده قطع شد. می‌توانید صفحه را مجدداً بارگذاری کنید.');
     } finally {
       setProcessingAction(null);
     }
@@ -863,18 +871,14 @@ export const PaymentGatewayAndResultPage: React.FC<PaymentGatewayPageProps> = ({
     setProcessingAction('RETRY');
     setErrorMsg('');
     try {
-      const res = await fetch(
-        `/api/orders/${encodeURIComponent(data.order.orderNumber)}/retry-payment`,
-        { method: 'POST' }
-      );
-      const json = await res.json();
-      if (!res.ok || !json.paymentAttempt) {
+      const json = await apiRetryPaymentAttempt(data.order.orderNumber);
+      if (!json.success || !json.paymentAttempt) {
         setErrorMsg(json.error || 'امکان ایجاد تلاش پرداخت مجدد وجود ندارد.');
       } else {
         onNavigate(`/checkout/result?attempt=${encodeURIComponent(json.paymentAttempt.attemptRef)}`);
       }
-    } catch {
-      setErrorMsg('خطا در ایجاد تلاش پرداخت مجدد.');
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'خطا در ایجاد تلاش پرداخت مجدد.');
     } finally {
       setProcessingAction(null);
     }
@@ -883,7 +887,7 @@ export const PaymentGatewayAndResultPage: React.FC<PaymentGatewayPageProps> = ({
   if (loading) {
     return (
       <div className="max-w-3xl mx-auto px-4 pt-32 pb-20 text-center text-sm text-[#77716A]">
-        در حال فراخوانی وضعیت سفارش و درگاه آزمایشی از سرور...
+        در حال فراخوانی وضعیت سفارش و درگاه آزمایشی شبیه‌سازی‌شده...
       </div>
     );
   }
@@ -915,18 +919,18 @@ export const PaymentGatewayAndResultPage: React.FC<PaymentGatewayPageProps> = ({
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-28 pb-20 space-y-6">
-      {/* Explicit Test Gateway Banner */}
+      {/* Explicit Simulated Demo Payment Gateway Banner */}
       <div className="bg-[#4C202B] text-[#F8F4EC] rounded-2xl p-6 border border-[#B89A62]/60 space-y-2">
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <span className="text-xs font-bold tracking-wider uppercase text-[#B89A62]">
-            درگاه پرداخت آزمایشی رَواق · TEST PAYMENT SIMULATOR
+            درگاه پرداخت آزمایشی شبیه‌سازی‌شده رَواق · SIMULATED DEMO PAYMENT GATEWAY
           </span>
           <span className="text-xs font-mono bg-[#F8F4EC]/15 px-2.5 py-1 rounded">
-            محیط شبیه‌سازی (بدون انتقال وجه واقعی)
+            محیط شبیه‌سازی (isSimulatedDemo: true · بدون انتقال وجه واقعی)
           </span>
         </div>
         <p className="text-xs sm:text-sm text-[#EFE5D6]/90 leading-relaxed">
-          این صفحه شبیه‌ساز رسمی درگاه پرداخت برای ارزیابی فنی ماشین وضعیت سفارش، کنترل موجودی انبار و جلوگیری از تراکنش تکراری (Idempotency) است. هیچ شماره کارت بانکی، رمز دوم یا اطلاعات مالی واقعی دریافت نمی‌شود.
+          این صفحه یک شبیه‌ساز درگاه پرداخت آزمایشی (Simulated Demo Payment Flow) است که برای ارزیابی فنی ماشین وضعیت سفارش، کسر تراکنشی موجودی انبار و جلوگیری از تراکنش تکراری (Idempotency) طراحی شده است. هیچ شماره کارت بانکی، رمز دوم یا اطلاعات مالی واقعی دریافت نمی‌شود.
         </p>
       </div>
 
@@ -961,20 +965,20 @@ export const PaymentGatewayAndResultPage: React.FC<PaymentGatewayPageProps> = ({
         {isPending && (
           <div className="bg-[#F8F4EC] border border-[#E4DCCF] rounded-xl p-5 space-y-4">
             <h2 className="text-sm font-bold text-[#292624]">
-              انتخاب سناریوی شبیه‌سازی پرداخت:
+              انتخاب سناریوی شبیه‌سازی پرداخت آزمایشی:
             </h2>
             <p className="text-xs text-[#77716A] leading-relaxed">
-              یکی از نتیجه‌های زیر را برای تست رفتار سرور، کسر موجودی انبار و ثبت تاریخچه سفارش انتخاب کنید:
+              یکی از نتیجه‌های زیر را برای تست رفتار پایگاه داده، کسر موجودی انبار و ثبت تاریخچه سفارش انتخاب کنید:
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <button
                 type="button"
                 disabled={Boolean(processingAction)}
                 onClick={() => handleAction('SUCCEED')}
                 className="p-3.5 bg-[#2D8C88] text-[#FFFFFF] rounded-xl text-xs font-bold hover:opacity-95 transition-opacity flex items-center justify-center gap-2 cursor-pointer"
               >
-                <CheckCircle2 className="w-4 h-4" />
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
                 <span>تأیید پرداخت موفق (آزمایشی)</span>
               </button>
 
@@ -984,7 +988,7 @@ export const PaymentGatewayAndResultPage: React.FC<PaymentGatewayPageProps> = ({
                 onClick={() => handleAction('FAIL')}
                 className="p-3.5 bg-[#742E3A] text-[#F8F4EC] rounded-xl text-xs font-bold hover:bg-[#4C202B] transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
-                <XCircle className="w-4 h-4" />
+                <XCircle className="w-4 h-4 shrink-0" />
                 <span>شبیه‌سازی خطای پرداخت</span>
               </button>
 
@@ -994,8 +998,18 @@ export const PaymentGatewayAndResultPage: React.FC<PaymentGatewayPageProps> = ({
                 onClick={() => handleAction('CANCEL')}
                 className="p-3.5 bg-[#EFE5D6] text-[#292624] border border-[#E4DCCF] rounded-xl text-xs font-bold hover:bg-[#E4DCCF] transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Clock className="w-4 h-4" />
+                <XCircle className="w-4 h-4 shrink-0" />
                 <span>انصراف کاربر از پرداخت</span>
+              </button>
+
+              <button
+                type="button"
+                disabled={Boolean(processingAction)}
+                onClick={() => handleAction('EXPIRE')}
+                className="p-3.5 bg-[#FFFFFF] text-[#77716A] border border-[#E4DCCF] rounded-xl text-xs font-bold hover:border-[#742E3A] hover:text-[#292624] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Clock className="w-4 h-4 shrink-0" />
+                <span>انقضای مهلت درگاه</span>
               </button>
             </div>
           </div>
@@ -1118,19 +1132,14 @@ export const OrderTrackingPage: React.FC<{
     setError('');
     setTrackingResult(null);
     try {
-      const res = await fetch('/api/orders/track', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderNumber, customerMobile }),
-      });
-      const data = await res.json();
-      if (!res.ok || !data.found) {
+      const data = await apiTrackOrder(orderNumber, customerMobile);
+      if (!data.found) {
         setError(data.error || 'سفارشی با این مشخصات یافت نشد.');
       } else {
         setTrackingResult(data.trackingData);
       }
     } catch {
-      setError('خطا در برقراری ارتباط با سرور.');
+      setError('خطا در برقراری ارتباط با پایگاه داده.');
     } finally {
       setLoading(false);
     }

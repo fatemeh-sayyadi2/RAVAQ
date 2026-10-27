@@ -603,6 +603,10 @@ export function createOrder(
   const orderId = `ord-${seq}-${Math.random().toString(36).slice(2, 7)}`;
   const orderNumber = `RVQ-1405-${seq}`;
 
+  const expiresAt = new Date(now.getTime() + 15 * 60 * 1000).toISOString();
+  const attemptSeq = 100 + state.paymentAttempts.length + 1;
+  const attemptRef = `PAY-RVQ-${seq}-${attemptSeq}`;
+
   const order: Order = {
     id: orderId,
     orderNumber,
@@ -637,20 +641,22 @@ export function createOrder(
     status: 'PENDING_PAYMENT',
     paymentStatus: 'PENDING',
     stockDeducted: false,
+    isSimulatedDemo: true,
+    lastAttemptRef: attemptRef,
     idempotencyKey: input.idempotencyKey,
     createdAt: nowIso,
     updatedAt: nowIso,
   };
 
-  const expiresAt = new Date(now.getTime() + 15 * 60 * 1000).toISOString();
-  const attemptSeq = 100 + state.paymentAttempts.length + 1;
   const paymentAttempt: PaymentAttempt = {
     id: `pay-${attemptSeq}`,
-    attemptRef: `PAY-RVQ-${seq}-${attemptSeq}`,
+    attemptRef,
     orderId: order.id,
     orderNumber: order.orderNumber,
+    userId: input.userId,
     amount: order.totalAmount,
     status: 'PENDING',
+    isSimulatedDemo: true,
     createdAt: nowIso,
     updatedAt: nowIso,
     expiresAt,
@@ -659,6 +665,7 @@ export function createOrder(
   const historyEntry: OrderStatusHistoryEntry = {
     id: `hist-${state.orderStatusHistory.length + 1}`,
     orderId: order.id,
+    userId: input.userId,
     status: 'PENDING_PAYMENT',
     paymentStatus: 'PENDING',
     note: 'سفارش ثبت شد و در انتظار پرداخت آزمایشی است.',
@@ -1020,20 +1027,24 @@ export function createRetryPaymentAttempt(
     attemptRef: `PAY-${order.orderNumber}-${attemptSeq}`,
     orderId: order.id,
     orderNumber: order.orderNumber,
+    userId: order.userId,
     amount: order.totalAmount,
     status: 'PENDING',
+    isSimulatedDemo: true,
     createdAt: nowIso,
     updatedAt: nowIso,
     expiresAt: new Date(now.getTime() + 15 * 60 * 1000).toISOString(),
   };
 
   order.paymentStatus = 'PENDING';
+  order.lastAttemptRef = newAttempt.attemptRef;
   order.updatedAt = nowIso;
 
   state.paymentAttempts.unshift(newAttempt);
   state.orderStatusHistory.unshift({
     id: `hist-${state.orderStatusHistory.length + 1}`,
     orderId: order.id,
+    userId: order.userId,
     status: order.status,
     paymentStatus: 'PENDING',
     note: `تلاش پرداخت مجدد (${newAttempt.attemptRef}) ایجاد شد.`,

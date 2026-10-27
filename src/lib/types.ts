@@ -173,8 +173,10 @@ export interface PaymentAttempt {
   attemptRef: string;
   orderId: string;
   orderNumber: string;
+  userId?: string;
   amount: number; // integer Toman
   status: PaymentStatus;
+  isSimulatedDemo?: boolean;
   failureReason?: string;
   createdAt: string;
   updatedAt: string;
@@ -185,6 +187,7 @@ export interface PaymentAttempt {
 export interface OrderStatusHistoryEntry {
   id: string;
   orderId: string;
+  userId?: string;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
   note: string;
@@ -243,6 +246,8 @@ export interface Order {
   status: OrderStatus;
   paymentStatus: PaymentStatus;
   stockDeducted: boolean;
+  isSimulatedDemo?: boolean;
+  lastAttemptRef?: string;
   idempotencyKey?: string;
   createdAt: string;
   updatedAt: string;

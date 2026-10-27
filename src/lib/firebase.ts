@@ -3,9 +3,13 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  updateProfile,
   signOut as firebaseSignOut,
   onAuthStateChanged,
-  User as FirebaseUser
+  User as FirebaseUser,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -19,9 +23,13 @@ import {
   getDocs,
   query,
   where,
-  serverTimestamp
+  runTransaction,
+  writeBatch,
+  serverTimestamp,
 } from 'firebase/firestore';
 import firebaseConfig from '../../firebase-applet-config.json';
+
+export const AUTHORIZED_ADMIN_EMAIL = 'fawti.tiri2@gmail.com';
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
@@ -95,17 +103,35 @@ if (typeof window !== 'undefined') {
   testConnection();
 }
 
+/**
+ * Verifies whether a Firebase user is the authorized project admin.
+ * Strictly requires emailVerified === true and exact match with fawti.tiri2@gmail.com
+ * (or an explicit document in /admins/{uid}).
+ */
+export async function isVerifiedFirebaseAdmin(user: FirebaseUser | null): Promise<boolean> {
+  if (!user || !user.emailVerified) return false;
+  if (user.email?.toLowerCase() === AUTHORIZED_ADMIN_EMAIL) return true;
+  try {
+    const adminDoc = await getDoc(doc(db, 'admins', user.uid));
+    return adminDoc.exists();
+  } catch {
+    return false;
+  }
+}
+
 export async function syncFirebaseUserToFirestore(user: FirebaseUser): Promise<{
   uid: string;
   displayName: string;
   email: string;
+  mobile?: string;
   role: 'CUSTOMER' | 'ADMIN';
 }> {
   const userPath = `users/${user.uid}`;
   const privatePath = `users/${user.uid}/private/info`;
-  const isDefaultAdmin = user.email === 'fawti.tiri2@gmail.com';
-  const displayName = (user.displayName || 'کاربر رواق').slice(0, 100);
-  const role: 'CUSTOMER' | 'ADMIN' = isDefaultAdmin ? 'ADMIN' : 'CUSTOMER';
+  const isAdmin = await isVerifiedFirebaseAdmin(user);
+  let displayName = (user.displayName || 'کاربر رواق').slice(0, 100);
+  const role: 'CUSTOMER' | 'ADMIN' = isAdmin ? 'ADMIN' : 'CUSTOMER';
+  let mobile: string | undefined;
 
   try {
     const existingDoc = await getDoc(doc(db, 'users', user.uid));
@@ -117,6 +143,11 @@ export async function syncFirebaseUserToFirestore(user: FirebaseUser): Promise<{
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
+    } else {
+      const data = existingDoc.data();
+      if (data?.displayName) {
+        displayName = String(data.displayName).slice(0, 100);
+      }
     }
   } catch (error) {
     handleFirestoreError(error, OperationType.WRITE, userPath);
@@ -124,11 +155,17 @@ export async function syncFirebaseUserToFirestore(user: FirebaseUser): Promise<{
 
   if (user.email) {
     try {
+      const privRef = doc(db, 'users', user.uid, 'private', 'info');
+      const existingPriv = await getDoc(privRef);
+      if (existingPriv.exists() && existingPriv.data()?.mobile) {
+        mobile = String(existingPriv.data().mobile);
+      }
       await setDoc(
-        doc(db, 'users', user.uid, 'private', 'info'),
+        privRef,
         {
           uid: user.uid,
           email: user.email.slice(0, 160),
+          ...(mobile ? { mobile } : {}),
           updatedAt: serverTimestamp(),
         },
         { merge: true }
@@ -142,6 +179,7 @@ export async function syncFirebaseUserToFirestore(user: FirebaseUser): Promise<{
     uid: user.uid,
     displayName,
     email: user.email || '',
+    mobile,
     role,
   };
 }
@@ -178,35 +216,12 @@ export async function saveAddressToFirestore(
   }
 }
 
-export async function mirrorOrderToFirestore(
-  orderId: string,
-  payload: {
-    orderNumber: string;
-    userId: string;
-    status: string;
-    paymentStatus: string;
-    totalAmount: number;
-  }
-) {
-  if (!auth.currentUser || auth.currentUser.uid !== payload.userId) return;
-  const path = `orders/${orderId}`;
-  try {
-    await setDoc(doc(db, 'orders', orderId), {
-      orderNumber: payload.orderNumber.slice(0, 40),
-      userId: payload.userId.slice(0, 128),
-      status: payload.status.slice(0, 30),
-      paymentStatus: payload.paymentStatus.slice(0, 30),
-      totalAmount: Math.max(0, Math.floor(payload.totalAmount)),
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-    });
-  } catch (error) {
-    handleFirestoreError(error, OperationType.CREATE, path);
-  }
-}
-
 export {
   signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  updateProfile,
   firebaseSignOut,
   firebaseSignOut as signOut,
   onAuthStateChanged,
@@ -219,6 +234,8 @@ export {
   getDocs,
   query,
   where,
+  runTransaction,
+  writeBatch,
   serverTimestamp,
 };
 export type { FirebaseUser };
