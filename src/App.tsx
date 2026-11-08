@@ -96,9 +96,24 @@ export default function App() {
   const [cartValidation, setCartValidation] = useState<CartValidationResult | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Auth & Account State (Derived from verified Firebase Auth or active local dev session; never localStorage)
-  const [user, setUser] = useState<AppUser | null>(null);
-  const [authToken, setAuthToken] = useState<string | null>(null);
+  // Auth & Account State (Derived from Firebase Auth or active demo session in sessionStorage; never localStorage)
+  const [user, setUser] = useState<AppUser | null>(() => {
+    try {
+      const saved = sessionStorage.getItem('ravaq_demo_session_user');
+      if (saved) return JSON.parse(saved);
+    } catch {
+      // ignore
+    }
+    return null;
+  });
+  const [authToken, setAuthToken] = useState<string | null>(() => {
+    try {
+      return sessionStorage.getItem('ravaq_demo_session_token') || null;
+    } catch {
+      // ignore
+    }
+    return null;
+  });
   const [addresses, setAddresses] = useState<CustomerAddressRecord[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
 
@@ -207,10 +222,13 @@ export default function App() {
 
     const validateAuthoritatively = async () => {
       try {
-        const data = await apiValidateCart({
-          items: cartItems,
-          couponCode: couponCode || undefined,
-        });
+        const data = await apiValidateCart(
+          {
+            items: cartItems,
+            couponCode: couponCode || undefined,
+          },
+          authToken
+        );
         setCartValidation(data);
       } catch {
         // ignore
@@ -218,7 +236,7 @@ export default function App() {
     };
 
     validateAuthoritatively();
-  }, [cartItems, couponCode]);
+  }, [cartItems, couponCode, authToken]);
 
   // Cart manipulation handlers
   const handleAddToCart = (
@@ -306,11 +324,27 @@ export default function App() {
   const handleAuthSuccess = (newUser: AppUser, token: string | null) => {
     setUser(newUser);
     setAuthToken(token);
+    try {
+      sessionStorage.setItem('ravaq_demo_session_user', JSON.stringify(newUser));
+      if (token) {
+        sessionStorage.setItem('ravaq_demo_session_token', token);
+      } else {
+        sessionStorage.removeItem('ravaq_demo_session_token');
+      }
+    } catch {
+      // ignore
+    }
   };
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
+    } catch {
+      // ignore
+    }
+    try {
+      sessionStorage.removeItem('ravaq_demo_session_user');
+      sessionStorage.removeItem('ravaq_demo_session_token');
     } catch {
       // ignore
     }

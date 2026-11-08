@@ -29,7 +29,7 @@ import {
 } from 'firebase/firestore';
 import firebaseConfig from '../../firebase-applet-config.json';
 
-export const AUTHORIZED_ADMIN_EMAIL = 'fawti.tiri2@gmail.com';
+export const AUTHORIZED_ADMIN_EMAIL = 'admin@ravaq.ir';
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
@@ -105,7 +105,7 @@ if (typeof window !== 'undefined') {
 
 /**
  * Verifies whether a Firebase user is the authorized project admin.
- * Strictly requires emailVerified === true and exact match with fawti.tiri2@gmail.com
+ * Requires emailVerified === true and match with admin@ravaq.ir
  * (or an explicit document in /admins/{uid}).
  */
 export async function isVerifiedFirebaseAdmin(user: FirebaseUser | null): Promise<boolean> {

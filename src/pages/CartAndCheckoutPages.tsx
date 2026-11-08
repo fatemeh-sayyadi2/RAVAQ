@@ -409,20 +409,45 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
     () => `idem-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
   );
 
-  // Populate from default saved address if available
+  const DEMO_SARA_ADDRESS: CustomerAddressRecord = {
+    id: 'addr-sara-default',
+    userId: user?.uid || 'customer-sara-uid',
+    recipientName: 'سارا احمدی',
+    mobile: '09123456789',
+    province: 'تهران',
+    city: 'تهران',
+    postalCode: '1234567890',
+    addressLine: 'تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳',
+    isDefault: true,
+    createdAt: '2026-10-01T08:00:00.000Z',
+    updatedAt: '2026-10-01T08:00:00.000Z',
+  };
+
+  // Populate from default saved address (or demo customer Sara's address) if available
   useEffect(() => {
-    if (savedAddresses.length > 0 && !addressLine) {
-      const def = savedAddresses.find((a) => a.isDefault) || savedAddresses[0];
-      if (def) {
-        setCustomerName(def.recipientName);
-        setCustomerMobile(def.mobile);
-        setProvince(def.province);
-        setCity(def.city);
-        setAddressLine(def.addressLine);
-        setPostalCode(def.postalCode);
+    if (!addressLine) {
+      if (savedAddresses.length > 0) {
+        const def = savedAddresses.find((a) => a.isDefault) || savedAddresses[0];
+        if (def) {
+          setCustomerName(def.recipientName);
+          setCustomerMobile(def.mobile);
+          setProvince(def.province);
+          setCity(def.city);
+          setAddressLine(def.addressLine);
+          setPostalCode(def.postalCode);
+          return;
+        }
+      }
+      if (user?.email?.toLowerCase() === 'sara@example.com') {
+        setCustomerName(DEMO_SARA_ADDRESS.recipientName);
+        setCustomerMobile(DEMO_SARA_ADDRESS.mobile);
+        setProvince(DEMO_SARA_ADDRESS.province);
+        setCity(DEMO_SARA_ADDRESS.city);
+        setAddressLine(DEMO_SARA_ADDRESS.addressLine);
+        setPostalCode(DEMO_SARA_ADDRESS.postalCode);
       }
     }
-  }, [savedAddresses, addressLine]);
+  }, [savedAddresses, user?.email, addressLine]);
 
   const currentProvinceCities =
     IRAN_PROVINCES.find((p) => p.name === province)?.cities || ['مرکز استان'];
@@ -440,7 +465,23 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
     setCity(addr.city);
     setAddressLine(addr.addressLine);
     setPostalCode(addr.postalCode);
+    setFieldErrors({});
+    setFormError('');
   };
+
+  // Compute live shipping & payable total based on selected deliveryMethod
+  const subtotal = validation?.subtotal || 0;
+  const discountAmount = validation?.discountAmount || 0;
+  const afterDiscount = Math.max(0, subtotal - discountAmount);
+  const effectiveShippingCost =
+    subtotal === 0
+      ? 0
+      : afterDiscount >= 1200000
+      ? 0
+      : deliveryMethod === 'EXPRESS_TEHRAN'
+      ? 95000
+      : 65000;
+  const effectivePayableTotal = afterDiscount + effectiveShippingCost;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -497,6 +538,13 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
     );
   }
 
+  const addressListToDisplay =
+    savedAddresses.length > 0
+      ? savedAddresses
+      : user?.email?.toLowerCase() === 'sara@example.com'
+      ? [DEMO_SARA_ADDRESS]
+      : [];
+
   return (
     <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
       <div className="mb-8">
@@ -508,16 +556,16 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
         </p>
       </div>
 
-      {/* Clear Guest Sign-In Guidance Banner when Authentication is Required for Firestore Order Persistence */}
+      {/* Clear Guest Sign-In Guidance Banner when Authentication is Required */}
       {!user && (
         <div className="mb-6 bg-[#EFE5D6] border border-[#B89A62] rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <h2 className="text-sm font-bold text-[#4C202B] flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-[#742E3A] shrink-0" />
-              <span>راهنمای ثبت سفارش امن در پایگاه داده ابری (Firebase Auth)</span>
+              <span>راهنمای ثبت سفارش امن در پایگاه داده</span>
             </h2>
             <p className="text-xs text-[#292624]/85 leading-relaxed">
-              شما می‌توانید به عنوان مهمان محصولات را مرور و سبد خرید خود را تکمیل کنید؛ اما برای ثبت دائمی سفارش در Cloud Firestore و ورود به درگاه آزمایشی شبیه‌سازی‌شده، لطفاً ابتدا وارد حساب کاربری خود شوید. اقلام سبد خرید شما کاملاً حفظ خواهند شد.
+              شما می‌توانید به عنوان مهمان محصولات را مرور و سبد خرید خود را تکمیل کنید؛ اما برای ثبت سفارش و ورود به درگاه آزمایشی شبیه‌سازی‌شده، لطفاً ابتدا وارد حساب کاربری خود شوید. اقلام سبد خرید شما کاملاً حفظ خواهند شد.
             </p>
           </div>
           <button
@@ -530,20 +578,35 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+      >
         <div className="lg:col-span-8 bg-[#FFFFFF] border border-[#E4DCCF] rounded-2xl p-6 sm:p-8 space-y-6">
-          {/* Saved Addresses Selector for Logged-in Users */}
-          {savedAddresses.length > 0 && (
-            <div className="space-y-2.5 pb-5 border-b border-[#E4DCCF]">
+          {/* Saved / Demo Addresses Selector */}
+          <div className="space-y-2.5 pb-5 border-b border-[#E4DCCF]">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-sm font-bold text-[#292624] flex items-center gap-1.5">
                 <MapPin className="w-4 h-4 text-[#742E3A]" />
-                <span>انتخاب از نشانی‌های ذخیره‌شده شما:</span>
+                <span>انتخاب نشانی ارسال (ذخیره‌شده / نمونه آزمایشی):</span>
               </h2>
+              <button
+                type="button"
+                data-testid="use-demo-address-btn"
+                onClick={() => handleSelectSavedAddress(DEMO_SARA_ADDRESS)}
+                className="text-xs font-bold text-[#2D8C88] hover:text-[#742E3A] underline cursor-pointer"
+              >
+                پر کردن نشانی نمونه آزمایشی (سارا احمدی)
+              </button>
+            </div>
+            {addressListToDisplay.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {savedAddresses.map((addr) => (
+                {addressListToDisplay.map((addr) => (
                   <button
                     key={addr.id}
                     type="button"
+                    data-testid={`saved-address-${addr.id}`}
                     onClick={() => handleSelectSavedAddress(addr)}
                     className="text-right p-3 rounded-xl border border-[#E4DCCF] bg-[#F8F4EC] hover:border-[#742E3A] transition-colors text-xs space-y-1 cursor-pointer"
                   >
@@ -553,14 +616,20 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                     <div className="text-[#77716A] line-clamp-1">
                       {addr.province}، {addr.city} — {addr.addressLine}
                     </div>
+                    <div className="text-[11px] text-[#2D8C88] font-mono">
+                      کد پستی: {toPersianDigits(addr.postalCode)}
+                    </div>
                   </button>
                 ))}
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
           {formError && (
-            <div className="bg-[#F5E2E0] border border-[#742E3A] text-[#4C202B] p-4 rounded-xl text-xs font-medium flex items-center gap-2">
+            <div
+              data-testid="checkout-form-error"
+              className="bg-[#F5E2E0] border border-[#742E3A] text-[#4C202B] p-4 rounded-xl text-xs font-medium flex items-center gap-2"
+            >
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{formError}</span>
             </div>
@@ -573,9 +642,10 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
               </label>
               <input
                 type="text"
+                name="customerName"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                placeholder="مثلاً: سارا محمدی"
+                placeholder="مثلاً: سارا احمدی"
                 className="w-full px-3.5 py-2.5 text-sm bg-[#F8F4EC] border border-[#E4DCCF] rounded-lg focus:outline-none focus:border-[#742E3A]"
                 required
               />
@@ -590,6 +660,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
               </label>
               <input
                 type="tel"
+                name="customerMobile"
                 dir="ltr"
                 value={customerMobile}
                 onChange={(e) => setCustomerMobile(e.target.value)}
@@ -609,6 +680,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                 استان *
               </label>
               <select
+                name="province"
                 value={province}
                 onChange={(e) => handleProvinceChange(e.target.value)}
                 className="w-full px-3 py-2.5 text-sm bg-[#F8F4EC] border border-[#E4DCCF] rounded-lg"
@@ -626,6 +698,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                 شهر *
               </label>
               <select
+                name="city"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 className="w-full px-3 py-2.5 text-sm bg-[#F8F4EC] border border-[#E4DCCF] rounded-lg"
@@ -644,11 +717,12 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
               </label>
               <input
                 type="text"
+                name="postalCode"
                 dir="ltr"
                 maxLength={12}
                 value={postalCode}
                 onChange={(e) => setPostalCode(e.target.value)}
-                placeholder="۱۹۸۷۶۵۴۳۲۱"
+                placeholder="۱۲۳۴۵۶۷۸۹۰"
                 className="w-full px-3.5 py-2.5 text-sm bg-[#F8F4EC] border border-[#E4DCCF] rounded-lg text-left font-mono focus:outline-none focus:border-[#742E3A]"
                 required
               />
@@ -663,10 +737,11 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
               نشانی کامل پستی (خیابان، کوچه، پلاک، واحد) *
             </label>
             <textarea
+              name="addressLine"
               rows={2}
               value={addressLine}
               onChange={(e) => setAddressLine(e.target.value)}
-              placeholder="تهران، خیابان ولیعصر، بالاتر از پارک ساعی، کوچه شبنم، پلاک ۱۲، واحد ۴"
+              placeholder="تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳"
               className="w-full px-3.5 py-2.5 text-sm bg-[#F8F4EC] border border-[#E4DCCF] rounded-lg focus:outline-none focus:border-[#742E3A]"
               required
             />
@@ -681,14 +756,15 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                 شیوه ارسال (آزمایشی):
               </label>
               <select
+                name="deliveryMethod"
                 value={deliveryMethod}
                 onChange={(e) =>
                   setDeliveryMethod(e.target.value as 'STANDARD' | 'EXPRESS_TEHRAN')
                 }
                 className="w-full px-3 py-2.5 text-sm bg-[#F8F4EC] border border-[#E4DCCF] rounded-lg"
               >
-                <option value="STANDARD">پست پیشتاز / بسته‌بندی ایمن استاندارد</option>
-                <option value="EXPRESS_TEHRAN">ارسال ویژه منتخب (تهران)</option>
+                <option value="STANDARD">پست پیشتاز / بسته‌بندی ایمن استاندارد (۶۵,۰۰۰ تومان)</option>
+                <option value="EXPRESS_TEHRAN">ارسال ویژه منتخب تهران (۹۵,۰۰۰ تومان)</option>
               </select>
             </div>
 
@@ -698,6 +774,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
               </label>
               <input
                 type="text"
+                name="orderNote"
                 value={orderNote}
                 onChange={(e) => setOrderNote(e.target.value)}
                 placeholder="توضیحات تحویل یا زمان پیشنهادی..."
@@ -710,6 +787,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
             <label className="inline-flex items-center gap-2.5 text-xs text-[#292624] cursor-pointer">
               <input
                 type="checkbox"
+                name="acceptedTerms"
                 checked={acceptedTerms}
                 onChange={(e) => setAcceptedTerms(e.target.checked)}
                 className="w-4 h-4 accent-[#742E3A] rounded"
@@ -753,29 +831,29 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
             <div className="flex justify-between text-[#77716A]">
               <span>جمع اقلام:</span>
               <span className="tabular-nums text-[#292624]">
-                {formatToman(validation?.subtotal || 0)}
+                {formatToman(subtotal)}
               </span>
             </div>
-            {validation && validation.discountAmount > 0 && (
+            {discountAmount > 0 && (
               <div className="flex justify-between text-[#2D8C88]">
-                <span>تخفیف ({validation.appliedCoupon?.code}):</span>
+                <span>تخفیف ({validation?.appliedCoupon?.code}):</span>
                 <span className="tabular-nums font-bold">
-                  − {formatToman(validation.discountAmount)}
+                  − {formatToman(discountAmount)}
                 </span>
               </div>
             )}
             <div className="flex justify-between text-[#77716A]">
               <span>هزینه ارسال:</span>
               <span className="tabular-nums text-[#292624]">
-                {validation?.shippingCost === 0
+                {effectiveShippingCost === 0
                   ? 'رایگان'
-                  : formatToman(validation?.shippingCost || 0)}
+                  : formatToman(effectiveShippingCost)}
               </span>
             </div>
             <div className="pt-3 border-t border-[#E4DCCF] flex justify-between text-base font-bold text-[#292624]">
-              <span>مبلغ نهایی سفارش:</span>
-              <span className="tabular-nums text-[#742E3A]">
-                {formatToman(validation?.payableTotal || 0)}
+              <span>مبلغ قابل پرداخت:</span>
+              <span data-testid="checkout-payable-total" className="tabular-nums text-[#742E3A]">
+                {formatToman(effectivePayableTotal)}
               </span>
             </div>
           </div>

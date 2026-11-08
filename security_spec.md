@@ -14,7 +14,7 @@
 1. **Shadow Field Injection**: Creating `/users/u1` with `{ uid: 'u1', displayName: 'Ali', role: 'CUSTOMER', isSuperAdmin: true, createdAt: SERVER_TIME, updatedAt: SERVER_TIME }` -> `PERMISSION_DENIED`.
 2. **Privilege Escalation on Create**: Non-admin creating `/users/u1` with `role: 'ADMIN'` -> `PERMISSION_DENIED`.
 3. **Privilege Escalation on Update**: Non-admin updating `/users/u1` field `role` to `'ADMIN'` -> `PERMISSION_DENIED`.
-4. **Unverified Email Spoof**: Request with `request.auth.token.email == 'fawti.tiri2@gmail.com'` and `email_verified == false` attempting admin write -> `PERMISSION_DENIED`.
+4. **Unverified Email Spoof**: Request with `request.auth.token.email == 'admin@ravaq.ir'` and `email_verified == false` attempting admin write -> `PERMISSION_DENIED`.
 5. **Cross-User PII Read**: Authenticated user `u2` attempting `get(/users/u1/private/info)` -> `PERMISSION_DENIED`.
 6. **Orphaned Subcollection Write**: Authenticated user `u1` creating `/users/u1/addresses/a1` when `/users/u1` does not exist -> `PERMISSION_DENIED`.
 7. **ID Poisoning Attack**: Creating document with 256-character or special-character ID -> `PERMISSION_DENIED`.

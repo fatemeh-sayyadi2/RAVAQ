@@ -35,13 +35,13 @@ service cloud.firestore {
       return isSignedIn() && request.auth.uid == userId;
     }
 
-    // Strictly restricts Admin access to the verified project owner email
-    // (fawti.tiri2@gmail.com) or an explicit document in /admins/{uid}.
+    // Strictly restricts Admin access to the designated admin account
+    // (admin@ravaq.ir) or an explicit document in /admins/{uid}.
     // Client headers, localStorage, or unverified emails are NEVER trusted.
     function isAdmin() {
       return isVerified() && (
         exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
-        request.auth.token.email == 'fawti.tiri2@gmail.com'
+        request.auth.token.email == 'admin@ravaq.ir'
       );
     }
 

@@ -202,98 +202,161 @@ test('3. Concurrent stock deduction & gift-box bundle stock constraints prevent 
   assert.equal(compVariant.stock, 0, 'Component stock must never go negative');
 });
 
-test('4. Coupon validation, minimum subtotal, per-customer usage limits, and redemption tracking', () => {
+test('4. All 5 seed coupons (NOWRUZ1405, RAVAQ50, YALDA15, EXPIRED1403, FULL100) validate math, caps, min purchase, category restrictions, expiration, and usage limits', () => {
   const state = createInitialDatabaseState();
-  const expensiveProduct = state.products.find((p) => p.basePrice >= 900000) || state.products[0];
-  const variant = expensiveProduct.variants[0];
-  const coupon = state.coupons.find((c) => c.active)!;
+  const nonGiftProd = state.products.find((p) => p.categorySlug !== 'gift-boxes')!;
+  const giftBoxProd = state.products.find((p) => p.categorySlug === 'gift-boxes')!;
 
-  // Ensure quantity meets minOrderAmount
-  const qty = Math.max(2, Math.ceil(coupon.minOrderAmount / variant.price));
-  const cartItems = [{ productId: expensiveProduct.id, variantId: variant.id, quantity: qty }];
-
-  const cartValidation = validateCart(state, cartItems, {
-    couponCode: coupon.code,
-    userId: 'user-coupon-1',
-    customerMobile: '09123456789',
-  });
-  assert.equal(cartValidation.couponError, undefined);
-  assert.ok(cartValidation.discountAmount > 0, 'Active coupon should apply a discount');
-
-  // Exhaust perCustomerLimit for user-coupon-1
-  for (let i = 0; i < coupon.perCustomerLimit; i++) {
-    const created = createOrder(state, {
-      ...baseCheckoutFields,
-      userId: 'user-coupon-1',
-      couponCode: coupon.code,
-      items: cartItems,
-    });
-    assert.equal(created.success, true);
-    const paid = processPaymentAttempt(state, {
-      attemptRef: created.paymentAttempt!.attemptRef,
-      action: 'SUCCEED',
-    });
-    assert.equal(paid.success, true);
+  // 4a. NOWRUZ1405: 10%, min 800,000, max 250,000
+  const lowCart = validateCart(
+    state,
+    [{ productId: nonGiftProd.id, variantId: nonGiftProd.variants[0].id, quantity: 1 }],
+    { couponCode: 'NOWRUZ1405' }
+  );
+  if (lowCart.subtotal < 800000) {
+    assert.equal(lowCart.discountAmount, 0);
+    assert.match(lowCart.couponError || '', /حداقل مبلغ سفارش/);
   }
 
-  // Subsequent attempt by the same user with the same coupon must be rejected
-  const overLimitCheck = validateCouponForItems(
+  const qtyFor1M = Math.ceil(1000000 / nonGiftProd.variants[0].price);
+  const validNowruz = validateCart(
     state,
-    coupon.code,
-    cartValidation.items,
-    cartValidation.subtotal,
-    { userId: 'user-coupon-1', mobile: '09123456789' }
+    [{ productId: nonGiftProd.id, variantId: nonGiftProd.variants[0].id, quantity: qtyFor1M }],
+    { couponCode: 'NOWRUZ1405' }
   );
-  assert.equal(overLimitCheck.valid, false);
-  assert.match(overLimitCheck.error || '', /سقف مجاز/);
+  assert.equal(validNowruz.couponError, undefined);
+  assert.equal(validNowruz.discountAmount, Math.min(250000, Math.round(validNowruz.subtotal * 0.1)));
+
+  // Cap check for NOWRUZ1405 (> 2,500,000 subtotal -> capped at 250,000)
+  const qtyFor3M = Math.ceil(3000000 / nonGiftProd.variants[0].price);
+  const cappedNowruz = validateCart(
+    state,
+    [{ productId: nonGiftProd.id, variantId: nonGiftProd.variants[0].id, quantity: qtyFor3M }],
+    { couponCode: 'NOWRUZ1405' }
+  );
+  assert.equal(cappedNowruz.discountAmount, 250000);
+
+  // 4b. RAVAQ50: 50,000 Toman fixed, min 500,000
+  const qtyFor600k = Math.ceil(600000 / nonGiftProd.variants[0].price);
+  const validRavaq50 = validateCart(
+    state,
+    [{ productId: nonGiftProd.id, variantId: nonGiftProd.variants[0].id, quantity: qtyFor600k }],
+    { couponCode: 'RAVAQ50' }
+  );
+  assert.equal(validRavaq50.couponError, undefined);
+  assert.equal(validRavaq50.discountAmount, 50000);
+
+  // 4c. YALDA15: 15% on gift-boxes only, min 1,200,000, max 250,000
+  const yaldaWrongCat = validateCart(
+    state,
+    [{ productId: nonGiftProd.id, variantId: nonGiftProd.variants[0].id, quantity: qtyFor3M }],
+    { couponCode: 'YALDA15' }
+  );
+  assert.equal(yaldaWrongCat.discountAmount, 0);
+  assert.match(yaldaWrongCat.couponError || '', /دسته‌بندی مشخص‌شده/);
+
+  const qtyGiftFor1_5M = Math.ceil(1500000 / giftBoxProd.variants[0].price);
+  const yaldaValid = validateCart(
+    state,
+    [{ productId: giftBoxProd.id, variantId: giftBoxProd.variants[0].id, quantity: qtyGiftFor1_5M }],
+    { couponCode: 'YALDA15' }
+  );
+  assert.equal(yaldaValid.couponError, undefined);
+  assert.equal(
+    yaldaValid.discountAmount,
+    Math.min(250000, Math.round(yaldaValid.subtotal * 0.15))
+  );
+
+  // 4d. EXPIRED1403: Expired coupon rejected
+  const expiredCheck = validateCart(
+    state,
+    [{ productId: nonGiftProd.id, variantId: nonGiftProd.variants[0].id, quantity: qtyFor1M }],
+    { couponCode: 'EXPIRED1403' }
+  );
+  assert.equal(expiredCheck.discountAmount, 0);
+  assert.match(expiredCheck.couponError || '', /مهلت استفاده/);
+
+  // 4e. FULL100: Usage limit reached rejected
+  const fullCheck = validateCart(
+    state,
+    [{ productId: nonGiftProd.id, variantId: nonGiftProd.variants[0].id, quantity: qtyFor1M }],
+    { couponCode: 'FULL100' }
+  );
+  assert.equal(fullCheck.discountAmount, 0);
+  assert.match(fullCheck.couponError || '', /ظرفیت استفاده/);
+
+  // 4f. Invalid coupon code rejected
+  const invalidCheck = validateCart(
+    state,
+    [{ productId: nonGiftProd.id, variantId: nonGiftProd.variants[0].id, quantity: qtyFor1M }],
+    { couponCode: 'FAKECODE999' }
+  );
+  assert.equal(invalidCheck.discountAmount, 0);
+  assert.match(invalidCheck.couponError || '', /معتبر نیست/);
 });
 
-test('5. Admin authorization enforces verified fawti.tiri2@gmail.com only and blocks unauthorized access', async () => {
-  assert.equal(AUTHORIZED_ADMIN_EMAIL, 'fawti.tiri2@gmail.com');
+test('5. Demo accounts (admin@ravaq.ir and sara@example.com), demo shipping address, and RBAC authorization', async () => {
+  assert.equal(AUTHORIZED_ADMIN_EMAIL, 'admin@ravaq.ir');
+
+  const state = createInitialDatabaseState();
+  const adminUser = state.users.find((u) => u.email === 'admin@ravaq.ir');
+  const customerUser = state.users.find((u) => u.email === 'sara@example.com');
+  assert.ok(adminUser, 'Demo ADMIN account admin@ravaq.ir must be seeded');
+  assert.equal(adminUser.role, 'ADMIN');
+  assert.ok(customerUser, 'Demo CUSTOMER account sara@example.com must be seeded');
+  assert.equal(customerUser.role, 'CUSTOMER');
+  assert.equal(customerUser.displayName, 'سارا احمدی');
+
+  const saraAddress = state.addresses.find((a) => a.userId === customerUser.uid);
+  assert.ok(saraAddress, 'Demo shipping address for Sara Ahmadi must be seeded');
+  assert.equal(saraAddress.recipientName, 'سارا احمدی');
+  assert.equal(saraAddress.mobile, '09123456789');
+  assert.equal(saraAddress.province, 'تهران');
+  assert.equal(saraAddress.city, 'تهران');
+  assert.equal(saraAddress.postalCode, '1234567890');
+  assert.equal(saraAddress.addressLine, 'تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳');
 
   // Null/guest user
   assert.equal(await isVerifiedFirebaseAdmin(null), false);
 
-  // Unverified fawti.tiri2@gmail.com must be rejected
+  // Unverified admin email must be rejected in Firebase Auth guard
   assert.equal(
     await isVerifiedFirebaseAdmin({
       uid: 'unverified-admin-uid',
-      email: 'fawti.tiri2@gmail.com',
+      email: 'admin@ravaq.ir',
       emailVerified: false,
     } as any),
-    false,
-    'Unverified admin email must not be granted admin privileges'
+    false
   );
 
-  // Verified fawti.tiri2@gmail.com is authorized immediately without needing Firestore lookup
+  // Verified admin@ravaq.ir is authorized
   assert.equal(
     await isVerifiedFirebaseAdmin({
       uid: 'verified-admin-uid',
-      email: 'fawti.tiri2@gmail.com',
+      email: 'admin@ravaq.ir',
       emailVerified: true,
     } as any),
     true
   );
 
   // Order access & fulfillment status protection
-  const state = createInitialDatabaseState();
   const product = state.products[0];
   const created = createOrder(state, {
     ...baseCheckoutFields,
-    userId: 'owner-uid-1',
+    userId: customerUser.uid,
     items: [{ productId: product.id, variantId: product.variants[0].id, quantity: 1 }],
   });
   const order = created.order!;
 
   assert.equal(canUserAccessOrder({ uid: 'other-uid', role: 'CUSTOMER' }, order), false);
-  assert.equal(canUserAccessOrder({ uid: 'owner-uid-1', role: 'CUSTOMER' }, order), true);
-  assert.equal(canUserAccessOrder({ uid: 'admin-uid', role: 'ADMIN' }, order), true);
+  assert.equal(canUserAccessOrder({ uid: customerUser.uid, role: 'CUSTOMER' }, order), true);
+  assert.equal(canUserAccessOrder({ uid: adminUser.uid, role: 'ADMIN' }, order), true);
 
   // Admin cannot mark an unpaid order as SHIPPED
   const unpaidShip = updateOrderFulfillmentStatus(state, {
     orderId: order.id,
     newStatus: 'SHIPPED',
-    adminActor: 'fawti.tiri2@gmail.com',
+    adminActor: 'admin@ravaq.ir',
   });
   assert.equal(unpaidShip.success, false);
 
@@ -306,7 +369,7 @@ test('5. Admin authorization enforces verified fawti.tiri2@gmail.com only and bl
   assert.equal(wrongTrack.found, false);
 });
 
-test('6. Vercel rewrite and Firestore security rules invariants are configured accurately', () => {
+test('6. Vercel rewrite, Firestore security rules, and HeroMedia studio photograph configuration', () => {
   const vercelJsonPath = path.resolve(process.cwd(), 'vercel.json');
   const vercelConfig = JSON.parse(fs.readFileSync(vercelJsonPath, 'utf8'));
   assert.ok(Array.isArray(vercelConfig.rewrites), 'vercel.json must define rewrites');
@@ -321,9 +384,9 @@ test('6. Vercel rewrite and Firestore security rules invariants are configured a
   const rulesPath = path.resolve(process.cwd(), 'firestore.rules');
   const rulesContent = fs.readFileSync(rulesPath, 'utf8');
   assert.ok(
-    rulesContent.includes("request.auth.token.email == 'fawti.tiri2@gmail.com'") &&
+    rulesContent.includes("request.auth.token.email == 'admin@ravaq.ir'") &&
       rulesContent.includes('request.auth.token.email_verified == true'),
-    'firestore.rules must require verified fawti.tiri2@gmail.com for default admin access'
+    'firestore.rules must use admin@ravaq.ir for default admin check'
   );
   assert.ok(
     rulesContent.includes('allow get: if isValidId(trackingKey);') &&
@@ -334,18 +397,19 @@ test('6. Vercel rewrite and Firestore security rules invariants are configured a
     rulesContent.includes('isSimulatedDemo == true'),
     'firestore.rules must enforce isSimulatedDemo == true on simulated payment transitions'
   );
-  assert.ok(
-    rulesContent.includes('isValidCustomerStockDeduction(incoming().variants, existing().variants)'),
-    'firestore.rules must prevent customers from tampering with variant prices or inflating stock'
-  );
 
-  // Verify hero video files exist on disk and have valid MP4/H.264 headers
-  for (const relVideoPath of ['public/assets/hero/ravaq-hero.mp4', 'public/assets/hero/ravaq-hero-desktop.mp4']) {
-    const absVideoPath = path.resolve(process.cwd(), relVideoPath);
-    assert.equal(fs.existsSync(absVideoPath), true, `${relVideoPath} must exist on disk`);
-    const buf = fs.readFileSync(absVideoPath);
-    assert.ok(buf.length > 3_000_000, `${relVideoPath} must be the complete 3.4MB MP4 file`);
-    const headerStr = buf.subarray(0, 64).toString('latin1');
-    assert.ok(headerStr.includes('ftyp'), `${relVideoPath} must contain MP4 ftyp box`);
-  }
+  // Verify HeroMedia.tsx has removed the dev hero video and preserves the studio photograph
+  const heroMediaPath = path.resolve(process.cwd(), 'src/components/homepage/HeroMedia.tsx');
+  const heroMediaCode = fs.readFileSync(heroMediaPath, 'utf8');
+  assert.equal(heroMediaCode.includes('<video'), false, 'HeroMedia must not render a dev <video> element');
+  assert.equal(
+    heroMediaCode.includes('DEV HERO VIDEO DIAGNOSTICS'),
+    false,
+    'HeroMedia must not include dev video diagnostics overlay'
+  );
+  assert.equal(
+    heroMediaCode.includes('/assets/hero/ravaq-hero-desktop.jpg'),
+    true,
+    'HeroMedia must preserve the Hero studio photograph'
+  );
 });

@@ -105,15 +105,150 @@ interface SessionRecord {
 const sessions = new Map<string, SessionRecord>();
 const passwordResetTokens = new Map<string, { email: string; expiresAt: number }>();
 
-// Seed default demo admin password hash if not set
-const adminUser = dbState.users.find((u) => u.role === 'ADMIN');
-if (adminUser && !adminUser.passwordHash) {
-  const defaultPass = process.env.DEMO_ADMIN_PASSWORD || 'RavaqAdmin1405!';
-  adminUser.passwordHash = hashPassword(defaultPass);
-  saveDatabase(dbState);
+const DEMO_ADMIN_EMAIL = 'admin@ravaq.ir';
+const DEMO_ADMIN_PASS = 'Admin1405!Ravaq';
+const DEMO_CUSTOMER_EMAIL = 'sara@example.com';
+const DEMO_CUSTOMER_PASS = 'Customer1405!';
+
+function ensureSeededDemoData(state: DatabaseState): void {
+  const initial = createInitialDatabaseState();
+  let mutated = false;
+
+  // 1. Remove any legacy non-demo admin email entries
+  const filteredUsers = state.users.filter(
+    (u) => u.role !== 'ADMIN' || u.email.toLowerCase() === DEMO_ADMIN_EMAIL
+  );
+  if (filteredUsers.length !== state.users.length) {
+    state.users = filteredUsers;
+    mutated = true;
+  }
+
+  // 2. Ensure DEMO ADMIN (admin@ravaq.ir / Admin1405!Ravaq)
+  const adminHash = hashPassword(DEMO_ADMIN_PASS);
+  let adminUser = state.users.find((u) => u.email.toLowerCase() === DEMO_ADMIN_EMAIL);
+  if (!adminUser) {
+    adminUser = {
+      id: 'usr-admin-seed',
+      uid: 'admin-demo-uid',
+      email: DEMO_ADMIN_EMAIL,
+      displayName: 'مدیر آزمایشی رواق',
+      mobile: '09120000000',
+      passwordHash: adminHash,
+      role: 'ADMIN',
+      createdAt: '2026-10-01T08:00:00.000Z',
+      updatedAt: '2026-10-01T08:00:00.000Z',
+    };
+    state.users.unshift(adminUser);
+    mutated = true;
+  } else if (adminUser.passwordHash !== adminHash || adminUser.role !== 'ADMIN') {
+    adminUser.passwordHash = adminHash;
+    adminUser.role = 'ADMIN';
+    adminUser.uid = adminUser.uid || 'admin-demo-uid';
+    mutated = true;
+  }
+
+  // 3. Ensure DEMO CUSTOMER (sara@example.com / Customer1405!)
+  const customerHash = hashPassword(DEMO_CUSTOMER_PASS);
+  let customerUser = state.users.find((u) => u.email.toLowerCase() === DEMO_CUSTOMER_EMAIL);
+  if (!customerUser) {
+    customerUser = {
+      id: 'usr-customer-seed',
+      uid: 'customer-sara-uid',
+      email: DEMO_CUSTOMER_EMAIL,
+      displayName: 'سارا احمدی',
+      mobile: '09123456789',
+      passwordHash: customerHash,
+      role: 'CUSTOMER',
+      createdAt: '2026-10-01T08:00:00.000Z',
+      updatedAt: '2026-10-01T08:00:00.000Z',
+    };
+    state.users.push(customerUser);
+    mutated = true;
+  } else if (customerUser.passwordHash !== customerHash) {
+    customerUser.passwordHash = customerHash;
+    customerUser.displayName = customerUser.displayName || 'سارا احمدی';
+    customerUser.mobile = customerUser.mobile || '09123456789';
+    customerUser.uid = customerUser.uid || 'customer-sara-uid';
+    mutated = true;
+  }
+
+  // 4. Ensure Demo Shipping Address for Sara Ahmadi
+  if (!Array.isArray(state.addresses)) {
+    state.addresses = [];
+  }
+  const hasSaraAddress = state.addresses.some(
+    (a) => a.userId === customerUser!.uid
+  );
+  if (!hasSaraAddress) {
+    state.addresses.unshift({
+      id: 'addr-sara-default',
+      userId: customerUser.uid,
+      recipientName: 'سارا احمدی',
+      mobile: '09123456789',
+      province: 'تهران',
+      city: 'تهران',
+      postalCode: '1234567890',
+      addressLine: 'تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳',
+      isDefault: true,
+      createdAt: '2026-10-01T08:00:00.000Z',
+      updatedAt: '2026-10-01T08:00:00.000Z',
+    });
+    mutated = true;
+  }
+
+  // 5. Sync seed coupons with canonical specification
+  const seedCouponByCode = new Map(initial.coupons.map((c) => [c.code.toUpperCase(), c]));
+  for (const seedCpn of initial.coupons) {
+    const existing = state.coupons.find((c) => c.code.toUpperCase() === seedCpn.code.toUpperCase());
+    if (!existing) {
+      state.coupons.push(structuredClone(seedCpn));
+      mutated = true;
+    } else if (
+      existing.minOrderAmount !== seedCpn.minOrderAmount ||
+      existing.maxDiscountAmount !== seedCpn.maxDiscountAmount ||
+      existing.discountValue !== seedCpn.discountValue ||
+      existing.categorySlugRestriction !== seedCpn.categorySlugRestriction
+    ) {
+      existing.minOrderAmount = seedCpn.minOrderAmount;
+      existing.maxDiscountAmount = seedCpn.maxDiscountAmount;
+      existing.discountValue = seedCpn.discountValue;
+      existing.discountType = seedCpn.discountType;
+      existing.description = seedCpn.description;
+      existing.categorySlugRestriction = seedCpn.categorySlugRestriction;
+      existing.perCustomerLimit = seedCpn.perCustomerLimit;
+      if (seedCpn.code === 'FULL100') {
+        existing.usageLimit = 5;
+        existing.usedCount = 5;
+      }
+      mutated = true;
+    }
+  }
+  void seedCouponByCode;
+
+  // Pre-seed persistent demo tokens so page refreshes or dev server restarts stay authenticated
+  sessions.set('demo-token-admin-ravaq', {
+    token: 'demo-token-admin-ravaq',
+    userId: adminUser.id,
+    uid: adminUser.uid,
+    email: adminUser.email,
+    role: 'ADMIN',
+    createdAt: new Date().toISOString(),
+  });
+  sessions.set('demo-token-customer-sara', {
+    token: 'demo-token-customer-sara',
+    userId: customerUser.id,
+    uid: customerUser.uid,
+    email: customerUser.email,
+    role: 'CUSTOMER',
+    createdAt: new Date().toISOString(),
+  });
+
+  if (mutated) {
+    saveDatabase(state);
+  }
 }
 
-const AUTHORIZED_ADMIN_EMAIL = 'fawti.tiri2@gmail.com';
+ensureSeededDemoData(dbState);
 
 function getAuthenticatedUser(req: Request): SessionRecord | null {
   const authHeader = req.headers.authorization;
@@ -213,9 +348,6 @@ async function startServer() {
 
     res.json({
       hero: {
-        sharedVideo: findVerifiedAsset('hero', 'ravaq-hero', ['mp4', 'webm']),
-        desktopVideo: findVerifiedAsset('hero', 'ravaq-hero-desktop', ['mp4', 'webm']),
-        mobileVideo: findVerifiedAsset('hero', 'ravaq-hero-mobile', ['mp4', 'webm']),
         desktopImage: findVerifiedAsset('hero', 'ravaq-hero-desktop', ['webp', 'jpg', 'jpeg', 'png']),
         mobileImage: findVerifiedAsset('hero', 'ravaq-hero-mobile', ['webp', 'jpg', 'jpeg', 'png']),
       },
@@ -481,7 +613,7 @@ async function startServer() {
     }
 
     const nowIso = new Date().toISOString();
-    // Self-registration always creates a CUSTOMER account; only the pre-seeded fawti.tiri2@gmail.com admin account holds ADMIN privileges.
+    // Self-registration always creates a CUSTOMER account; only the pre-seeded demo admin account holds ADMIN privileges.
     const newUser = {
       id: `usr-${Date.now()}`,
       uid: `uid-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
@@ -532,7 +664,12 @@ async function startServer() {
       return;
     }
 
-    const token = crypto.randomBytes(24).toString('hex');
+    const token =
+      cleanEmail === DEMO_ADMIN_EMAIL
+        ? 'demo-token-admin-ravaq'
+        : cleanEmail === DEMO_CUSTOMER_EMAIL
+        ? 'demo-token-customer-sara'
+        : crypto.randomBytes(24).toString('hex');
     const session: SessionRecord = {
       token,
       userId: user.id,

@@ -123,14 +123,14 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
             دسترسی محدود به مدیر فروشگاه رَواق
           </h1>
           <p className="text-xs text-[#77716A] leading-relaxed">
-            این مسیر توسط قوانین امنیتی Firebase Authentication و Firestore محافظت شده و تنها برای حساب مدیر تاییدشده (<span dir="ltr" className="font-mono">{AUTHORIZED_ADMIN_EMAIL}</span>) مجاز است.
+            این مسیر تنها برای حساب مدیر آزمایشی فروشگاه (<span dir="ltr" className="font-mono">{AUTHORIZED_ADMIN_EMAIL}</span>) مجاز است.
           </p>
           <button
             type="button"
             onClick={() => onNavigate('/login')}
             className="px-6 py-2.5 bg-[#742E3A] text-[#F8F4EC] text-xs font-bold rounded-lg cursor-pointer"
           >
-            ورود با حساب مدیر تاییدشده
+            ورود با حساب مدیر آزمایشی
           </button>
         </div>
       </div>
