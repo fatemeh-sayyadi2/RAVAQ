@@ -106,28 +106,28 @@
       "images": [
         {
           "id": "pistachio-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول پسته در فروشگاه رواق",
           "illustrationKey": "pistachio"
         },
         {
           "id": "pistachio-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/pistachios-cluster.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات پسته",
           "illustrationKey": "pistachio-detail"
         },
         {
           "id": "pistachio-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای پسته",
           "illustrationKey": "pistachio-packaging"
         },
         {
           "id": "pistachio-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی پسته در فضای ایرانی",
           "illustrationKey": "pistachio-lifestyle"
@@ -189,28 +189,28 @@
       "images": [
         {
           "id": "pistachio-kernel-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/pistachios-cluster.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مغز پسته در فروشگاه رواق",
           "illustrationKey": "pistachio-kernel"
         },
         {
           "id": "pistachio-kernel-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات مغز پسته",
           "illustrationKey": "pistachio-kernel-detail"
         },
         {
           "id": "pistachio-kernel-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای مغز پسته",
           "illustrationKey": "pistachio-kernel-packaging"
         },
         {
           "id": "pistachio-kernel-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی مغز پسته در فضای ایرانی",
           "illustrationKey": "pistachio-kernel-lifestyle"
@@ -267,28 +267,28 @@
       "images": [
         {
           "id": "tree-almond-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/almonds.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول بادام درختی در فروشگاه رواق",
           "illustrationKey": "almond"
         },
         {
           "id": "tree-almond-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات بادام درختی",
           "illustrationKey": "almond-detail"
         },
         {
           "id": "tree-almond-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای بادام درختی",
           "illustrationKey": "almond-packaging"
         },
         {
           "id": "tree-almond-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی بادام درختی در فضای ایرانی",
           "illustrationKey": "almond-lifestyle"
@@ -337,28 +337,28 @@
       "images": [
         {
           "id": "walnut-in-shell-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/walnuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول گردو در فروشگاه رواق",
           "illustrationKey": "walnut"
         },
         {
           "id": "walnut-in-shell-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات گردو",
           "illustrationKey": "walnut-detail"
         },
         {
           "id": "walnut-in-shell-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای گردو",
           "illustrationKey": "walnut-packaging"
         },
         {
           "id": "walnut-in-shell-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/almonds.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی گردو در فضای ایرانی",
           "illustrationKey": "walnut-lifestyle"
@@ -415,28 +415,28 @@
       "images": [
         {
           "id": "walnut-kernel-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/walnuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مغز گردو در فروشگاه رواق",
           "illustrationKey": "walnut-kernel"
         },
         {
           "id": "walnut-kernel-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/almonds.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات مغز گردو",
           "illustrationKey": "walnut-kernel-detail"
         },
         {
           "id": "walnut-kernel-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای مغز گردو",
           "illustrationKey": "walnut-kernel-packaging"
         },
         {
           "id": "walnut-kernel-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی مغز گردو در فضای ایرانی",
           "illustrationKey": "walnut-kernel-lifestyle"
@@ -493,28 +493,28 @@
       "images": [
         {
           "id": "mixed-nuts-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول آجیل مخلوط در فروشگاه رواق",
           "illustrationKey": "mixed-nuts"
         },
         {
           "id": "mixed-nuts-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات آجیل مخلوط",
           "illustrationKey": "mixed-nuts-detail"
         },
         {
           "id": "mixed-nuts-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای آجیل مخلوط",
           "illustrationKey": "mixed-nuts-packaging"
         },
         {
           "id": "mixed-nuts-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/cashews.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی آجیل مخلوط در فضای ایرانی",
           "illustrationKey": "mixed-nuts-lifestyle"
@@ -578,28 +578,28 @@
       "images": [
         {
           "id": "hospitality-nuts-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول آجیل پذیرایی در فروشگاه رواق",
           "illustrationKey": "hospitality-nuts"
         },
         {
           "id": "hospitality-nuts-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات آجیل پذیرایی",
           "illustrationKey": "hospitality-nuts-detail"
         },
         {
           "id": "hospitality-nuts-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/gift-box-open-assortment.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای آجیل پذیرایی",
           "illustrationKey": "hospitality-nuts-packaging"
         },
         {
           "id": "hospitality-nuts-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/hazelnuts.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی آجیل پذیرایی در فضای ایرانی",
           "illustrationKey": "hospitality-nuts-lifestyle"
@@ -661,28 +661,28 @@
       "images": [
         {
           "id": "mixed-dried-fruits-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول میوه خشک مخلوط در فروشگاه رواق",
           "illustrationKey": "dried-fruit"
         },
         {
           "id": "mixed-dried-fruits-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/almonds.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات میوه خشک مخلوط",
           "illustrationKey": "dried-fruit-detail"
         },
         {
           "id": "mixed-dried-fruits-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای میوه خشک مخلوط",
           "illustrationKey": "dried-fruit-packaging"
         },
         {
           "id": "mixed-dried-fruits-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی میوه خشک مخلوط در فضای ایرانی",
           "illustrationKey": "dried-fruit-lifestyle"
@@ -739,28 +739,28 @@
       "images": [
         {
           "id": "dried-apricot-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول برگه زردآلو در فروشگاه رواق",
           "illustrationKey": "apricot"
         },
         {
           "id": "dried-apricot-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/almonds.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات برگه زردآلو",
           "illustrationKey": "apricot-detail"
         },
         {
           "id": "dried-apricot-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای برگه زردآلو",
           "illustrationKey": "apricot-packaging"
         },
         {
           "id": "dried-apricot-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی برگه زردآلو در فضای ایرانی",
           "illustrationKey": "apricot-lifestyle"
@@ -817,28 +817,28 @@
       "images": [
         {
           "id": "dried-fig-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول انجیر خشک در فروشگاه رواق",
           "illustrationKey": "fig"
         },
         {
           "id": "dried-fig-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/walnuts.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات انجیر خشک",
           "illustrationKey": "fig-detail"
         },
         {
           "id": "dried-fig-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای انجیر خشک",
           "illustrationKey": "fig-packaging"
         },
         {
           "id": "dried-fig-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی انجیر خشک در فضای ایرانی",
           "illustrationKey": "fig-lifestyle"
@@ -898,28 +898,28 @@
       "images": [
         {
           "id": "raisins-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول کشمش در فروشگاه رواق",
           "illustrationKey": "raisins"
         },
         {
           "id": "raisins-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/walnuts.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات کشمش",
           "illustrationKey": "raisins-detail"
         },
         {
           "id": "raisins-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای کشمش",
           "illustrationKey": "raisins-packaging"
         },
         {
           "id": "raisins-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی کشمش در فضای ایرانی",
           "illustrationKey": "raisins-lifestyle"
@@ -976,28 +976,28 @@
       "images": [
         {
           "id": "dried-mulberry-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول توت خشک در فروشگاه رواق",
           "illustrationKey": "mulberry"
         },
         {
           "id": "dried-mulberry-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات توت خشک",
           "illustrationKey": "mulberry-detail"
         },
         {
           "id": "dried-mulberry-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای توت خشک",
           "illustrationKey": "mulberry-packaging"
         },
         {
           "id": "dried-mulberry-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی توت خشک در فضای ایرانی",
           "illustrationKey": "mulberry-lifestyle"
@@ -1054,28 +1054,28 @@
       "images": [
         {
           "id": "dried-sour-cherry-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول آلبالو خشک در فروشگاه رواق",
           "illustrationKey": "cherry"
         },
         {
           "id": "dried-sour-cherry-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/pistachios-cluster.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات آلبالو خشک",
           "illustrationKey": "cherry-detail"
         },
         {
           "id": "dried-sour-cherry-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای آلبالو خشک",
           "illustrationKey": "cherry-packaging"
         },
         {
           "id": "dried-sour-cherry-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی آلبالو خشک در فضای ایرانی",
           "illustrationKey": "cherry-lifestyle"
@@ -1132,28 +1132,28 @@
       "images": [
         {
           "id": "barberry-img-primary",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول زرشک در فروشگاه رواق",
           "illustrationKey": "barberry"
         },
         {
           "id": "barberry-img-detail",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/saffron-bowl-jar.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات زرشک",
           "illustrationKey": "barberry-detail"
         },
         {
           "id": "barberry-img-packaging",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/saffron-jar-ravaq.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای زرشک",
           "illustrationKey": "barberry-packaging"
         },
         {
           "id": "barberry-img-lifestyle",
-          "url": "/assets/categories/iranian-pistachios-dried-fruits.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی زرشک در فضای ایرانی",
           "illustrationKey": "barberry-lifestyle"
@@ -1210,28 +1210,28 @@
       "images": [
         {
           "id": "gaz-isfahan-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/persian-gaz.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول گز اصفهان در فروشگاه رواق",
           "illustrationKey": "gaz"
         },
         {
           "id": "gaz-isfahan-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/pistachios-cluster.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات گز اصفهان",
           "illustrationKey": "gaz-detail"
         },
         {
           "id": "gaz-isfahan-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای گز اصفهان",
           "illustrationKey": "gaz-packaging"
         },
         {
           "id": "gaz-isfahan-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی گز اصفهان در فضای ایرانی",
           "illustrationKey": "gaz-lifestyle"
@@ -1285,28 +1285,28 @@
       "images": [
         {
           "id": "sohan-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sohan.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول سوهان در فروشگاه رواق",
           "illustrationKey": "sohan"
         },
         {
           "id": "sohan-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/pistachios-cluster.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات سوهان",
           "illustrationKey": "sohan-detail"
         },
         {
           "id": "sohan-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای سوهان",
           "illustrationKey": "sohan-packaging"
         },
         {
           "id": "sohan-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی سوهان در فضای ایرانی",
           "illustrationKey": "sohan-lifestyle"
@@ -1367,28 +1367,28 @@
       "images": [
         {
           "id": "baklava-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/pistachio-baklava.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول باقلوا در فروشگاه رواق",
           "illustrationKey": "baklava"
         },
         {
           "id": "baklava-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات باقلوا",
           "illustrationKey": "baklava-detail"
         },
         {
           "id": "baklava-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای باقلوا",
           "illustrationKey": "baklava-packaging"
         },
         {
           "id": "baklava-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی باقلوا در فضای ایرانی",
           "illustrationKey": "baklava-lifestyle"
@@ -1437,28 +1437,28 @@
       "images": [
         {
           "id": "nan-berenji-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/nan-berenji.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول نان برنجی در فروشگاه رواق",
           "illustrationKey": "nan-berenji"
         },
         {
           "id": "nan-berenji-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات نان برنجی",
           "illustrationKey": "nan-berenji-detail"
         },
         {
           "id": "nan-berenji-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای نان برنجی",
           "illustrationKey": "nan-berenji-packaging"
         },
         {
           "id": "nan-berenji-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی نان برنجی در فضای ایرانی",
           "illustrationKey": "nan-berenji-lifestyle"
@@ -1507,28 +1507,28 @@
       "images": [
         {
           "id": "nan-nokhodchi-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/nokhodchi.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول نان نخودچی در فروشگاه رواق",
           "illustrationKey": "nokhodchi"
         },
         {
           "id": "nan-nokhodchi-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات نان نخودچی",
           "illustrationKey": "nokhodchi-detail"
         },
         {
           "id": "nan-nokhodchi-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای نان نخودچی",
           "illustrationKey": "nokhodchi-packaging"
         },
         {
           "id": "nan-nokhodchi-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی نان نخودچی در فضای ایرانی",
           "illustrationKey": "nokhodchi-lifestyle"
@@ -1588,28 +1588,28 @@
       "images": [
         {
           "id": "qottab-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/qottab.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول قطاب در فروشگاه رواق",
           "illustrationKey": "qottab"
         },
         {
           "id": "qottab-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات قطاب",
           "illustrationKey": "qottab-detail"
         },
         {
           "id": "qottab-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای قطاب",
           "illustrationKey": "qottab-packaging"
         },
         {
           "id": "qottab-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی قطاب در فضای ایرانی",
           "illustrationKey": "qottab-lifestyle"
@@ -1658,28 +1658,28 @@
       "images": [
         {
           "id": "kolompeh-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/kolompeh.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول کلمپه در فروشگاه رواق",
           "illustrationKey": "kolompeh"
         },
         {
           "id": "kolompeh-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات کلمپه",
           "illustrationKey": "kolompeh-detail"
         },
         {
           "id": "kolompeh-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای کلمپه",
           "illustrationKey": "kolompeh-packaging"
         },
         {
           "id": "kolompeh-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی کلمپه در فضای ایرانی",
           "illustrationKey": "kolompeh-lifestyle"
@@ -1728,28 +1728,28 @@
       "images": [
         {
           "id": "traditional-koloocheh-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/kolompeh.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول کلوچه سنتی در فروشگاه رواق",
           "illustrationKey": "koloocheh"
         },
         {
           "id": "traditional-koloocheh-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/walnuts.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات کلوچه سنتی",
           "illustrationKey": "koloocheh-detail"
         },
         {
           "id": "traditional-koloocheh-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای کلوچه سنتی",
           "illustrationKey": "koloocheh-packaging"
         },
         {
           "id": "traditional-koloocheh-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی کلوچه سنتی در فضای ایرانی",
           "illustrationKey": "koloocheh-lifestyle"
@@ -1798,28 +1798,28 @@
       "images": [
         {
           "id": "baslogh-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/basloq.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول باسلوق در فروشگاه رواق",
           "illustrationKey": "baslogh"
         },
         {
           "id": "baslogh-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/walnuts.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات باسلوق",
           "illustrationKey": "baslogh-detail"
         },
         {
           "id": "baslogh-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای باسلوق",
           "illustrationKey": "baslogh-packaging"
         },
         {
           "id": "baslogh-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی باسلوق در فضای ایرانی",
           "illustrationKey": "baslogh-lifestyle"
@@ -1871,28 +1871,28 @@
       "images": [
         {
           "id": "poolaki-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/pulaki.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول پولکی در فروشگاه رواق",
           "illustrationKey": "poolaki"
         },
         {
           "id": "poolaki-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات پولکی",
           "illustrationKey": "poolaki-detail"
         },
         {
           "id": "poolaki-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای پولکی",
           "illustrationKey": "poolaki-packaging"
         },
         {
           "id": "poolaki-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی پولکی در فضای ایرانی",
           "illustrationKey": "poolaki-lifestyle"
@@ -1941,28 +1941,28 @@
       "images": [
         {
           "id": "masghati-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مسقطی در فروشگاه رواق",
           "illustrationKey": "masghati"
         },
         {
           "id": "masghati-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/pistachio-baklava.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات مسقطی",
           "illustrationKey": "masghati-detail"
         },
         {
           "id": "masghati-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای مسقطی",
           "illustrationKey": "masghati-packaging"
         },
         {
           "id": "masghati-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی مسقطی در فضای ایرانی",
           "illustrationKey": "masghati-lifestyle"
@@ -2011,28 +2011,28 @@
       "images": [
         {
           "id": "traditional-sweets-assortment-img-primary",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مجموعه شیرینی سنتی پذیرایی در فروشگاه رواق",
           "illustrationKey": "sweet-assortment"
         },
         {
           "id": "traditional-sweets-assortment-img-detail",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/pistachio-baklava.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات مجموعه شیرینی سنتی پذیرایی",
           "illustrationKey": "sweet-assortment-detail"
         },
         {
           "id": "traditional-sweets-assortment-img-packaging",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/gift-box-open-assortment.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای مجموعه شیرینی سنتی پذیرایی",
           "illustrationKey": "sweet-assortment-packaging"
         },
         {
           "id": "traditional-sweets-assortment-img-lifestyle",
-          "url": "/assets/categories/persian-traditional-sweets.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی مجموعه شیرینی سنتی پذیرایی در فضای ایرانی",
           "illustrationKey": "sweet-assortment-lifestyle"
@@ -2080,7 +2080,7 @@
           "weightGrams": 5,
           "price": 840000,
           "compareAtPrice": 890000,
-          "stock": 18
+          "stock": 12
         },
         {
           "id": "RVQ-SAF-001-2M",
@@ -2094,28 +2094,28 @@
       "images": [
         {
           "id": "saffron-img-primary",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/saffron-jar-ravaq.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول زعفران در فروشگاه رواق",
           "illustrationKey": "saffron"
         },
         {
           "id": "saffron-img-detail",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/saffron-bowl-jar.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات زعفران",
           "illustrationKey": "saffron-detail"
         },
         {
           "id": "saffron-img-packaging",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/gift-box-signature.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای زعفران",
           "illustrationKey": "saffron-packaging"
         },
         {
           "id": "saffron-img-lifestyle",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی زعفران در فضای ایرانی",
           "illustrationKey": "saffron-lifestyle"
@@ -2155,7 +2155,7 @@
           "label": "قوطی استوانه‌ای ۱۲۰ گرم",
           "weightGrams": 120,
           "price": 170000,
-          "stock": 24
+          "stock": 18
         },
         {
           "id": "RVQ-SAF-002-250",
@@ -2169,28 +2169,28 @@
       "images": [
         {
           "id": "selected-herbal-infusion-img-primary",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/persian-tea-loose-leaf.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول دمنوش گیاهی منتخب در فروشگاه رواق",
           "illustrationKey": "herbal-tea"
         },
         {
           "id": "selected-herbal-infusion-img-detail",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات دمنوش گیاهی منتخب",
           "illustrationKey": "herbal-tea-detail"
         },
         {
           "id": "selected-herbal-infusion-img-packaging",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/saffron-jar-ravaq.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای دمنوش گیاهی منتخب",
           "illustrationKey": "herbal-tea-packaging"
         },
         {
           "id": "selected-herbal-infusion-img-lifestyle",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی دمنوش گیاهی منتخب در فضای ایرانی",
           "illustrationKey": "herbal-tea-lifestyle"
@@ -2239,28 +2239,28 @@
       "images": [
         {
           "id": "saffron-and-nuts-pairing-img-primary",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/saffron-bowl-jar.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول ترکیب زعفران و خشکبار در فروشگاه رواق",
           "illustrationKey": "saffron-nuts"
         },
         {
           "id": "saffron-and-nuts-pairing-img-detail",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات ترکیب زعفران و خشکبار",
           "illustrationKey": "saffron-nuts-detail"
         },
         {
           "id": "saffron-and-nuts-pairing-img-packaging",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/gift-box-open-assortment.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای ترکیب زعفران و خشکبار",
           "illustrationKey": "saffron-nuts-packaging"
         },
         {
           "id": "saffron-and-nuts-pairing-img-lifestyle",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/almonds.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی ترکیب زعفران و خشکبار در فضای ایرانی",
           "illustrationKey": "saffron-nuts-lifestyle"
@@ -2305,28 +2305,28 @@
       "images": [
         {
           "id": "iranian-delicacies-collection-img-primary",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/saffron-bowl-jar.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مجموعه خوراکی‌های ایرانی در فروشگاه رواق",
           "illustrationKey": "pantry-set"
         },
         {
           "id": "iranian-delicacies-collection-img-detail",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/saffron-jar-ravaq.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات مجموعه خوراکی‌های ایرانی",
           "illustrationKey": "pantry-set-detail"
         },
         {
           "id": "iranian-delicacies-collection-img-packaging",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/gift-box-open-assortment.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای مجموعه خوراکی‌های ایرانی",
           "illustrationKey": "pantry-set-packaging"
         },
         {
           "id": "iranian-delicacies-collection-img-lifestyle",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/pistachios-cluster.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی مجموعه خوراکی‌های ایرانی در فضای ایرانی",
           "illustrationKey": "pantry-set-lifestyle"
@@ -2367,28 +2367,28 @@
       "images": [
         {
           "id": "iranian-hospitality-pack-img-primary",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول بسته پذیرایی ایرانی در فروشگاه رواق",
           "illustrationKey": "hospitality-pack"
         },
         {
           "id": "iranian-hospitality-pack-img-detail",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/persian-tea-loose-leaf.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات بسته پذیرایی ایرانی",
           "illustrationKey": "hospitality-pack-detail"
         },
         {
           "id": "iranian-hospitality-pack-img-packaging",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای بسته پذیرایی ایرانی",
           "illustrationKey": "hospitality-pack-packaging"
         },
         {
           "id": "iranian-hospitality-pack-img-lifestyle",
-          "url": "/assets/categories/saffron-packaging.svg",
+          "url": "/assets/products/pulaki.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی بسته پذیرایی ایرانی در فضای ایرانی",
           "illustrationKey": "hospitality-pack-lifestyle"
@@ -2438,28 +2438,28 @@
       "images": [
         {
           "id": "terracotta-vessel-img-primary",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/artisan-objects.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول ظرف سفالی در فروشگاه رواق",
           "illustrationKey": "pottery"
         },
         {
           "id": "terracotta-vessel-img-detail",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/handicrafts-trio.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات ظرف سفالی",
           "illustrationKey": "pottery-detail"
         },
         {
           "id": "terracotta-vessel-img-packaging",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای ظرف سفالی",
           "illustrationKey": "pottery-packaging"
         },
         {
           "id": "terracotta-vessel-img-lifestyle",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی ظرف سفالی در فضای ایرانی",
           "illustrationKey": "pottery-lifestyle"
@@ -2514,28 +2514,28 @@
       "images": [
         {
           "id": "ceramic-bowl-and-plate-img-primary",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/handicrafts-trio.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول کاسه یا بشقاب سرامیکی در فروشگاه رواق",
           "illustrationKey": "ceramic-bowl"
         },
         {
           "id": "ceramic-bowl-and-plate-img-detail",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/artisan-objects.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات کاسه یا بشقاب سرامیکی",
           "illustrationKey": "ceramic-bowl-detail"
         },
         {
           "id": "ceramic-bowl-and-plate-img-packaging",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای کاسه یا بشقاب سرامیکی",
           "illustrationKey": "ceramic-bowl-packaging"
         },
         {
           "id": "ceramic-bowl-and-plate-img-lifestyle",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی کاسه یا بشقاب سرامیکی در فضای ایرانی",
           "illustrationKey": "ceramic-bowl-lifestyle"
@@ -2582,28 +2582,28 @@
       "images": [
         {
           "id": "iranian-table-runner-img-primary",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/handicrafts-trio.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول رانر یا رومیزی ایرانی در فروشگاه رواق",
           "illustrationKey": "runner"
         },
         {
           "id": "iranian-table-runner-img-detail",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/artisan-objects.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات رانر یا رومیزی ایرانی",
           "illustrationKey": "runner-detail"
         },
         {
           "id": "iranian-table-runner-img-packaging",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای رانر یا رومیزی ایرانی",
           "illustrationKey": "runner-packaging"
         },
         {
           "id": "iranian-table-runner-img-lifestyle",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی رانر یا رومیزی ایرانی در فضای ایرانی",
           "illustrationKey": "runner-lifestyle"
@@ -2646,28 +2646,28 @@
       "images": [
         {
           "id": "iranian-decorative-object-img-primary",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/artisan-objects.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول شیء تزئینی ایرانی در فروشگاه رواق",
           "illustrationKey": "arch-decor"
         },
         {
           "id": "iranian-decorative-object-img-detail",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/handicrafts-trio.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات شیء تزئینی ایرانی",
           "illustrationKey": "arch-decor-detail"
         },
         {
           "id": "iranian-decorative-object-img-packaging",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/gift-box-signature.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای شیء تزئینی ایرانی",
           "illustrationKey": "arch-decor-packaging"
         },
         {
           "id": "iranian-decorative-object-img-lifestyle",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/boutique-hero.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی شیء تزئینی ایرانی در فضای ایرانی",
           "illustrationKey": "arch-decor-lifestyle"
@@ -2707,28 +2707,28 @@
       "images": [
         {
           "id": "handicraft-gift-set-img-primary",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/handicrafts-trio.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مجموعه هدیه صنایع‌دستی در فروشگاه رواق",
           "illustrationKey": "craft-set"
         },
         {
           "id": "handicraft-gift-set-img-detail",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/artisan-objects.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات مجموعه هدیه صنایع‌دستی",
           "illustrationKey": "craft-set-detail"
         },
         {
           "id": "handicraft-gift-set-img-packaging",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/gift-box-signature.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای مجموعه هدیه صنایع‌دستی",
           "illustrationKey": "craft-set-packaging"
         },
         {
           "id": "handicraft-gift-set-img-lifestyle",
-          "url": "/assets/categories/iranian-artisan-gifts.svg",
+          "url": "/assets/products/gift-box-open-assortment.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی مجموعه هدیه صنایع‌دستی در فضای ایرانی",
           "illustrationKey": "craft-set-lifestyle"
@@ -2782,28 +2782,28 @@
       "images": [
         {
           "id": "nuts-and-dried-fruits-gift-box-img-primary",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/gift-box-open-assortment.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه آجیل و خشکبار در فروشگاه رواق",
           "illustrationKey": "gift-nuts"
         },
         {
           "id": "nuts-and-dried-fruits-gift-box-img-detail",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/pistachios-bowl.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات جعبه هدیه آجیل و خشکبار",
           "illustrationKey": "gift-nuts-detail"
         },
         {
           "id": "nuts-and-dried-fruits-gift-box-img-packaging",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/gift-box-signature.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای جعبه هدیه آجیل و خشکبار",
           "illustrationKey": "gift-nuts-packaging"
         },
         {
           "id": "nuts-and-dried-fruits-gift-box-img-lifestyle",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی جعبه هدیه آجیل و خشکبار در فضای ایرانی",
           "illustrationKey": "gift-nuts-lifestyle"
@@ -2879,28 +2879,28 @@
       "images": [
         {
           "id": "traditional-sweets-gift-box-img-primary",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه شیرینی سنتی در فروشگاه رواق",
           "illustrationKey": "gift-sweets"
         },
         {
           "id": "traditional-sweets-gift-box-img-detail",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات جعبه هدیه شیرینی سنتی",
           "illustrationKey": "gift-sweets-detail"
         },
         {
           "id": "traditional-sweets-gift-box-img-packaging",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای جعبه هدیه شیرینی سنتی",
           "illustrationKey": "gift-sweets-packaging"
         },
         {
           "id": "traditional-sweets-gift-box-img-lifestyle",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/persian-gaz.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی جعبه هدیه شیرینی سنتی در فضای ایرانی",
           "illustrationKey": "gift-sweets-lifestyle"
@@ -2961,7 +2961,7 @@
           "sku": "RVQ-GFT-003-STD",
           "label": "جعبه یک مثقال زعفران و دمنوش",
           "price": 1290000,
-          "stock": 16
+          "stock": 10
         },
         {
           "id": "RVQ-GFT-003-VIP",
@@ -2974,28 +2974,28 @@
       "images": [
         {
           "id": "saffron-gift-box-img-primary",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/gift-box-signature.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه زعفران در فروشگاه رواق",
           "illustrationKey": "gift-saffron"
         },
         {
           "id": "saffron-gift-box-img-detail",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/saffron-jar-ravaq.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات جعبه هدیه زعفران",
           "illustrationKey": "gift-saffron-detail"
         },
         {
           "id": "saffron-gift-box-img-packaging",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای جعبه هدیه زعفران",
           "illustrationKey": "gift-saffron-packaging"
         },
         {
           "id": "saffron-gift-box-img-lifestyle",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/saffron-bowl-jar.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی جعبه هدیه زعفران در فضای ایرانی",
           "illustrationKey": "gift-saffron-lifestyle"
@@ -3057,28 +3057,28 @@
       "images": [
         {
           "id": "delicacies-and-handicrafts-gift-box-img-primary",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/gift-box-signature.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه خوراکی و صنایع‌دستی در فروشگاه رواق",
           "illustrationKey": "gift-craft-food"
         },
         {
           "id": "delicacies-and-handicrafts-gift-box-img-detail",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/gift-box-open-assortment.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات جعبه هدیه خوراکی و صنایع‌دستی",
           "illustrationKey": "gift-craft-food-detail"
         },
         {
           "id": "delicacies-and-handicrafts-gift-box-img-packaging",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای جعبه هدیه خوراکی و صنایع‌دستی",
           "illustrationKey": "gift-craft-food-packaging"
         },
         {
           "id": "delicacies-and-handicrafts-gift-box-img-lifestyle",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/boutique-hero.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی جعبه هدیه خوراکی و صنایع‌دستی در فضای ایرانی",
           "illustrationKey": "gift-craft-food-lifestyle"
@@ -3155,28 +3155,28 @@
       "images": [
         {
           "id": "nowruz-gift-box-img-primary",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/nowruz-gift-box.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه نوروز در فروشگاه رواق",
           "illustrationKey": "gift-nowruz"
         },
         {
           "id": "nowruz-gift-box-img-detail",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/gift-box-open-assortment.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات جعبه هدیه نوروز",
           "illustrationKey": "gift-nowruz-detail"
         },
         {
           "id": "nowruz-gift-box-img-packaging",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای جعبه هدیه نوروز",
           "illustrationKey": "gift-nowruz-packaging"
         },
         {
           "id": "nowruz-gift-box-img-lifestyle",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/sweets-platter.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی جعبه هدیه نوروز در فضای ایرانی",
           "illustrationKey": "gift-nowruz-lifestyle"
@@ -3249,28 +3249,28 @@
       "images": [
         {
           "id": "yalda-night-gift-box-img-primary",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/gift-box-open-assortment.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه شب یلدا در فروشگاه رواق",
           "illustrationKey": "gift-yalda"
         },
         {
           "id": "yalda-night-gift-box-img-detail",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/basloq.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات جعبه هدیه شب یلدا",
           "illustrationKey": "gift-yalda-detail"
         },
         {
           "id": "yalda-night-gift-box-img-packaging",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/gift-box-signature.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای جعبه هدیه شب یلدا",
           "illustrationKey": "gift-yalda-packaging"
         },
         {
           "id": "yalda-night-gift-box-img-lifestyle",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/dried-fruits-nuts.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی جعبه هدیه شب یلدا در فضای ایرانی",
           "illustrationKey": "gift-yalda-lifestyle"
@@ -3343,28 +3343,28 @@
       "images": [
         {
           "id": "visiting-and-gathering-gift-box-img-primary",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/ribbon-packaging.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه مهمانی و دیدار در فروشگاه رواق",
           "illustrationKey": "gift-visiting"
         },
         {
           "id": "visiting-and-gathering-gift-box-img-detail",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/gift-box-plain.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات جعبه هدیه مهمانی و دیدار",
           "illustrationKey": "gift-visiting-detail"
         },
         {
           "id": "visiting-and-gathering-gift-box-img-packaging",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/gift-box-signature.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای جعبه هدیه مهمانی و دیدار",
           "illustrationKey": "gift-visiting-packaging"
         },
         {
           "id": "visiting-and-gathering-gift-box-img-lifestyle",
-          "url": "/assets/categories/occasion-gifts.svg",
+          "url": "/assets/products/persian-tea-teapot.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی جعبه هدیه مهمانی و دیدار در فضای ایرانی",
           "illustrationKey": "gift-visiting-lifestyle"
@@ -3437,28 +3437,28 @@
       "images": [
         {
           "id": "corporate-gift-box-img-primary",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/corporate-gift-box.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه سازمانی در فروشگاه رواق",
           "illustrationKey": "gift-corporate"
         },
         {
           "id": "corporate-gift-box-img-detail",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/saffron-jar-ravaq.jpg",
           "role": "detail",
           "alt": "نمای نزدیک بافت و جزئیات جعبه هدیه سازمانی",
           "illustrationKey": "gift-corporate-detail"
         },
         {
           "id": "corporate-gift-box-img-packaging",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/gift-box-signature.jpg",
           "role": "packaging",
           "alt": "بسته‌بندی اختصاصی رواق برای جعبه هدیه سازمانی",
           "illustrationKey": "gift-corporate-packaging"
         },
         {
           "id": "corporate-gift-box-img-lifestyle",
-          "url": "/assets/categories/ravaq-gift-box.svg",
+          "url": "/assets/products/artisan-objects.jpg",
           "role": "lifestyle",
           "alt": "چیدمان پذیرایی جعبه هدیه سازمانی در فضای ایرانی",
           "illustrationKey": "gift-corporate-lifestyle"
@@ -3515,46 +3515,46 @@
     {
       "id": "cpn-nowruz",
       "code": "NOWRUZ1405",
-      "description": "تخفیف ۱۰ درصدی ویژه سفارش‌های بالای ۷۰۰ هزار تومان (حداکثر ۲۰۰ هزار تومان) — کد آزمایشی",
+      "description": "تخفیف ۱۰ درصدی ویژه سفارش‌های بالای ۸۰۰ هزار تومان (حداکثر ۲۵۰ هزار تومان) — کد آزمایشی",
       "discountType": "PERCENTAGE",
       "discountValue": 10,
-      "minOrderAmount": 700000,
-      "maxDiscountAmount": 200000,
+      "minOrderAmount": 800000,
+      "maxDiscountAmount": 250000,
       "startsAt": "2025-01-01T00:00:00.000Z",
       "endsAt": "2028-12-31T23:59:59.000Z",
       "active": true,
       "usageLimit": 100,
-      "usedCount": 3,
-      "perCustomerLimit": 2
+      "usedCount": 6,
+      "perCustomerLimit": 5
     },
     {
       "id": "cpn-ravaq50",
       "code": "RAVAQ50",
-      "description": "۵۰ هزار تومان تخفیف ثابت برای خریدهای بالای ۴۰۰ هزار تومان — کد آزمایشی",
+      "description": "۵۰ هزار تومان تخفیف ثابت برای خریدهای بالای ۵۰۰ هزار تومان — کد آزمایشی",
       "discountType": "FIXED",
       "discountValue": 50000,
-      "minOrderAmount": 400000,
+      "minOrderAmount": 500000,
       "startsAt": "2025-01-01T00:00:00.000Z",
       "endsAt": "2028-12-31T23:59:59.000Z",
       "active": true,
       "usageLimit": 50,
       "usedCount": 1,
-      "perCustomerLimit": 1
+      "perCustomerLimit": 5
     },
     {
       "id": "cpn-yalda",
       "code": "YALDA15",
-      "description": "۱۵ درصد تخفیف ویژه جعبه‌های هدیه (حداکثر ۲۵۰ هزار تومان) — کد آزمایشی",
+      "description": "۱۵ درصد تخفیف ویژه جعبه‌های هدیه برای خریدهای بالای ۱,۲۰۰,۰۰۰ تومان (حداکثر ۲۵۰ هزار تومان) — کد آزمایشی",
       "discountType": "PERCENTAGE",
       "discountValue": 15,
-      "minOrderAmount": 900000,
+      "minOrderAmount": 1200000,
       "maxDiscountAmount": 250000,
       "startsAt": "2025-01-01T00:00:00.000Z",
       "endsAt": "2028-12-31T23:59:59.000Z",
       "active": true,
       "usageLimit": 30,
       "usedCount": 0,
-      "perCustomerLimit": 1,
+      "perCustomerLimit": 5,
       "categorySlugRestriction": "gift-boxes"
     },
     {
@@ -3586,25 +3586,599 @@
       "perCustomerLimit": 1
     }
   ],
-  "couponRedemptions": [],
-  "orders": [],
-  "paymentAttempts": [],
-  "orderStatusHistory": [],
-  "inventoryMovements": [],
+  "couponRedemptions": [
+    {
+      "id": "red-3",
+      "couponId": "cpn-nowruz",
+      "couponCode": "NOWRUZ1405",
+      "orderId": "ord-1004-8l05g",
+      "userId": "customer-sara-uid",
+      "customerMobile": "09123456789",
+      "discountAmount": 250000,
+      "redeemedAt": "2026-11-07T14:40:55.250Z"
+    },
+    {
+      "id": "red-2",
+      "couponId": "cpn-nowruz",
+      "couponCode": "NOWRUZ1405",
+      "orderId": "ord-1003-faela",
+      "userId": "customer-sara-uid",
+      "customerMobile": "09123456789",
+      "discountAmount": 250000,
+      "redeemedAt": "2026-11-07T14:38:58.356Z"
+    },
+    {
+      "id": "red-1",
+      "couponId": "cpn-nowruz",
+      "couponCode": "NOWRUZ1405",
+      "orderId": "ord-1002-lp6tx",
+      "userId": "customer-sara-uid",
+      "customerMobile": "09123456789",
+      "discountAmount": 250000,
+      "redeemedAt": "2026-11-07T14:31:53.890Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ord-1004-8l05g",
+      "orderNumber": "RVQ-1405-1004",
+      "userId": "customer-sara-uid",
+      "customerName": "سارا احمدی",
+      "customerMobile": "09123456789",
+      "customerEmail": "sara@example.com",
+      "province": "تهران",
+      "city": "تهران",
+      "addressLine": "تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳",
+      "postalCode": "1234567890",
+      "orderNote": "",
+      "deliveryMethod": "EXPRESS_TEHRAN",
+      "items": [
+        {
+          "id": "ord-1004-8l05g-item-1",
+          "productId": "prod-gift-saffron",
+          "productSlug": "saffron-gift-box",
+          "productName": "جعبه هدیه زعفران",
+          "variantId": "RVQ-GFT-003-STD",
+          "variantLabel": "جعبه یک مثقال زعفران و دمنوش",
+          "sku": "RVQ-GFT-003-STD",
+          "unitPrice": 1290000,
+          "quantity": 2,
+          "lineTotal": 2580000
+        }
+      ],
+      "subtotal": 2580000,
+      "discountAmount": 250000,
+      "couponCode": "NOWRUZ1405",
+      "shippingCost": 0,
+      "totalAmount": 2330000,
+      "status": "PAID",
+      "paymentStatus": "SUCCEEDED",
+      "stockDeducted": true,
+      "isSimulatedDemo": true,
+      "lastAttemptRef": "PAY-RVQ-1405-1004-107",
+      "idempotencyKey": "idem-1794062452722-qymg9h",
+      "createdAt": "2026-11-07T14:40:53.934Z",
+      "updatedAt": "2026-11-07T14:40:55.250Z"
+    },
+    {
+      "id": "ord-1003-faela",
+      "orderNumber": "RVQ-1405-1003",
+      "userId": "customer-sara-uid",
+      "customerName": "سارا احمدی",
+      "customerMobile": "09123456789",
+      "customerEmail": "sara@example.com",
+      "province": "تهران",
+      "city": "تهران",
+      "addressLine": "تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳",
+      "postalCode": "1234567890",
+      "orderNote": "",
+      "deliveryMethod": "EXPRESS_TEHRAN",
+      "items": [
+        {
+          "id": "ord-1003-faela-item-1",
+          "productId": "prod-gift-saffron",
+          "productSlug": "saffron-gift-box",
+          "productName": "جعبه هدیه زعفران",
+          "variantId": "RVQ-GFT-003-STD",
+          "variantLabel": "جعبه یک مثقال زعفران و دمنوش",
+          "sku": "RVQ-GFT-003-STD",
+          "unitPrice": 1290000,
+          "quantity": 2,
+          "lineTotal": 2580000
+        }
+      ],
+      "subtotal": 2580000,
+      "discountAmount": 250000,
+      "couponCode": "NOWRUZ1405",
+      "shippingCost": 0,
+      "totalAmount": 2330000,
+      "status": "PAID",
+      "paymentStatus": "SUCCEEDED",
+      "stockDeducted": true,
+      "isSimulatedDemo": true,
+      "lastAttemptRef": "PAY-RVQ-1405-1003-105",
+      "idempotencyKey": "idem-1794062335392-rc49vj",
+      "createdAt": "2026-11-07T14:38:56.723Z",
+      "updatedAt": "2026-11-07T14:38:58.356Z"
+    },
+    {
+      "id": "ord-1002-lp6tx",
+      "orderNumber": "RVQ-1405-1002",
+      "userId": "customer-sara-uid",
+      "customerName": "سارا احمدی",
+      "customerMobile": "09123456789",
+      "customerEmail": "sara@example.com",
+      "province": "تهران",
+      "city": "تهران",
+      "addressLine": "تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳",
+      "postalCode": "1234567890",
+      "orderNote": "",
+      "deliveryMethod": "EXPRESS_TEHRAN",
+      "items": [
+        {
+          "id": "ord-1002-lp6tx-item-1",
+          "productId": "prod-gift-saffron",
+          "productSlug": "saffron-gift-box",
+          "productName": "جعبه هدیه زعفران",
+          "variantId": "RVQ-GFT-003-STD",
+          "variantLabel": "جعبه یک مثقال زعفران و دمنوش",
+          "sku": "RVQ-GFT-003-STD",
+          "unitPrice": 1290000,
+          "quantity": 2,
+          "lineTotal": 2580000
+        }
+      ],
+      "subtotal": 2580000,
+      "discountAmount": 250000,
+      "couponCode": "NOWRUZ1405",
+      "shippingCost": 0,
+      "totalAmount": 2330000,
+      "status": "PAID",
+      "paymentStatus": "SUCCEEDED",
+      "stockDeducted": true,
+      "isSimulatedDemo": true,
+      "lastAttemptRef": "PAY-RVQ-1405-1002-103",
+      "idempotencyKey": "idem-1794061910942-9b4qrw",
+      "createdAt": "2026-11-07T14:31:52.274Z",
+      "updatedAt": "2026-11-07T14:31:53.890Z"
+    },
+    {
+      "id": "ord-1001-8ktuk",
+      "orderNumber": "RVQ-1405-1001",
+      "userId": "customer-sara-uid",
+      "customerName": "سارا احمدی",
+      "customerMobile": "09123456789",
+      "customerEmail": "sara@example.com",
+      "province": "تهران",
+      "city": "تهران",
+      "addressLine": "تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳",
+      "postalCode": "1234567890",
+      "orderNote": "",
+      "deliveryMethod": "EXPRESS_TEHRAN",
+      "items": [
+        {
+          "id": "ord-1001-8ktuk-item-1",
+          "productId": "prod-gift-saffron",
+          "productSlug": "saffron-gift-box",
+          "productName": "جعبه هدیه زعفران",
+          "variantId": "RVQ-GFT-003-STD",
+          "variantLabel": "جعبه یک مثقال زعفران و دمنوش",
+          "sku": "RVQ-GFT-003-STD",
+          "unitPrice": 1290000,
+          "quantity": 2,
+          "lineTotal": 2580000
+        }
+      ],
+      "subtotal": 2580000,
+      "discountAmount": 250000,
+      "couponCode": "NOWRUZ1405",
+      "shippingCost": 0,
+      "totalAmount": 2330000,
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "PENDING",
+      "stockDeducted": false,
+      "isSimulatedDemo": true,
+      "lastAttemptRef": "PAY-RVQ-1001-101",
+      "idempotencyKey": "idem-1794061794714-n6s01h",
+      "createdAt": "2026-11-07T14:29:56.064Z",
+      "updatedAt": "2026-11-07T14:29:56.064Z"
+    }
+  ],
+  "paymentAttempts": [
+    {
+      "id": "pay-107",
+      "attemptRef": "PAY-RVQ-1405-1004-107",
+      "orderId": "ord-1004-8l05g",
+      "orderNumber": "RVQ-1405-1004",
+      "userId": "customer-sara-uid",
+      "amount": 2330000,
+      "status": "SUCCEEDED",
+      "isSimulatedDemo": true,
+      "createdAt": "2026-11-07T14:40:54.817Z",
+      "updatedAt": "2026-11-07T14:40:55.250Z",
+      "expiresAt": "2026-11-07T14:55:54.817Z",
+      "completedAt": "2026-11-07T14:40:55.250Z"
+    },
+    {
+      "id": "pay-106",
+      "attemptRef": "PAY-RVQ-1004-106",
+      "orderId": "ord-1004-8l05g",
+      "orderNumber": "RVQ-1405-1004",
+      "userId": "customer-sara-uid",
+      "amount": 2330000,
+      "status": "FAILED",
+      "isSimulatedDemo": true,
+      "createdAt": "2026-11-07T14:40:53.934Z",
+      "updatedAt": "2026-11-07T14:40:54.386Z",
+      "expiresAt": "2026-11-07T14:55:53.934Z",
+      "failureReason": "تراکنش آزمایشی توسط شبیه‌ساز ناموفق اعلام شد.",
+      "completedAt": "2026-11-07T14:40:54.386Z"
+    },
+    {
+      "id": "pay-105",
+      "attemptRef": "PAY-RVQ-1405-1003-105",
+      "orderId": "ord-1003-faela",
+      "orderNumber": "RVQ-1405-1003",
+      "userId": "customer-sara-uid",
+      "amount": 2330000,
+      "status": "SUCCEEDED",
+      "isSimulatedDemo": true,
+      "createdAt": "2026-11-07T14:38:57.823Z",
+      "updatedAt": "2026-11-07T14:38:58.356Z",
+      "expiresAt": "2026-11-07T14:53:57.823Z",
+      "completedAt": "2026-11-07T14:38:58.356Z"
+    },
+    {
+      "id": "pay-104",
+      "attemptRef": "PAY-RVQ-1003-104",
+      "orderId": "ord-1003-faela",
+      "orderNumber": "RVQ-1405-1003",
+      "userId": "customer-sara-uid",
+      "amount": 2330000,
+      "status": "FAILED",
+      "isSimulatedDemo": true,
+      "createdAt": "2026-11-07T14:38:56.723Z",
+      "updatedAt": "2026-11-07T14:38:57.275Z",
+      "expiresAt": "2026-11-07T14:53:56.723Z",
+      "failureReason": "تراکنش آزمایشی توسط شبیه‌ساز ناموفق اعلام شد.",
+      "completedAt": "2026-11-07T14:38:57.275Z"
+    },
+    {
+      "id": "pay-103",
+      "attemptRef": "PAY-RVQ-1405-1002-103",
+      "orderId": "ord-1002-lp6tx",
+      "orderNumber": "RVQ-1405-1002",
+      "userId": "customer-sara-uid",
+      "amount": 2330000,
+      "status": "SUCCEEDED",
+      "isSimulatedDemo": true,
+      "createdAt": "2026-11-07T14:31:53.357Z",
+      "updatedAt": "2026-11-07T14:31:53.890Z",
+      "expiresAt": "2026-11-07T14:46:53.357Z",
+      "completedAt": "2026-11-07T14:31:53.890Z"
+    },
+    {
+      "id": "pay-102",
+      "attemptRef": "PAY-RVQ-1002-102",
+      "orderId": "ord-1002-lp6tx",
+      "orderNumber": "RVQ-1405-1002",
+      "userId": "customer-sara-uid",
+      "amount": 2330000,
+      "status": "FAILED",
+      "isSimulatedDemo": true,
+      "createdAt": "2026-11-07T14:31:52.274Z",
+      "updatedAt": "2026-11-07T14:31:52.825Z",
+      "expiresAt": "2026-11-07T14:46:52.274Z",
+      "failureReason": "تراکنش آزمایشی توسط شبیه‌ساز ناموفق اعلام شد.",
+      "completedAt": "2026-11-07T14:31:52.825Z"
+    },
+    {
+      "id": "pay-101",
+      "attemptRef": "PAY-RVQ-1001-101",
+      "orderId": "ord-1001-8ktuk",
+      "orderNumber": "RVQ-1405-1001",
+      "userId": "customer-sara-uid",
+      "amount": 2330000,
+      "status": "PENDING",
+      "isSimulatedDemo": true,
+      "createdAt": "2026-11-07T14:29:56.064Z",
+      "updatedAt": "2026-11-07T14:29:56.064Z",
+      "expiresAt": "2026-11-07T14:44:56.064Z"
+    }
+  ],
+  "orderStatusHistory": [
+    {
+      "id": "hist-13",
+      "orderId": "ord-1004-8l05g",
+      "status": "PAID",
+      "paymentStatus": "SUCCEEDED",
+      "note": "پرداخت آزمایشی با مرجع PAY-RVQ-1405-1004-107 با موفقیت تأیید و موجودی انبار کسر شد.",
+      "actor": "payment-simulator",
+      "createdAt": "2026-11-07T14:40:55.250Z"
+    },
+    {
+      "id": "hist-12",
+      "orderId": "ord-1004-8l05g",
+      "userId": "customer-sara-uid",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "PENDING",
+      "note": "تلاش پرداخت مجدد (PAY-RVQ-1405-1004-107) ایجاد شد.",
+      "actor": "customer",
+      "createdAt": "2026-11-07T14:40:54.817Z"
+    },
+    {
+      "id": "hist-11",
+      "orderId": "ord-1004-8l05g",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "FAILED",
+      "note": "تراکنش آزمایشی توسط شبیه‌ساز ناموفق اعلام شد.",
+      "actor": "payment-simulator",
+      "createdAt": "2026-11-07T14:40:54.386Z"
+    },
+    {
+      "id": "hist-10",
+      "orderId": "ord-1004-8l05g",
+      "userId": "customer-sara-uid",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "PENDING",
+      "note": "سفارش ثبت شد و در انتظار پرداخت آزمایشی است.",
+      "actor": "customer-sara-uid",
+      "createdAt": "2026-11-07T14:40:53.934Z"
+    },
+    {
+      "id": "hist-9",
+      "orderId": "ord-1003-faela",
+      "status": "PAID",
+      "paymentStatus": "SUCCEEDED",
+      "note": "پرداخت آزمایشی با مرجع PAY-RVQ-1405-1003-105 با موفقیت تأیید و موجودی انبار کسر شد.",
+      "actor": "payment-simulator",
+      "createdAt": "2026-11-07T14:38:58.356Z"
+    },
+    {
+      "id": "hist-8",
+      "orderId": "ord-1003-faela",
+      "userId": "customer-sara-uid",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "PENDING",
+      "note": "تلاش پرداخت مجدد (PAY-RVQ-1405-1003-105) ایجاد شد.",
+      "actor": "customer",
+      "createdAt": "2026-11-07T14:38:57.823Z"
+    },
+    {
+      "id": "hist-7",
+      "orderId": "ord-1003-faela",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "FAILED",
+      "note": "تراکنش آزمایشی توسط شبیه‌ساز ناموفق اعلام شد.",
+      "actor": "payment-simulator",
+      "createdAt": "2026-11-07T14:38:57.275Z"
+    },
+    {
+      "id": "hist-6",
+      "orderId": "ord-1003-faela",
+      "userId": "customer-sara-uid",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "PENDING",
+      "note": "سفارش ثبت شد و در انتظار پرداخت آزمایشی است.",
+      "actor": "customer-sara-uid",
+      "createdAt": "2026-11-07T14:38:56.723Z"
+    },
+    {
+      "id": "hist-5",
+      "orderId": "ord-1002-lp6tx",
+      "status": "PAID",
+      "paymentStatus": "SUCCEEDED",
+      "note": "پرداخت آزمایشی با مرجع PAY-RVQ-1405-1002-103 با موفقیت تأیید و موجودی انبار کسر شد.",
+      "actor": "payment-simulator",
+      "createdAt": "2026-11-07T14:31:53.890Z"
+    },
+    {
+      "id": "hist-4",
+      "orderId": "ord-1002-lp6tx",
+      "userId": "customer-sara-uid",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "PENDING",
+      "note": "تلاش پرداخت مجدد (PAY-RVQ-1405-1002-103) ایجاد شد.",
+      "actor": "customer",
+      "createdAt": "2026-11-07T14:31:53.357Z"
+    },
+    {
+      "id": "hist-3",
+      "orderId": "ord-1002-lp6tx",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "FAILED",
+      "note": "تراکنش آزمایشی توسط شبیه‌ساز ناموفق اعلام شد.",
+      "actor": "payment-simulator",
+      "createdAt": "2026-11-07T14:31:52.825Z"
+    },
+    {
+      "id": "hist-2",
+      "orderId": "ord-1002-lp6tx",
+      "userId": "customer-sara-uid",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "PENDING",
+      "note": "سفارش ثبت شد و در انتظار پرداخت آزمایشی است.",
+      "actor": "customer-sara-uid",
+      "createdAt": "2026-11-07T14:31:52.274Z"
+    },
+    {
+      "id": "hist-1",
+      "orderId": "ord-1001-8ktuk",
+      "userId": "customer-sara-uid",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "PENDING",
+      "note": "سفارش ثبت شد و در انتظار پرداخت آزمایشی است.",
+      "actor": "customer-sara-uid",
+      "createdAt": "2026-11-07T14:29:56.064Z"
+    }
+  ],
+  "inventoryMovements": [
+    {
+      "id": "inv-9-rxf",
+      "productId": "prod-herbal-infusion",
+      "productName": "دمنوش گیاهی منتخب",
+      "variantId": "RVQ-SAF-002-120",
+      "variantLabel": "قوطی استوانه‌ای ۱۲۰ گرم",
+      "sku": "RVQ-SAF-002-120G",
+      "delta": -2,
+      "previousStock": 20,
+      "newStock": 18,
+      "reason": "BUNDLE_COMPONENT_PAID",
+      "referenceId": "RVQ-1405-1004 (جعبه هدیه زعفران)",
+      "createdAt": "2026-11-07T14:40:55.250Z"
+    },
+    {
+      "id": "inv-8-7w7",
+      "productId": "prod-saffron",
+      "productName": "زعفران",
+      "variantId": "RVQ-SAF-001-1M",
+      "variantLabel": "یک مثقال (۴.۶ گرم) در جعبه کادویی",
+      "sku": "RVQ-SAF-001-4.6G",
+      "delta": -2,
+      "previousStock": 14,
+      "newStock": 12,
+      "reason": "BUNDLE_COMPONENT_PAID",
+      "referenceId": "RVQ-1405-1004 (جعبه هدیه زعفران)",
+      "createdAt": "2026-11-07T14:40:55.250Z"
+    },
+    {
+      "id": "inv-7-qq7",
+      "productId": "prod-gift-saffron",
+      "productName": "جعبه هدیه زعفران",
+      "variantId": "RVQ-GFT-003-STD",
+      "variantLabel": "جعبه یک مثقال زعفران و دمنوش",
+      "sku": "RVQ-GFT-003-STD",
+      "delta": -2,
+      "previousStock": 12,
+      "newStock": 10,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1004",
+      "createdAt": "2026-11-07T14:40:55.250Z"
+    },
+    {
+      "id": "inv-6-kpe",
+      "productId": "prod-herbal-infusion",
+      "productName": "دمنوش گیاهی منتخب",
+      "variantId": "RVQ-SAF-002-120",
+      "variantLabel": "قوطی استوانه‌ای ۱۲۰ گرم",
+      "sku": "RVQ-SAF-002-120G",
+      "delta": -2,
+      "previousStock": 22,
+      "newStock": 20,
+      "reason": "BUNDLE_COMPONENT_PAID",
+      "referenceId": "RVQ-1405-1003 (جعبه هدیه زعفران)",
+      "createdAt": "2026-11-07T14:38:58.356Z"
+    },
+    {
+      "id": "inv-5-a80",
+      "productId": "prod-saffron",
+      "productName": "زعفران",
+      "variantId": "RVQ-SAF-001-1M",
+      "variantLabel": "یک مثقال (۴.۶ گرم) در جعبه کادویی",
+      "sku": "RVQ-SAF-001-4.6G",
+      "delta": -2,
+      "previousStock": 16,
+      "newStock": 14,
+      "reason": "BUNDLE_COMPONENT_PAID",
+      "referenceId": "RVQ-1405-1003 (جعبه هدیه زعفران)",
+      "createdAt": "2026-11-07T14:38:58.356Z"
+    },
+    {
+      "id": "inv-4-e8s",
+      "productId": "prod-gift-saffron",
+      "productName": "جعبه هدیه زعفران",
+      "variantId": "RVQ-GFT-003-STD",
+      "variantLabel": "جعبه یک مثقال زعفران و دمنوش",
+      "sku": "RVQ-GFT-003-STD",
+      "delta": -2,
+      "previousStock": 14,
+      "newStock": 12,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1003",
+      "createdAt": "2026-11-07T14:38:58.356Z"
+    },
+    {
+      "id": "inv-3-3ti",
+      "productId": "prod-herbal-infusion",
+      "productName": "دمنوش گیاهی منتخب",
+      "variantId": "RVQ-SAF-002-120",
+      "variantLabel": "قوطی استوانه‌ای ۱۲۰ گرم",
+      "sku": "RVQ-SAF-002-120G",
+      "delta": -2,
+      "previousStock": 24,
+      "newStock": 22,
+      "reason": "BUNDLE_COMPONENT_PAID",
+      "referenceId": "RVQ-1405-1002 (جعبه هدیه زعفران)",
+      "createdAt": "2026-11-07T14:31:53.890Z"
+    },
+    {
+      "id": "inv-2-6cm",
+      "productId": "prod-saffron",
+      "productName": "زعفران",
+      "variantId": "RVQ-SAF-001-1M",
+      "variantLabel": "یک مثقال (۴.۶ گرم) در جعبه کادویی",
+      "sku": "RVQ-SAF-001-4.6G",
+      "delta": -2,
+      "previousStock": 18,
+      "newStock": 16,
+      "reason": "BUNDLE_COMPONENT_PAID",
+      "referenceId": "RVQ-1405-1002 (جعبه هدیه زعفران)",
+      "createdAt": "2026-11-07T14:31:53.890Z"
+    },
+    {
+      "id": "inv-1-8kk",
+      "productId": "prod-gift-saffron",
+      "productName": "جعبه هدیه زعفران",
+      "variantId": "RVQ-GFT-003-STD",
+      "variantLabel": "جعبه یک مثقال زعفران و دمنوش",
+      "sku": "RVQ-GFT-003-STD",
+      "delta": -2,
+      "previousStock": 16,
+      "newStock": 14,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1002",
+      "createdAt": "2026-11-07T14:31:53.890Z"
+    }
+  ],
   "users": [
     {
       "id": "usr-admin-seed",
       "uid": "admin-demo-uid",
-      "email": "fawti.tiri2@gmail.com",
-      "displayName": "مدیر فروشگاه رواق (آزمایشی)",
+      "email": "admin@ravaq.ir",
+      "displayName": "مدیر آزمایشی رواق",
       "mobile": "09120000000",
+      "passwordHash": "089642e365c56b017f9ecc43a7e90460e8c625e7fabaa88272b4f659d51f92e5b7963a94f9102b8ed5e06911ff90f29c5a8b09c2c4767bda0f97979d0da4c905",
       "role": "ADMIN",
       "createdAt": "2026-10-01T08:00:00.000Z",
-      "updatedAt": "2026-10-01T08:00:00.000Z",
-      "passwordHash": "a07ddd46d8529eb41c34768a675c1c8ba813cea98ba19ece06ec29b9231bb6666657cfc26bf1ac4d5b67979f68a7bfe78d0f64b97cc3fe7bb1796528372d4af0"
+      "updatedAt": "2026-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "usr-customer-seed",
+      "uid": "customer-sara-uid",
+      "email": "sara@example.com",
+      "displayName": "سارا احمدی",
+      "mobile": "09123456789",
+      "passwordHash": "633dab0c84201d01c9e9b939eeee2a7b04cb00bec537d01a6684efd59464f9e30c024b46e00d88b3ca2eee57a6f7956e607c450bd6c67961e263ed057768f219",
+      "role": "CUSTOMER",
+      "createdAt": "2026-10-01T08:00:00.000Z",
+      "updatedAt": "2026-10-01T08:00:00.000Z"
     }
   ],
-  "addresses": [],
+  "addresses": [
+    {
+      "id": "addr-sara-default",
+      "userId": "customer-sara-uid",
+      "recipientName": "سارا احمدی",
+      "mobile": "09123456789",
+      "province": "تهران",
+      "city": "تهران",
+      "postalCode": "1234567890",
+      "addressLine": "تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳",
+      "isDefault": true,
+      "createdAt": "2026-10-01T08:00:00.000Z",
+      "updatedAt": "2026-10-01T08:00:00.000Z"
+    }
+  ],
   "reviews": [
     {
       "id": "rev-1",

@@ -60,15 +60,34 @@ async function tryLocalExpressJson<T>(
 }
 
 export async function apiBootstrap() {
+  const localRes = await tryLocalExpressJson<any>('/api/bootstrap');
+  if (localRes && localRes.ok && localRes.data?.products) {
+    return localRes.data;
+  }
   return firestoreBootstrap();
 }
 
-export async function apiValidateCart(params: {
-  items: CartItemInput[];
-  couponCode?: string;
-  deliveryMethod?: 'STANDARD' | 'EXPRESS_TEHRAN';
-  customerMobile?: string;
-}) {
+export async function apiValidateCart(
+  params: {
+    items: CartItemInput[];
+    couponCode?: string;
+    deliveryMethod?: 'STANDARD' | 'EXPRESS_TEHRAN';
+    customerMobile?: string;
+  },
+  authToken?: string | null
+) {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (authToken) {
+    headers.Authorization = `Bearer ${authToken}`;
+  }
+  const localRes = await tryLocalExpressJson<any>('/api/cart/validate', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(params),
+  });
+  if (localRes && localRes.ok) {
+    return localRes.data;
+  }
   return firestoreValidateCart(params);
 }
 
@@ -145,10 +164,6 @@ export async function apiRetryPaymentAttempt(orderNumber: string) {
 }
 
 export async function apiTrackOrder(orderNumber: string, customerMobile: string) {
-  const fsRes = await firestoreTrackOrder(orderNumber, customerMobile).catch(() => null);
-  if (fsRes && fsRes.found) {
-    return fsRes;
-  }
   const localRes = await tryLocalExpressJson<any>('/api/orders/track', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -157,7 +172,12 @@ export async function apiTrackOrder(orderNumber: string, customerMobile: string)
   if (localRes && localRes.data?.found) {
     return localRes.data;
   }
+  const fsRes = await firestoreTrackOrder(orderNumber, customerMobile).catch(() => null);
+  if (fsRes && fsRes.found) {
+    return fsRes;
+  }
   return (
+    localRes?.data ||
     fsRes || {
       found: false,
       error: 'سفارشی با این شماره سفارش و شماره موبایل یافت نشد.',
@@ -183,6 +203,31 @@ export async function apiGoogleLogin() {
 
 export async function apiEmailLogin(email: string, password: string) {
   const cleanEmail = String(email || '').trim().toLowerCase();
+
+  // Check local Express backend first so seeded demo accounts (admin@ravaq.ir / sara@example.com)
+  // authenticate directly without triggering unnecessary Firebase Auth console errors
+  const localRes = await tryLocalExpressJson<any>('/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: cleanEmail, password }),
+  });
+  if (localRes) {
+    if (localRes.ok && localRes.data?.user) {
+      return {
+        user: localRes.data.user,
+        token: localRes.data.token as string,
+      };
+    }
+    if (
+      cleanEmail === 'admin@ravaq.ir' ||
+      cleanEmail === 'sara@example.com'
+    ) {
+      throw new Error(
+        localRes.data?.error || 'ایمیل یا رمز عبور حساب آزمایشی نادرست است.'
+      );
+    }
+  }
+
   try {
     const cred = await signInWithEmailAndPassword(auth, cleanEmail, password);
     const synced = await syncFirebaseUserToFirestore(cred.user);
@@ -198,25 +243,12 @@ export async function apiEmailLogin(email: string, password: string) {
       token: null,
     };
   } catch (fbErr: any) {
-    // If running in local Node dev server, check local Express auth
-    const localRes = await tryLocalExpressJson<any>('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: cleanEmail, password }),
-    });
-    if (localRes && localRes.ok && localRes.data?.user) {
-      return {
-        user: localRes.data.user,
-        token: localRes.data.token as string,
-      };
-    }
-
     if (
       fbErr?.code === 'auth/operation-not-allowed' ||
       fbErr?.code === 'auth/configuration-not-found'
     ) {
       throw new Error(
-        `ورود با ایمیل/رمز عبور در کنسول Firebase فعال نشده است. لطفاً از دکمه «ورود با حساب گوگل (Firebase Auth)» استفاده کنید (مدیر پروژه: ${AUTHORIZED_ADMIN_EMAIL}).`
+        `ورود با ایمیل/رمز عبور در کنسول Firebase فعال نشده است. لطفاً از حساب‌های آزمایشی نمونه (${AUTHORIZED_ADMIN_EMAIL} یا sara@example.com) استفاده کنید.`
       );
     }
     throw new Error('ایمیل یا رمز عبور واردشده نادرست است یا حساب کاربری یافت نشد.');

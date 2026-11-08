@@ -66,15 +66,39 @@ export function createInitialDatabaseState(): DatabaseState {
       {
         id: 'usr-admin-seed',
         uid: 'admin-demo-uid',
-        email: 'fawti.tiri2@gmail.com',
-        displayName: 'مدیر فروشگاه رواق (آزمایشی)',
+        email: 'admin@ravaq.ir',
+        displayName: 'مدیر آزمایشی رواق',
         mobile: '09120000000',
         role: 'ADMIN',
         createdAt: '2026-10-01T08:00:00.000Z',
         updatedAt: '2026-10-01T08:00:00.000Z',
       },
+      {
+        id: 'usr-customer-seed',
+        uid: 'customer-sara-uid',
+        email: 'sara@example.com',
+        displayName: 'سارا احمدی',
+        mobile: '09123456789',
+        role: 'CUSTOMER',
+        createdAt: '2026-10-01T08:00:00.000Z',
+        updatedAt: '2026-10-01T08:00:00.000Z',
+      },
     ],
-    addresses: [],
+    addresses: [
+      {
+        id: 'addr-sara-default',
+        userId: 'customer-sara-uid',
+        recipientName: 'سارا احمدی',
+        mobile: '09123456789',
+        province: 'تهران',
+        city: 'تهران',
+        postalCode: '1234567890',
+        addressLine: 'تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳',
+        isDefault: true,
+        createdAt: '2026-10-01T08:00:00.000Z',
+        updatedAt: '2026-10-01T08:00:00.000Z',
+      },
+    ],
     reviews: structuredClone(INITIAL_REVIEWS),
     newsletterSubscriptions: [],
     settings: structuredClone(INITIAL_STORE_SETTINGS),
@@ -265,27 +289,27 @@ export function validateCouponForItems(
     }
   }
 
-  if (subtotal < coupon.minOrderAmount) {
-    return {
-      valid: false,
-      discountAmount: 0,
-      error: `حداقل مبلغ سفارش برای استفاده از این کد ${coupon.minOrderAmount.toLocaleString('fa-IR')} تومان است.`,
-    };
-  }
-
   let eligibleSubtotal = subtotal;
   if (coupon.categorySlugRestriction) {
     eligibleSubtotal = items
-      .filter((item) => item.categorySlug === coupon.categorySlugRestriction)
+      .filter((item) => item.categorySlug === coupon.categorySlugRestriction && !item.unavailable)
       .reduce((sum, item) => sum + item.lineTotal, 0);
 
     if (eligibleSubtotal <= 0) {
       return {
         valid: false,
         discountAmount: 0,
-        error: 'این کد تخفیف تنها برای دسته‌بندی مشخص‌شده قابل استفاده است.',
+        error: 'این کد تخفیف تنها برای دسته‌بندی مشخص‌شده (جعبه‌های هدیه) قابل استفاده است.',
       };
     }
+  }
+
+  if (subtotal < coupon.minOrderAmount || eligibleSubtotal < coupon.minOrderAmount) {
+    return {
+      valid: false,
+      discountAmount: 0,
+      error: `حداقل مبلغ سفارش برای استفاده از این کد ${coupon.minOrderAmount.toLocaleString('fa-IR')} تومان است.`,
+    };
   }
 
   let rawDiscount =

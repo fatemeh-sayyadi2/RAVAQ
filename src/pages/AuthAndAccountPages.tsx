@@ -79,6 +79,27 @@ export const AuthPage: React.FC<AuthPageProps> = ({
     }
   };
 
+  const handleDemoQuickLogin = async (demoEmail: string, demoPass: string) => {
+    setError('');
+    setInfoMsg('');
+    setEmail(demoEmail);
+    setPassword(demoPass);
+    setLoading(true);
+    try {
+      const { user, token } = await apiEmailLogin(demoEmail, demoPass);
+      onAuthSuccess(user, token);
+      if (redirectTo) {
+        onNavigate(redirectTo);
+      } else {
+        onNavigate(user.role === 'ADMIN' ? '/admin' : '/account');
+      }
+    } catch (err: any) {
+      setError(err?.message || 'خطا در ورود با حساب آزمایشی.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -168,19 +189,64 @@ export const AuthPage: React.FC<AuthPageProps> = ({
           </div>
         )}
 
+        {mode === 'login' && (
+          <div className="bg-[#F8F4EC] border border-[#E4DCCF] rounded-xl p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-[#4C202B] flex items-center gap-1.5">
+                <KeyRound className="w-3.5 h-3.5 text-[#742E3A]" />
+                <span>حساب‌های آزمایشی (DEMO / TEST ACCOUNTS)</span>
+              </span>
+              <span className="text-[10px] font-mono text-[#77716A]">TEST ONLY</span>
+            </div>
+            <p className="text-[11px] text-[#77716A] leading-relaxed">
+              برای تست سریع فرآیند خرید، نشانی پیش‌فرض و پنل مدیریت، با یک کلیک وارد یکی از حساب‌های آزمایشی زیر شوید:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <button
+                type="button"
+                data-testid="demo-login-customer"
+                disabled={loading}
+                onClick={() => handleDemoQuickLogin('sara@example.com', 'Customer1405!')}
+                className="p-2.5 rounded-lg bg-[#FFFFFF] border border-[#E4DCCF] hover:border-[#2D8C88] text-right transition-colors cursor-pointer space-y-1"
+              >
+                <div className="text-xs font-bold text-[#2D8C88]">ورود سریع مشتری (CUSTOMER)</div>
+                <div dir="ltr" className="text-[11px] font-mono text-[#292624] truncate">
+                  sara@example.com
+                </div>
+                <div dir="ltr" className="text-[10px] font-mono text-[#77716A]">
+                  Pass: Customer1405!
+                </div>
+              </button>
+
+              <button
+                type="button"
+                data-testid="demo-login-admin"
+                disabled={loading}
+                onClick={() => handleDemoQuickLogin(AUTHORIZED_ADMIN_EMAIL, 'Admin1405!Ravaq')}
+                className="p-2.5 rounded-lg bg-[#FFFFFF] border border-[#E4DCCF] hover:border-[#742E3A] text-right transition-colors cursor-pointer space-y-1"
+              >
+                <div className="text-xs font-bold text-[#742E3A]">ورود سریع مدیر (ADMIN)</div>
+                <div dir="ltr" className="text-[11px] font-mono text-[#292624] truncate">
+                  {AUTHORIZED_ADMIN_EMAIL}
+                </div>
+                <div dir="ltr" className="text-[10px] font-mono text-[#77716A]">
+                  Pass: Admin1405!Ravaq
+                </div>
+              </button>
+            </div>
+          </div>
+        )}
+
         {(mode === 'login' || mode === 'register') && (
-          <div className="space-y-2.5">
+          <div className="space-y-2">
             <button
               type="button"
               onClick={handleGoogleLogin}
               disabled={loading}
               className="w-full py-2.5 px-4 bg-[#F8F4EC] border border-[#E4DCCF] rounded-lg text-xs font-bold text-[#292624] hover:border-[#742E3A] transition-colors cursor-pointer"
             >
-              ورود امن با حساب گوگل (Firebase Authentication)
+              ورود با حساب گوگل (Firebase Authentication)
             </button>
-            <p className="text-[11px] text-[#77716A] text-center">
-              حساب مدیر تاییدشده پروژه: <span dir="ltr" className="font-mono">{AUTHORIZED_ADMIN_EMAIL}</span>
-            </p>
           </div>
         )}
 
