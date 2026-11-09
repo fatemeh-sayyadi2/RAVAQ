@@ -478,6 +478,7 @@ const CATALOG_PRIMARY_IMAGE_BY_SLUG: Record<string, string> = {
   'traditional-koloocheh': '/catalog/RAVAQ_Images/19_fuman-cookies-koloocheh.jpg',
   'mixed-nuts': '/catalog/RAVAQ_Images/20_mixed-nuts.jpg',
   'hospitality-nuts': '/catalog/RAVAQ_Images/21_persian-celebration-nuts.jpg',
+  'masghati': '/catalog/RAVAQ_Images/23_masghati.jpg',
 };
 
 function makeImages(slug: string, name: string, illustrationKey: string): ProductImage[] {

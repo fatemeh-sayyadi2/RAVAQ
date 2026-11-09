@@ -65,6 +65,23 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
   const [productCatFilter, setProductCatFilter] = useState('all');
   const [orderSearch, setOrderSearch] = useState('');
   const [orderStatusFilter, setOrderStatusFilter] = useState('all');
+  const ORDER_STATUS_PERSIAN: Record<string, string> = {
+  PROCESSING: 'در حال پردازش',
+  SHIPPED: 'ارسال‌شده',
+  DELIVERED: 'تحویل‌شده',
+  CANCELLED: 'لغوشده',
+  PENDING_PAYMENT: 'در انتظار پرداخت',
+};
+
+const PAYMENT_STATUS_PERSIAN: Record<string, string> = {
+  PAID: 'پرداخت‌شده',
+  SUCCEEDED: 'موفق',
+  PENDING: 'در انتظار پرداخت',
+  PENDING_PAYMENT: 'در انتظار پرداخت',
+  FAILED: 'ناموفق',
+  EXPIRED: 'منقضی‌شده',
+  REFUNDED: 'بازپرداخت‌شده',
+};
 
   // New Product form
   const [newProdName, setNewProdName] = useState('');
@@ -437,8 +454,8 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                           <tr key={ord.id}>
                             <td className="py-3 font-mono font-bold">{ord.orderNumber}</td>
                             <td className="py-3">{ord.customerName}</td>
-                            <td className="py-3">{ord.status}</td>
-                            <td className="py-3">{ord.paymentStatus}</td>
+                            <td className="py-3">{ORDER_STATUS_PERSIAN[ord.status] || ord.status}</td>
+                            <td className="py-3">{PAYMENT_STATUS_PERSIAN[ord.paymentStatus] || ord.paymentStatus}</td>
                             <td className="py-3 tabular-nums font-bold">
                               {formatToman(ord.totalAmount)}
                             </td>
@@ -752,11 +769,12 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                     className="px-3 py-1.5 text-xs bg-[#F8F4EC] border border-[#E4DCCF] rounded-lg"
                   >
                     <option value="all">همه وضعیت‌ها</option>
-                    <option value="PENDING_PAYMENT">PENDING_PAYMENT</option>
-                    <option value="PAID">PAID</option>
-                    <option value="PROCESSING">PROCESSING</option>
-                    <option value="SHIPPED">SHIPPED</option>
-                    <option value="DELIVERED">DELIVERED</option>
+                    <option value="PENDING_PAYMENT">{ORDER_STATUS_PERSIAN.PENDING_PAYMENT}</option>
+                    <option value="PAID">{PAYMENT_STATUS_PERSIAN.PAID}</option>
+                    <option value="PROCESSING">{ORDER_STATUS_PERSIAN.PROCESSING}</option>
+                    <option value="SHIPPED">{ORDER_STATUS_PERSIAN.SHIPPED}</option>
+                    <option value="DELIVERED">{ORDER_STATUS_PERSIAN.DELIVERED}</option>
+                    <option value="CANCELLED">{ORDER_STATUS_PERSIAN.CANCELLED}</option>
                   </select>
                 </div>
               </div>
@@ -797,17 +815,17 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                         </div>
 
                         <div className="text-[#77716A]">
-                          نشانی Snapshot: {ord.province}، {ord.city}، {ord.addressLine} — کد پستی:{' '}
+                          نشانی ثبت‌شده هنگام سفارش: {ord.province}، {ord.city}، {ord.addressLine} — کد پستی:{' '}
                           {toPersianDigits(ord.postalCode)}
                         </div>
 
                         <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
                           <div>
-                            <span>وضعیت فعلی: </span>
-                            <strong className="text-[#292624]">{ord.status}</strong>
+                            <span>وضعیت فعلی سفارش: </span>
+                            <strong className="text-[#292624]">{ORDER_STATUS_PERSIAN[ord.status] || ord.status}</strong>
                             <span className="mx-2">·</span>
-                            <span>پرداخت: </span>
-                            <strong className="text-[#2D8C88]">{ord.paymentStatus}</strong>
+                            <span>وضعیت پرداخت: </span>
+                            <strong className="text-[#2D8C88]">{PAYMENT_STATUS_PERSIAN[ord.paymentStatus] || ord.paymentStatus}</strong>
                           </div>
 
                           <div className="flex flex-wrap items-center gap-1.5">
@@ -829,7 +847,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({
                                     : 'bg-[#FFFFFF] text-[#292624] border border-[#E4DCCF] hover:border-[#742E3A]'
                                 }`}
                               >
-                                {st}
+                                {ORDER_STATUS_PERSIAN[st] || st}
                               </button>
                             ))}
                           </div>
