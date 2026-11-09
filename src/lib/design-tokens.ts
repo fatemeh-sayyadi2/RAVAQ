@@ -111,7 +111,7 @@ export const HOMEPAGE_CATEGORY_SHOWCASE: CategoryShowcaseItemConfig[] = [
     shortDescription: 'زعفران خوش‌عطر، دمنوش‌های گیاهی منتخب و بسته‌های ترکیبی پذیرایی ایرانی',
     routePath: '/category/saffron-select-foods',
     illustrationKey: 'saffron',
-    imagePath: '/assets/products/saffron-jar-ravaq.jpg',
+    imagePath: '/catalog/RAVAQ_Images/22_saffron-select-foods.jpg',
     accentHex: '#742E3A',
     kicker: '۵ ترکیب معطر',
   },

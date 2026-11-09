@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import { HERO_MEDIA_MANIFEST } from '../../lib/design-tokens.ts';
 import { RavaqLuxuryGiftBox3D } from '../RavaqVisuals.tsx';
@@ -8,6 +8,10 @@ interface HeroMediaProps {
   desktopSrcOverride?: string;
   /** Optional custom mobile render source override */
   mobileSrcOverride?: string;
+  /** Optional custom desktop video source override */
+  desktopVideoSrcOverride?: string;
+  /** Optional custom mobile/shared video source override */
+  mobileVideoSrcOverride?: string;
 }
 
 function resolvePublicAssetPath(rawPath: string | null | undefined): string | null {
@@ -27,16 +31,26 @@ function resolvePublicAssetPath(rawPath: string | null | undefined): string | nu
 
 /**
  * HeroMedia Component
- * Renders the full-viewport RAVĀQ studio photograph (/assets/hero/ravaq-hero-desktop.jpg)
- * with responsive <picture> support, smooth motion entrance, scroll parallax,
- * and an architectural boutique stage fallback.
+ * Renders a premium cinematic hero experience that smoothly crossfades between
+ * the supplied RAVĀQ hero video (ravaq-hero.mp4 / ravaq-hero-desktop.mp4) and
+ * the static hero image (ravaq-hero-desktop.jpg), looping continuously.
+ *
+ * - Video and static image alternate with an elegant crossfade transition.
+ * * The static image carries a subtle cinematic scale motion (gentle zoom).
+ * - Video stays muted, autoplay, loop, playsInline.
+ * - Respects prefers-reduced-motion (static image, no crossfade, no scale).
+ * - Falls back to the architectural boutique SVG when neither asset is available.
+ * - All original Hero layout, content, typography, overlays, and interactions preserved.
  */
 export const HeroMedia: React.FC<HeroMediaProps> = ({
   desktopSrcOverride,
   mobileSrcOverride,
+  desktopVideoSrcOverride,
+  mobileVideoSrcOverride,
 }) => {
   const prefersReducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   // Restrained environmental scroll parallax (compositor-only transform: translateY)
   const bgArchParallaxY = useTransform(
@@ -53,14 +67,29 @@ export const HeroMedia: React.FC<HeroMediaProps> = ({
   const [verifiedHero, setVerifiedHero] = useState<{
     desktopImage: string | null;
     mobileImage: string | null;
+    desktopVideo: string | null;
+    mobileVideo: string | null;
+    sharedVideo: string | null;
   }>({
     desktopImage: '/assets/hero/ravaq-hero-desktop.jpg',
     mobileImage: '/assets/hero/ravaq-hero-desktop.jpg',
+    desktopVideo: '/assets/hero/ravaq-hero.mp4',
+    mobileVideo: null,
+    sharedVideo: '/assets/hero/ravaq-hero.mp4',
   });
 
-  const [desktopAssetLoaded, setDesktopAssetLoaded] = useState(true);
-  const [desktopAssetError, setDesktopAssetError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const [activeMedia, setActiveMedia] = useState<'video' | 'image'>('image');
 
+  // Crossfade timing (milliseconds)
+  const IMAGE_DISPLAY = 6000;   // static image fully visible for 6s
+  const VIDEO_DISPLAY = 8000;   // video fully visible for 8s
+  const CROSSFADE = 1500;       // 1.5s elegant crossfade each way
+
+  // Fetch verified assets from server
   useEffect(() => {
     let active = true;
     fetch('/api/assets/verified')
@@ -71,6 +100,9 @@ export const HeroMedia: React.FC<HeroMediaProps> = ({
             desktopImage: data.hero.desktopImage || prev.desktopImage,
             mobileImage:
               data.hero.mobileImage || data.hero.desktopImage || prev.mobileImage,
+            desktopVideo: data.hero.desktopVideo || prev.desktopVideo,
+            mobileVideo: data.hero.mobileVideo || prev.mobileVideo,
+            sharedVideo: data.hero.sharedVideo || prev.sharedVideo,
           }));
         }
       })
@@ -94,20 +126,121 @@ export const HeroMedia: React.FC<HeroMediaProps> = ({
       mobileSrcOverride || verifiedHero.mobileImage || activeDesktopSrc
     ) || activeDesktopSrc;
 
-  const hasValidRenderedImage =
-    Boolean(activeDesktopSrc) && desktopAssetLoaded && !desktopAssetError;
+  const activeDesktopVideoSrc = resolvePublicAssetPath(
+    desktopVideoSrcOverride ||
+      verifiedHero.desktopVideo ||
+      verifiedHero.sharedVideo ||
+      '/assets/hero/ravaq-hero.mp4'
+  );
+  const activeMobileVideoSrc = resolvePublicAssetPath(
+    mobileVideoSrcOverride ||
+      verifiedHero.mobileVideo ||
+      verifiedHero.sharedVideo ||
+      activeDesktopVideoSrc ||
+      '/assets/hero/ravaq-hero.mp4'
+  );
+  const activeVideoSrc = activeDesktopVideoSrc || activeMobileVideoSrc;
+
+  const canUseVideo = Boolean(activeVideoSrc) && !videoError;
+  const canUseImage = Boolean(activeDesktopSrc) && imageLoaded && !imageError;
+
+  // Load / verify the hero image
+  useEffect(() => {
+    const img = new Image();
+    img.src = activeDesktopSrc;
+    img.onload = () => {
+      setImageLoaded(true);
+      setImageError(false);
+    };
+    img.onerror = () => {
+      setImageError(true);
+      setImageLoaded(false);
+    };
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [activeDesktopSrc]);
+
+  // Reset video state when source changes
+  useEffect(() => {
+    setVideoReady(false);
+    setVideoError(false);
+  }, [activeVideoSrc]);
+
+  // Continuous video ↔ image alternation loop
+  useEffect(() => {
+    if (prefersReducedMotion || !canUseVideo || !canUseImage) return;
+
+    let timer: ReturnType<typeof setTimeout>;
+
+    const switchToVideo = () => {
+      setActiveMedia('video');
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play().catch(() => {
+          // Autoplay may be blocked; poster/image remains visible.
+        });
+      }
+      timer = setTimeout(switchToImage, CROSSFADE + VIDEO_DISPLAY);
+    };
+
+    const switchToImage = () => {
+      setActiveMedia('image');
+      timer = setTimeout(switchToVideo, CROSSFADE + IMAGE_DISPLAY);
+    };
+
+    if (videoReady) {
+      setActiveMedia('video');
+      videoRef.current?.play().catch(() => {});
+      timer = setTimeout(switchToImage, CROSSFADE + VIDEO_DISPLAY);
+    } else {
+      setActiveMedia('image');
+      timer = setTimeout(switchToVideo, CROSSFADE + IMAGE_DISPLAY);
+    }
+
+    return () => clearTimeout(timer);
+  }, [videoReady, canUseVideo, canUseImage, prefersReducedMotion]);
+
+  // Play video when it becomes the active media
+  useEffect(() => {
+    if (activeMedia === 'video' && videoReady && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [activeMedia, videoReady]);
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }}
+      transition={{
+        duration: prefersReducedMotion ? 0 : 0.7,
+        ease: [0.16, 1, 0.3, 1],
+      }}
       className="absolute inset-0 w-full h-full overflow-hidden select-none bg-[#2D131A]"
     >
       {/* ====================================================================
-          1. RESPONSIVE <picture> ARCHITECTURE (16:9 Studio Hero Photograph)
+          1. CINEMATIC HERO MEDIA: VIDEO ↔ STATIC IMAGE CROSSFADE
           ==================================================================== */}
-      {hasValidRenderedImage && activeDesktopSrc && (
+
+      {/* Static image layer — subtle cinematic scale motion */}
+      <motion.div
+        className="absolute inset-0 w-full h-full"
+        animate={{
+          opacity:
+            activeMedia === 'image' && canUseImage
+              ? 1
+              : prefersReducedMotion
+                ? canUseImage
+                  ? 1
+                  : 0
+              : 0,
+        }}
+        transition={{
+          duration: prefersReducedMotion ? 0 : CROSSFADE / 1000,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }}
+      >
         <picture className="block w-full h-full">
           <source
             media={HERO_MEDIA_MANIFEST.desktop.mediaQuery}
@@ -119,35 +252,101 @@ export const HeroMedia: React.FC<HeroMediaProps> = ({
               srcSet={activeMobileSrc}
             />
           )}
-          <img
+          <motion.img
             src={activeDesktopSrc}
             alt={HERO_MEDIA_MANIFEST.desktop.alt}
             referrerPolicy="no-referrer"
+            className="w-full h-full object-cover object-[74%_center] md:object-[center_center]"
+            loading="eager"
+            animate={{
+              scale: prefersReducedMotion ? 1 : [1, 1.03, 1],
+            }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 10,
+              repeat: prefersReducedMotion ? 0 : Infinity,
+              ease: 'easeInOut',
+            }}
             onLoad={() => {
-              setDesktopAssetLoaded(true);
-              setDesktopAssetError(false);
+              setImageLoaded(true);
+              setImageError(false);
             }}
             onError={(e) => {
               const target = e.currentTarget;
               if (!target.src.endsWith('/assets/hero/boutique-hero.jpg')) {
                 target.src = '/assets/hero/boutique-hero.jpg';
-                setDesktopAssetError(false);
-                setDesktopAssetLoaded(true);
+                setImageError(false);
+                setImageLoaded(true);
               } else {
-                setDesktopAssetError(true);
-                setDesktopAssetLoaded(false);
+                setImageError(true);
+                setImageLoaded(false);
               }
             }}
-            className="w-full h-full object-cover object-[74%_center] md:object-[center_center]"
           />
         </picture>
+      </motion.div>
+
+      {/* Video layer */}
+      {canUseVideo && activeVideoSrc && (
+        <motion.video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover object-[74%_center] md:object-[center_center]"
+          animate={{
+            opacity:
+              activeMedia === 'video' && videoReady
+                ? 1
+                : prefersReducedMotion
+                  ? 0
+                  : 0,
+          }}
+          transition={{
+            duration: prefersReducedMotion ? 0 : CROSSFADE / 1000,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={activeDesktopSrc || '/assets/hero/ravaq-hero-poster.jpg'}
+          onLoadedData={() => {
+            setVideoReady(true);
+            setVideoError(false);
+          }}
+          onCanPlay={() => {
+            setVideoReady(true);
+            setVideoError(false);
+          }}
+          onError={() => {
+            setVideoError(true);
+            setVideoReady(false);
+          }}
+          aria-label={HERO_MEDIA_MANIFEST.desktop.alt}
+        >
+          {activeDesktopVideoSrc && (
+            <source
+              media={HERO_MEDIA_MANIFEST.desktop.mediaQuery}
+              src={activeDesktopVideoSrc}
+              type="video/mp4"
+            />
+          )}
+          {activeMobileVideoSrc && (
+            <source
+              media={HERO_MEDIA_MANIFEST.mobile.mediaQuery}
+              src={activeMobileVideoSrc}
+              type="video/mp4"
+            />
+          )}
+          {activeDesktopVideoSrc && (
+            <source src={activeDesktopVideoSrc} type="video/mp4" />
+          )}
+        </motion.video>
       )}
 
       {/* ====================================================================
-          2. CONTINUOUS FULL-VIEWPORT BOUTIQUE ARCHITECTURAL ENVIRONMENT
-             (Fallback when external hero image files are unavailable)
+          2. FALLBACK: continuous full-viewport boutique architectural environment
+             (shown only when neither video nor image is available)
           ==================================================================== */}
-      {!hasValidRenderedImage && (
+      {!canUseVideo && !canUseImage && (
         <div className="relative w-full h-full">
           <motion.div
             style={{ y: bgArchParallaxY }}

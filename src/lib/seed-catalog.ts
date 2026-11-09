@@ -453,11 +453,39 @@ export function resolveVerifiedCategoryAsset(
   return '/assets/products/pistachios-bowl.jpg';
 }
 
+// Authoritative catalog image overrides for the 19 verified RAVĀQ catalog products.
+// Keys are existing product slugs (no product data/IDs/categories changed). Primary image
+// uses the matching catalog asset; detail/packaging/lifestyle preserve existing verified assets.
+const CATALOG_PRIMARY_IMAGE_BY_SLUG: Record<string, string> = {
+  'delicacies-and-handicrafts-gift-box': '/catalog/RAVAQ_Images/01_gourmet-handicraft-gift-box.jpg',
+  'saffron-gift-box': '/catalog/RAVAQ_Images/02_saffron-gift-box.jpg',
+  'iranian-hospitality-pack': '/catalog/RAVAQ_Images/03_iranian-hospitality-set.jpg',
+  'dried-sour-cherry': '/catalog/RAVAQ_Images/04_dried-sour-cherries-albaloo.jpg',
+  'dried-apricot': '/catalog/RAVAQ_Images/05_dried-apricot-halves.jpg',
+  'dried-mulberry': '/catalog/RAVAQ_Images/06_dried-white-mulberries-toot.jpg',
+  'saffron-and-nuts-pairing': '/catalog/RAVAQ_Images/07_saffron-and-nuts-gift-set.jpg',
+  'iranian-decorative-object': '/catalog/RAVAQ_Images/08_architectural-decorative-object.jpg',
+  'barberry': '/catalog/RAVAQ_Images/09_dried-barberries-zereshk.jpg',
+  'ceramic-bowl-and-plate': '/catalog/RAVAQ_Images/10_ceramic-bowl-and-plate.jpg',
+  'raisins': '/catalog/RAVAQ_Images/11_iranian-raisins-kishmish.jpg',
+  'iranian-delicacies-collection': '/catalog/RAVAQ_Images/12_iranian-gourmet-ingredient-collection.jpg',
+  'mixed-dried-fruits': '/catalog/RAVAQ_Images/13_mixed-dried-fruit.jpg',
+  'pistachio-kernel': '/catalog/RAVAQ_Images/14_packaged-pistachio-kernels.jpg',
+  'walnut-kernel': '/catalog/RAVAQ_Images/15_walnut-kernels-ravaq-logo.jpg',
+  'iranian-table-runner': '/catalog/RAVAQ_Images/16_iranian-textile-runner.jpg',
+  'handicraft-gift-set': '/catalog/RAVAQ_Images/17_handicraft-gift-set.jpg',
+  'saffron': '/catalog/RAVAQ_Images/18_premium-iranian-saffron-jar.jpg',
+  'traditional-koloocheh': '/catalog/RAVAQ_Images/19_fuman-cookies-koloocheh.jpg',
+  'mixed-nuts': '/catalog/RAVAQ_Images/20_mixed-nuts.jpg',
+  'hospitality-nuts': '/catalog/RAVAQ_Images/21_persian-celebration-nuts.jpg',
+};
+
 function makeImages(slug: string, name: string, illustrationKey: string): ProductImage[] {
+  const catalogPrimary = CATALOG_PRIMARY_IMAGE_BY_SLUG[slug];
   return [
     {
       id: `${slug}-img-primary`,
-      url: resolveVerifiedCategoryAsset(illustrationKey, 'primary'),
+      url: catalogPrimary || resolveVerifiedCategoryAsset(illustrationKey, 'primary'),
       role: 'primary',
       alt: `تصویر اصلی محصول ${name} در فروشگاه رواق`,
       illustrationKey,
