@@ -189,7 +189,7 @@
       "images": [
         {
           "id": "pistachio-kernel-img-primary",
-          "url": "/assets/products/pistachios-cluster.jpg",
+          "url": "/catalog/RAVAQ_Images/14_packaged-pistachio-kernels.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مغز پسته در فروشگاه رواق",
           "illustrationKey": "pistachio-kernel"
@@ -245,7 +245,7 @@
           "label": "۲۵۰ گرم",
           "weightGrams": 250,
           "price": 295000,
-          "stock": 26
+          "stock": 25
         },
         {
           "id": "RVQ-NUT-003-500",
@@ -415,7 +415,7 @@
       "images": [
         {
           "id": "walnut-kernel-img-primary",
-          "url": "/assets/products/walnuts.jpg",
+          "url": "/catalog/RAVAQ_Images/15_walnut-kernels-ravaq-logo.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مغز گردو در فروشگاه رواق",
           "illustrationKey": "walnut-kernel"
@@ -479,7 +479,7 @@
           "label": "۵۰۰ گرم",
           "weightGrams": 500,
           "price": 614400,
-          "stock": 21
+          "stock": 20
         },
         {
           "id": "RVQ-NUT-006-1000",
@@ -493,7 +493,7 @@
       "images": [
         {
           "id": "mixed-nuts-img-primary",
-          "url": "/assets/products/dried-fruits-nuts.jpg",
+          "url": "/catalog/RAVAQ_Images/20_mixed-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول آجیل مخلوط در فروشگاه رواق",
           "illustrationKey": "mixed-nuts"
@@ -578,7 +578,7 @@
       "images": [
         {
           "id": "hospitality-nuts-img-primary",
-          "url": "/assets/products/dried-fruits-nuts.jpg",
+          "url": "/catalog/RAVAQ_Images/21_persian-celebration-nuts.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول آجیل پذیرایی در فروشگاه رواق",
           "illustrationKey": "hospitality-nuts"
@@ -661,7 +661,7 @@
       "images": [
         {
           "id": "mixed-dried-fruits-img-primary",
-          "url": "/assets/products/dried-fruits-nuts.jpg",
+          "url": "/catalog/RAVAQ_Images/13_mixed-dried-fruit.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول میوه خشک مخلوط در فروشگاه رواق",
           "illustrationKey": "dried-fruit"
@@ -739,7 +739,7 @@
       "images": [
         {
           "id": "dried-apricot-img-primary",
-          "url": "/assets/products/dried-fruits-nuts.jpg",
+          "url": "/catalog/RAVAQ_Images/05_dried-apricot-halves.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول برگه زردآلو در فروشگاه رواق",
           "illustrationKey": "apricot"
@@ -898,7 +898,7 @@
       "images": [
         {
           "id": "raisins-img-primary",
-          "url": "/assets/products/dried-fruits-nuts.jpg",
+          "url": "/catalog/RAVAQ_Images/11_iranian-raisins-kishmish.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول کشمش در فروشگاه رواق",
           "illustrationKey": "raisins"
@@ -976,7 +976,7 @@
       "images": [
         {
           "id": "dried-mulberry-img-primary",
-          "url": "/assets/products/dried-fruits-nuts.jpg",
+          "url": "/catalog/RAVAQ_Images/06_dried-white-mulberries-toot.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول توت خشک در فروشگاه رواق",
           "illustrationKey": "mulberry"
@@ -1048,13 +1048,13 @@
           "label": "۱ کیلوگرم",
           "weightGrams": 1000,
           "price": 610500,
-          "stock": 10
+          "stock": 9
         }
       ],
       "images": [
         {
           "id": "dried-sour-cherry-img-primary",
-          "url": "/assets/products/dried-fruits-nuts.jpg",
+          "url": "/catalog/RAVAQ_Images/04_dried-sour-cherries-albaloo.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول آلبالو خشک در فروشگاه رواق",
           "illustrationKey": "cherry"
@@ -1110,7 +1110,7 @@
           "label": "۲۵۰ گرم",
           "weightGrams": 250,
           "price": 195000,
-          "stock": 24
+          "stock": 23
         },
         {
           "id": "RVQ-NUT-014-500",
@@ -1132,7 +1132,7 @@
       "images": [
         {
           "id": "barberry-img-primary",
-          "url": "/assets/products/dried-fruits-nuts.jpg",
+          "url": "/catalog/RAVAQ_Images/09_dried-barberries-zereshk.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول زرشک در فروشگاه رواق",
           "illustrationKey": "barberry"
@@ -1652,7 +1652,7 @@
           "label": "جعبه بزرگ (۸۵۰ گرم)",
           "weightGrams": 850,
           "price": 390000,
-          "stock": 12
+          "stock": 11
         }
       ],
       "images": [
@@ -1728,7 +1728,7 @@
       "images": [
         {
           "id": "traditional-koloocheh-img-primary",
-          "url": "/assets/products/kolompeh.jpg",
+          "url": "/catalog/RAVAQ_Images/19_fuman-cookies-koloocheh.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول کلوچه سنتی در فروشگاه رواق",
           "illustrationKey": "koloocheh"
@@ -2080,7 +2080,7 @@
           "weightGrams": 5,
           "price": 840000,
           "compareAtPrice": 890000,
-          "stock": 12
+          "stock": 11
         },
         {
           "id": "RVQ-SAF-001-2M",
@@ -2094,7 +2094,7 @@
       "images": [
         {
           "id": "saffron-img-primary",
-          "url": "/assets/products/saffron-jar-ravaq.jpg",
+          "url": "/catalog/RAVAQ_Images/18_premium-iranian-saffron-jar.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول زعفران در فروشگاه رواق",
           "illustrationKey": "saffron"
@@ -2155,7 +2155,7 @@
           "label": "قوطی استوانه‌ای ۱۲۰ گرم",
           "weightGrams": 120,
           "price": 170000,
-          "stock": 18
+          "stock": 17
         },
         {
           "id": "RVQ-SAF-002-250",
@@ -2239,7 +2239,7 @@
       "images": [
         {
           "id": "saffron-and-nuts-pairing-img-primary",
-          "url": "/assets/products/saffron-bowl-jar.jpg",
+          "url": "/catalog/RAVAQ_Images/07_saffron-and-nuts-gift-set.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول ترکیب زعفران و خشکبار در فروشگاه رواق",
           "illustrationKey": "saffron-nuts"
@@ -2305,7 +2305,7 @@
       "images": [
         {
           "id": "iranian-delicacies-collection-img-primary",
-          "url": "/assets/products/saffron-bowl-jar.jpg",
+          "url": "/catalog/RAVAQ_Images/12_iranian-gourmet-ingredient-collection.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مجموعه خوراکی‌های ایرانی در فروشگاه رواق",
           "illustrationKey": "pantry-set"
@@ -2361,13 +2361,13 @@
           "label": "بسته پذیرایی ۴ جزئی",
           "weightGrams": 650,
           "price": 520000,
-          "stock": 18
+          "stock": 17
         }
       ],
       "images": [
         {
           "id": "iranian-hospitality-pack-img-primary",
-          "url": "/assets/products/persian-tea-teapot.jpg",
+          "url": "/catalog/RAVAQ_Images/03_iranian-hospitality-set.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول بسته پذیرایی ایرانی در فروشگاه رواق",
           "illustrationKey": "hospitality-pack"
@@ -2514,7 +2514,7 @@
       "images": [
         {
           "id": "ceramic-bowl-and-plate-img-primary",
-          "url": "/assets/products/handicrafts-trio.jpg",
+          "url": "/catalog/RAVAQ_Images/10_ceramic-bowl-and-plate.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول کاسه یا بشقاب سرامیکی در فروشگاه رواق",
           "illustrationKey": "ceramic-bowl"
@@ -2582,7 +2582,7 @@
       "images": [
         {
           "id": "iranian-table-runner-img-primary",
-          "url": "/assets/products/handicrafts-trio.jpg",
+          "url": "/catalog/RAVAQ_Images/16_iranian-textile-runner.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول رانر یا رومیزی ایرانی در فروشگاه رواق",
           "illustrationKey": "runner"
@@ -2646,7 +2646,7 @@
       "images": [
         {
           "id": "iranian-decorative-object-img-primary",
-          "url": "/assets/products/artisan-objects.jpg",
+          "url": "/catalog/RAVAQ_Images/08_architectural-decorative-object.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول شیء تزئینی ایرانی در فروشگاه رواق",
           "illustrationKey": "arch-decor"
@@ -2707,7 +2707,7 @@
       "images": [
         {
           "id": "handicraft-gift-set-img-primary",
-          "url": "/assets/products/handicrafts-trio.jpg",
+          "url": "/catalog/RAVAQ_Images/17_handicraft-gift-set.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول مجموعه هدیه صنایع‌دستی در فروشگاه رواق",
           "illustrationKey": "craft-set"
@@ -2961,7 +2961,7 @@
           "sku": "RVQ-GFT-003-STD",
           "label": "جعبه یک مثقال زعفران و دمنوش",
           "price": 1290000,
-          "stock": 10
+          "stock": 9
         },
         {
           "id": "RVQ-GFT-003-VIP",
@@ -2974,7 +2974,7 @@
       "images": [
         {
           "id": "saffron-gift-box-img-primary",
-          "url": "/assets/products/gift-box-signature.jpg",
+          "url": "/catalog/RAVAQ_Images/02_saffron-gift-box.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه زعفران در فروشگاه رواق",
           "illustrationKey": "gift-saffron"
@@ -3057,7 +3057,7 @@
       "images": [
         {
           "id": "delicacies-and-handicrafts-gift-box-img-primary",
-          "url": "/assets/products/gift-box-signature.jpg",
+          "url": "/catalog/RAVAQ_Images/01_gourmet-handicraft-gift-box.jpg",
           "role": "primary",
           "alt": "تصویر اصلی محصول جعبه هدیه خوراکی و صنایع‌دستی در فروشگاه رواق",
           "illustrationKey": "gift-craft-food"
@@ -3553,7 +3553,7 @@
       "endsAt": "2028-12-31T23:59:59.000Z",
       "active": true,
       "usageLimit": 30,
-      "usedCount": 0,
+      "usedCount": 1,
       "perCustomerLimit": 5,
       "categorySlugRestriction": "gift-boxes"
     },
@@ -3588,6 +3588,16 @@
   ],
   "couponRedemptions": [
     {
+      "id": "red-4",
+      "couponId": "cpn-yalda",
+      "couponCode": "YALDA15",
+      "orderId": "ord-1005-w1nf2",
+      "userId": "customer-sara-uid",
+      "customerMobile": "09123456789",
+      "discountAmount": 193500,
+      "redeemedAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
       "id": "red-3",
       "couponId": "cpn-nowruz",
       "couponCode": "NOWRUZ1405",
@@ -3619,6 +3629,119 @@
     }
   ],
   "orders": [
+    {
+      "id": "ord-1005-w1nf2",
+      "orderNumber": "RVQ-1405-1005",
+      "userId": "customer-sara-uid",
+      "customerName": "سارا احمدی",
+      "customerMobile": "09123456789",
+      "customerEmail": "sara@example.com",
+      "province": "تهران",
+      "city": "تهران",
+      "addressLine": "تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳",
+      "postalCode": "1234567890",
+      "orderNote": "",
+      "deliveryMethod": "STANDARD",
+      "items": [
+        {
+          "id": "ord-1005-w1nf2-item-1",
+          "productId": "prod-mixed-nuts",
+          "productSlug": "mixed-nuts",
+          "productName": "آجیل مخلوط",
+          "variantId": "RVQ-NUT-006-500",
+          "variantLabel": "۵۰۰ گرم",
+          "sku": "RVQ-NUT-006-500G",
+          "unitPrice": 614400,
+          "quantity": 1,
+          "lineTotal": 614400
+        },
+        {
+          "id": "ord-1005-w1nf2-item-2",
+          "productId": "prod-gift-saffron",
+          "productSlug": "saffron-gift-box",
+          "productName": "جعبه هدیه زعفران",
+          "variantId": "RVQ-GFT-003-STD",
+          "variantLabel": "جعبه یک مثقال زعفران و دمنوش",
+          "sku": "RVQ-GFT-003-STD",
+          "unitPrice": 1290000,
+          "quantity": 1,
+          "lineTotal": 1290000
+        },
+        {
+          "id": "ord-1005-w1nf2-item-3",
+          "productId": "prod-almond",
+          "productSlug": "tree-almond",
+          "productName": "بادام درختی",
+          "variantId": "RVQ-NUT-003-250",
+          "variantLabel": "۲۵۰ گرم",
+          "sku": "RVQ-NUT-003-250G",
+          "unitPrice": 295000,
+          "quantity": 1,
+          "lineTotal": 295000
+        },
+        {
+          "id": "ord-1005-w1nf2-item-4",
+          "productId": "prod-dried-sour-cherry",
+          "productSlug": "dried-sour-cherry",
+          "productName": "آلبالو خشک",
+          "variantId": "RVQ-NUT-013-1000",
+          "variantLabel": "۱ کیلوگرم",
+          "sku": "RVQ-NUT-013-1KG",
+          "unitPrice": 610500,
+          "quantity": 1,
+          "lineTotal": 610500
+        },
+        {
+          "id": "ord-1005-w1nf2-item-5",
+          "productId": "prod-barberry",
+          "productSlug": "barberry",
+          "productName": "زرشک",
+          "variantId": "RVQ-NUT-014-250",
+          "variantLabel": "۲۵۰ گرم",
+          "sku": "RVQ-NUT-014-250G",
+          "unitPrice": 195000,
+          "quantity": 1,
+          "lineTotal": 195000
+        },
+        {
+          "id": "ord-1005-w1nf2-item-6",
+          "productId": "prod-kolompeh",
+          "productSlug": "kolompeh",
+          "productName": "کلمپه",
+          "variantId": "RVQ-SWT-007-LG",
+          "variantLabel": "جعبه بزرگ (۸۵۰ گرم)",
+          "sku": "RVQ-SWT-007-850G",
+          "unitPrice": 390000,
+          "quantity": 1,
+          "lineTotal": 390000
+        },
+        {
+          "id": "ord-1005-w1nf2-item-7",
+          "productId": "prod-iranian-hospitality-pack",
+          "productSlug": "iranian-hospitality-pack",
+          "productName": "بسته پذیرایی ایرانی",
+          "variantId": "RVQ-SAF-005-STD",
+          "variantLabel": "بسته پذیرایی ۴ جزئی",
+          "sku": "RVQ-SAF-005-STD",
+          "unitPrice": 520000,
+          "quantity": 1,
+          "lineTotal": 520000
+        }
+      ],
+      "subtotal": 3914900,
+      "discountAmount": 193500,
+      "couponCode": "YALDA15",
+      "shippingCost": 0,
+      "totalAmount": 3721400,
+      "status": "PAID",
+      "paymentStatus": "SUCCEEDED",
+      "stockDeducted": true,
+      "isSimulatedDemo": true,
+      "lastAttemptRef": "PAY-RVQ-1005-108",
+      "idempotencyKey": "idem-1794187670581-rp2y7o",
+      "createdAt": "2026-11-09T01:27:54.387Z",
+      "updatedAt": "2026-11-09T01:27:59.931Z"
+    },
     {
       "id": "ord-1004-8l05g",
       "orderNumber": "RVQ-1405-1004",
@@ -3786,6 +3909,20 @@
   ],
   "paymentAttempts": [
     {
+      "id": "pay-108",
+      "attemptRef": "PAY-RVQ-1005-108",
+      "orderId": "ord-1005-w1nf2",
+      "orderNumber": "RVQ-1405-1005",
+      "userId": "customer-sara-uid",
+      "amount": 3721400,
+      "status": "SUCCEEDED",
+      "isSimulatedDemo": true,
+      "createdAt": "2026-11-09T01:27:54.387Z",
+      "updatedAt": "2026-11-09T01:27:59.931Z",
+      "expiresAt": "2026-11-09T01:42:54.387Z",
+      "completedAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
       "id": "pay-107",
       "attemptRef": "PAY-RVQ-1405-1004-107",
       "orderId": "ord-1004-8l05g",
@@ -3887,6 +4024,25 @@
     }
   ],
   "orderStatusHistory": [
+    {
+      "id": "hist-15",
+      "orderId": "ord-1005-w1nf2",
+      "status": "PAID",
+      "paymentStatus": "SUCCEEDED",
+      "note": "پرداخت آزمایشی با مرجع PAY-RVQ-1005-108 با موفقیت تأیید و موجودی انبار کسر شد.",
+      "actor": "payment-simulator",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
+      "id": "hist-14",
+      "orderId": "ord-1005-w1nf2",
+      "userId": "customer-sara-uid",
+      "status": "PENDING_PAYMENT",
+      "paymentStatus": "PENDING",
+      "note": "سفارش ثبت شد و در انتظار پرداخت آزمایشی است.",
+      "actor": "customer-sara-uid",
+      "createdAt": "2026-11-09T01:27:54.387Z"
+    },
     {
       "id": "hist-13",
       "orderId": "ord-1004-8l05g",
@@ -4013,6 +4169,132 @@
     }
   ],
   "inventoryMovements": [
+    {
+      "id": "inv-18-5s0",
+      "productId": "prod-iranian-hospitality-pack",
+      "productName": "بسته پذیرایی ایرانی",
+      "variantId": "RVQ-SAF-005-STD",
+      "variantLabel": "بسته پذیرایی ۴ جزئی",
+      "sku": "RVQ-SAF-005-STD",
+      "delta": -1,
+      "previousStock": 18,
+      "newStock": 17,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1005",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
+      "id": "inv-17-y0v",
+      "productId": "prod-kolompeh",
+      "productName": "کلمپه",
+      "variantId": "RVQ-SWT-007-LG",
+      "variantLabel": "جعبه بزرگ (۸۵۰ گرم)",
+      "sku": "RVQ-SWT-007-850G",
+      "delta": -1,
+      "previousStock": 12,
+      "newStock": 11,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1005",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
+      "id": "inv-16-8nv",
+      "productId": "prod-barberry",
+      "productName": "زرشک",
+      "variantId": "RVQ-NUT-014-250",
+      "variantLabel": "۲۵۰ گرم",
+      "sku": "RVQ-NUT-014-250G",
+      "delta": -1,
+      "previousStock": 24,
+      "newStock": 23,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1005",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
+      "id": "inv-15-f98",
+      "productId": "prod-dried-sour-cherry",
+      "productName": "آلبالو خشک",
+      "variantId": "RVQ-NUT-013-1000",
+      "variantLabel": "۱ کیلوگرم",
+      "sku": "RVQ-NUT-013-1KG",
+      "delta": -1,
+      "previousStock": 10,
+      "newStock": 9,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1005",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
+      "id": "inv-14-85y",
+      "productId": "prod-almond",
+      "productName": "بادام درختی",
+      "variantId": "RVQ-NUT-003-250",
+      "variantLabel": "۲۵۰ گرم",
+      "sku": "RVQ-NUT-003-250G",
+      "delta": -1,
+      "previousStock": 26,
+      "newStock": 25,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1005",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
+      "id": "inv-13-bjt",
+      "productId": "prod-herbal-infusion",
+      "productName": "دمنوش گیاهی منتخب",
+      "variantId": "RVQ-SAF-002-120",
+      "variantLabel": "قوطی استوانه‌ای ۱۲۰ گرم",
+      "sku": "RVQ-SAF-002-120G",
+      "delta": -1,
+      "previousStock": 18,
+      "newStock": 17,
+      "reason": "BUNDLE_COMPONENT_PAID",
+      "referenceId": "RVQ-1405-1005 (جعبه هدیه زعفران)",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
+      "id": "inv-12-e3r",
+      "productId": "prod-saffron",
+      "productName": "زعفران",
+      "variantId": "RVQ-SAF-001-1M",
+      "variantLabel": "یک مثقال (۴.۶ گرم) در جعبه کادویی",
+      "sku": "RVQ-SAF-001-4.6G",
+      "delta": -1,
+      "previousStock": 12,
+      "newStock": 11,
+      "reason": "BUNDLE_COMPONENT_PAID",
+      "referenceId": "RVQ-1405-1005 (جعبه هدیه زعفران)",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
+      "id": "inv-11-jb3",
+      "productId": "prod-gift-saffron",
+      "productName": "جعبه هدیه زعفران",
+      "variantId": "RVQ-GFT-003-STD",
+      "variantLabel": "جعبه یک مثقال زعفران و دمنوش",
+      "sku": "RVQ-GFT-003-STD",
+      "delta": -1,
+      "previousStock": 10,
+      "newStock": 9,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1005",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
+    {
+      "id": "inv-10-lmw",
+      "productId": "prod-mixed-nuts",
+      "productName": "آجیل مخلوط",
+      "variantId": "RVQ-NUT-006-500",
+      "variantLabel": "۵۰۰ گرم",
+      "sku": "RVQ-NUT-006-500G",
+      "delta": -1,
+      "previousStock": 21,
+      "newStock": 20,
+      "reason": "ORDER_PAID",
+      "referenceId": "RVQ-1405-1005",
+      "createdAt": "2026-11-09T01:27:59.931Z"
+    },
     {
       "id": "inv-9-rxf",
       "productId": "prod-herbal-infusion",

@@ -350,6 +350,9 @@ async function startServer() {
       hero: {
         desktopImage: findVerifiedAsset('hero', 'ravaq-hero-desktop', ['webp', 'jpg', 'jpeg', 'png']),
         mobileImage: findVerifiedAsset('hero', 'ravaq-hero-mobile', ['webp', 'jpg', 'jpeg', 'png']),
+        desktopVideo: findVerifiedAsset('hero', 'ravaq-hero-desktop', ['mp4']),
+        mobileVideo: findVerifiedAsset('hero', 'ravaq-hero-mobile', ['mp4']),
+        sharedVideo: findVerifiedAsset('hero', 'ravaq-hero', ['mp4']),
       },
       categories: {
         'gift-boxes': findVerifiedAsset('categories', 'ravaq-gift-box', ['webp', 'jpg', 'png']),
