@@ -1259,6 +1259,41 @@ export function updateOrderFulfillmentStatus(
   }
 
   const nowIso = (params.now || new Date()).toISOString();
+
+  // Stock restoration when cancelling a paid order
+  if (
+    params.newStatus === 'CANCELLED' &&
+    order.paymentStatus === 'SUCCEEDED' &&
+    order.stockDeducted
+  ) {
+    for (const item of order.items) {
+      const product = state.products.find((p) => p.id === item.productId);
+      const variant = product?.variants.find((v) => v.id === item.variantId);
+      if (!variant || !product) continue;
+
+      const prevStock = variant.stock;
+      const newStock = prevStock + item.quantity;
+      variant.stock = newStock;
+
+      const movement: InventoryMovement = {
+        id: `inv-${state.inventoryMovements.length + 1}-${Math.random().toString(36).slice(2, 5)}`,
+        productId: product.id,
+        productName: product.name,
+        variantId: variant.id,
+        variantLabel: variant.label,
+        sku: variant.sku,
+        delta: item.quantity,
+        previousStock: prevStock,
+        newStock,
+        reason: 'ORDER_CANCELLED',
+        referenceId: order.orderNumber,
+        createdAt: nowIso,
+      };
+      state.inventoryMovements.unshift(movement);
+    }
+    order.stockDeducted = false;
+  }
+
   order.status = params.newStatus;
   order.updatedAt = nowIso;
 

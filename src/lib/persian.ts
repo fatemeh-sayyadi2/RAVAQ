@@ -131,6 +131,34 @@ export function formatJalaliDate(isoDate: string | Date, includeTime = false): s
   }
 }
 
+/**
+ * Formats a Persian address for display, ensuring province and city
+ * are never repeated. Returns "{city}، {addressLine}" where addressLine
+ * has any leading "محله " stripped. Province is intentionally not shown
+ * separately to avoid duplication when city == province.
+ */
+export function formatAddress(province?: string | null, cityName?: string | null, addressLine?: string | null): string {
+  const city = String(cityName || '').trim();
+  let line = String(addressLine || '').trim();
+
+  // Strip leading "محله " from address line to avoid redundant neighborhood label
+  line = line.replace(/^محله\s*/, '');
+
+  const parts: string[] = [];
+  if (city) parts.push(city);
+  if (line) parts.push(line);
+
+  return parts.join('، ');
+}
+
+/**
+ * Returns the display-friendly short address for an order snapshot,
+ * never repeating province or city.
+ */
+export function formatOrderAddress(province?: string | null, city?: string | null, addressLine?: string | null): string {
+  return formatAddress(province, city, addressLine);
+}
+
 export const IRAN_PROVINCES: { name: string; cities: string[] }[] = [
   { name: 'تهران', cities: ['تهران', 'شمیرانات', 'ری', 'شهریار', 'اسلام‌شهر', 'لواسان', 'دماوند'] },
   { name: 'اصفهان', cities: ['اصفهان', 'کاشان', 'نجف‌آباد', 'خمینی‌شهر', 'شاهین‌شهر', 'نطنز', 'خوانسار'] },

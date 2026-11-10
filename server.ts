@@ -18,6 +18,7 @@ import {
   adjustVariantInventory,
   getEffectiveVariantStock,
 } from './src/lib/commerce-engine.ts';
+import { PaymentStatus } from './src/lib/types.ts';
 import {
   normalizeDigits,
   normalizeIranianMobile,
@@ -187,8 +188,8 @@ function ensureSeededDemoData(state: DatabaseState): void {
       mobile: '09123456789',
       province: 'تهران',
       city: 'تهران',
-      postalCode: '1234567890',
-      addressLine: 'تهران، خیابان ولیعصر، خیابان نمونه، پلاک ۱۲، واحد ۳',
+      postalCode: '۱۴۷۶۹۱۲۳۴۵',
+      addressLine: 'پونک، بلوار عدل شمالی، خیابان سردار جنگل، کوچه یاس، پلاک ۲۴، واحد ۳',
       isDefault: true,
       createdAt: '2026-10-01T08:00:00.000Z',
       updatedAt: '2026-10-01T08:00:00.000Z',
@@ -226,22 +227,8 @@ function ensureSeededDemoData(state: DatabaseState): void {
   void seedCouponByCode;
 
   // Pre-seed persistent demo tokens so page refreshes or dev server restarts stay authenticated
-  sessions.set('demo-token-admin-ravaq', {
-    token: 'demo-token-admin-ravaq',
-    userId: adminUser.id,
-    uid: adminUser.uid,
-    email: adminUser.email,
-    role: 'ADMIN',
-    createdAt: new Date().toISOString(),
-  });
-  sessions.set('demo-token-customer-sara', {
-    token: 'demo-token-customer-sara',
-    userId: customerUser.id,
-    uid: customerUser.uid,
-    email: customerUser.email,
-    role: 'CUSTOMER',
-    createdAt: new Date().toISOString(),
-  });
+
+
 
   if (mutated) {
     saveDatabase(state);
@@ -249,6 +236,305 @@ function ensureSeededDemoData(state: DatabaseState): void {
 }
 
 ensureSeededDemoData(dbState);
+ensureDemoCustomersAndOrders(dbState);
+
+function ensureDemoCustomersAndOrders(state: DatabaseState): void {
+  let mutated = false;
+
+  // ------------------------------------------------------------------
+  // 1. Additional demo customers (keeping existing admin + Sara)
+  // ------------------------------------------------------------------
+  const demoCustomers = [
+    {
+      id: 'usr-demo-amir',
+      uid: 'demo-amir-uid',
+      email: 'amir.mousavi@example.com',
+      displayName: 'امیررضا موسوی',
+      mobile: '09121112233',
+      password: 'Amir1405!Ravaq',
+    },
+    {
+      id: 'usr-demo-fateme',
+      uid: 'demo-fateme-uid',
+      email: 'fateme.hearat@example.com',
+      displayName: 'فاطمه هرات',
+      mobile: '09122223344',
+      password: 'Fateme1405!Ravaq',
+    },
+    {
+      id: 'usr-demo-reza',
+      uid: 'demo-reza-uid',
+      email: 'reza.karimi@example.com',
+      displayName: 'رضا کریمی',
+      mobile: '09123334455',
+      password: 'Reza1405!Ravaq',
+    },
+  ];
+
+  for (const c of demoCustomers) {
+    if (!state.users.find((u) => u.email.toLowerCase() === c.email.toLowerCase())) {
+      state.users.push({
+        id: c.id,
+        uid: c.uid,
+        email: c.email,
+        displayName: c.displayName,
+        mobile: c.mobile,
+        passwordHash: hashPassword(c.password),
+        role: 'CUSTOMER',
+        createdAt: '2026-10-15T10:00:00.000Z',
+        updatedAt: '2026-10-15T10:00:00.000Z',
+      });
+      mutated = true;
+    }
+  }
+
+  // ------------------------------------------------------------------
+  // 2. Demo shipping addresses (one per new customer)
+  // ------------------------------------------------------------------
+  const demoAddresses = [
+    {
+      id: 'addr-demo-amir',
+      userId: 'demo-amir-uid',
+      recipientName: 'امیررضا موسوی',
+      mobile: '09121112233',
+      province: 'اصفهان',
+      city: 'اصفهان',
+      postalCode: '۸۱۷۵۶۱۲۳۴۵',
+      addressLine: 'چهارباغ بالا، خیابان توحید، کوچه بهار، پلاک ۱۸، واحد ۲',
+      isDefault: true,
+      createdAt: '2026-10-15T10:00:00.000Z',
+      updatedAt: '2026-10-15T10:00:00.000Z',
+    },
+    {
+      id: 'addr-demo-fateme',
+      userId: 'demo-fateme-uid',
+      recipientName: 'فاطمه هرات',
+      mobile: '09122223344',
+      province: 'فارس',
+      city: 'شیراز',
+      postalCode: '۷۱۸۶۷۱۲۳۴۵',
+      addressLine: 'معالی‌آباد، خیابان دوستان، کوچه نسترن، پلاک ۳۲، واحد ۴',
+      isDefault: true,
+      createdAt: '2026-10-15T10:00:00.000Z',
+      updatedAt: '2026-10-15T10:00:00.000Z',
+    },
+    {
+      id: 'addr-demo-reza',
+      userId: 'demo-reza-uid',
+      recipientName: 'رضا کریمی',
+      mobile: '09123334455',
+      province: 'خراسان رضوی',
+      city: 'مشهد',
+      postalCode: '۹۱۸۷۶۱۲۳۴۵',
+      addressLine: 'احمدآباد، بلوار ملاصدرا، خیابان عارف، کوچه سرو، پلاک ۱۵، واحد ۱',
+      isDefault: true,
+      createdAt: '2026-10-15T10:00:00.000Z',
+      updatedAt: '2026-10-15T10:00:00.000Z',
+    },
+  ];
+
+  // Remove any non-Persian characters that slipped in
+  const cleanAddresses = demoAddresses.map((a) => ({
+    ...a,
+    addressLine: a.addressLine.replace(/[^\u0600-\u06FF\s،،-]/g, '').trim() || 'نشانی نمونه',
+  }));
+
+  for (const a of cleanAddresses) {
+    if (!state.addresses.find((addr) => addr.id === a.id)) {
+      state.addresses.push(a);
+      mutated = true;
+    }
+  }
+
+  // ------------------------------------------------------------------
+  // 3. Demo orders with payment attempts and status history
+  // ------------------------------------------------------------------
+  // Validated product/variant IDs from seed-catalog.ts (confirmed against live dbState)
+  const VARIANT_PISTACHIO_250 = 'RVQ-NUT-001-250';
+  const VARIANT_PISTACHIO_1KG = 'RVQ-NUT-001-1000';
+  const VARIANT_GIFT_VISITING = 'RVQ-GFT-007-STD';
+  const VARIANT_GIFT_YALDA = 'RVQ-GFT-006-STD';
+  const VARIANT_SAFFRON_2G = 'RVQ-SAF-001-2G';
+  const VARIANT_GAZ_LQ = 'RVQ-SWT-001-LQ';
+  const VARIANT_BAKLAVA_SM = 'RVQ-SWT-003-sm';
+
+  const nowIso = '2026-10-20T14:30:00.000Z';
+
+  // Build orders sequentially starting after existing max sequence (1009)
+  let orderSeq = 1009;
+  let attemptSeq = state.paymentAttempts.length;
+  let historySeq = state.orderStatusHistory.length;
+
+  const newOrders = [
+    {
+      customerUid: 'demo-amir-uid',
+      customerName: 'امیررضا موسوی',
+      customerMobile: '09121112233',
+      province: 'اصفهان',
+      city: 'اصفهان',
+      addressLine: 'چهارباغ بالا، خیابان توحید، کوچه بهار، پلاک ۱۸، واحد ۲',
+      postalCode: '۸۱۷۵۶۱۲۳۴۵',
+      status: 'PENDING_PAYMENT' as const,
+      paymentStatus: 'FAILED' as const,
+      items: [
+        { productId: 'prod-pistachio', variantId: VARIANT_PISTACHIO_250, quantity: 2 },
+      ],
+      deliveryMethod: 'STANDARD' as const,
+      attemptAction: 'FAILED',
+      attemptNote: 'تراکنش آزمایشی توسط شبیه‌ساز ناموفق اعلام شد.',
+      historyNote: 'پرداخت ناموفق؛ سفارش در انتظار تلاش مجدد است.',
+    },
+    {
+      customerUid: 'demo-fateme-uid',
+      customerName: 'فاطمه هرات',
+      customerMobile: '09122223344',
+      province: 'فارس',
+      city: 'شیراز',
+      addressLine: 'معالی‌آباد، خیابان دوستان، کوچه نسترن، پلاک ۳۲، واحد ۴',
+      postalCode: '۷۱۸۶۷۱۲۳۴۵',
+      status: 'PAID' as const,
+      paymentStatus: 'SUCCEEDED' as const,
+      items: [
+        { productId: 'prod-baklava', variantId: VARIANT_BAKLAVA_SM, quantity: 1 },
+        { productId: 'prod-saffron', variantId: VARIANT_SAFFRON_2G, quantity: 1 },
+      ],
+      deliveryMethod: 'EXPRESS_TEHRAN' as const,
+      attemptAction: 'SUCCEEDED',
+      attemptNote: 'تراکنش آزمایشی با موفقیت تأیید شد.',
+      historyNote: 'پرداخت آزمایشی با موفقیت تأیید و موجودی انبار کسر شد.',
+    },
+    {
+customerUid: 'demo-reza-uid',
+      customerName: 'رضا کریمی',
+      customerMobile: '09123334455',
+      province: 'خراسان رضوی',
+      city: 'مشهد',
+      addressLine: 'احمدآباد، بلوار ملاصدرا، خیابان عارف، کوچه سرو، پلاک ۱۵، واحد ۱',
+      postalCode: '۹۱۸۷۶۱۲۳۴۵',
+      status: 'PROCESSING' as const,
+      paymentStatus: 'SUCCEEDED' as const,
+      items: [
+        { productId: 'prod-gift-visiting', variantId: VARIANT_GIFT_VISITING, quantity: 1 },
+      ],
+      deliveryMethod: 'STANDARD' as const,
+      attemptAction: 'SUCCEEDED',
+      attemptNote: 'تراکنش آزمایشی با موفقیت تأیید شد.',
+      historyNote: 'سفارش در حال پردازش و ارسال.',
+    },
+  ];
+
+  // Clean any non-Persian characters from address lines
+  const cleanNewOrders = newOrders.map((o) => ({
+    ...o,
+    addressLine: o.addressLine.replace(/[^\u0600-\u06FF\s،-]/g, '').trim() || 'نشانی نمونه',
+  }));
+
+  for (const o of cleanNewOrders) {
+    orderSeq++;
+    attemptSeq++;
+    const orderId = `ord-${orderSeq}-${Math.random().toString(36).slice(2, 7)}`;
+    const orderNumber = `RVQ-1405-${orderSeq}`;
+    const attemptRef = `PAY-${orderNumber}-${attemptSeq}`;
+
+    // Build order items (no stock deduction)
+    const orderItems = o.items.map((item, idx) => {
+      const product = state.products.find((p) => p.id === item.productId);
+      const variant = product?.variants.find((v) => v.id === item.variantId);
+      const unitPrice = variant?.price || 0;
+      return {
+        id: `${orderId}-item-${idx + 1}`,
+        productId: item.productId,
+        productSlug: product?.slug || '',
+        productName: product?.name || 'محصول نامشخص',
+        variantId: item.variantId,
+        variantLabel: variant?.label || 'استاندارد',
+        sku: variant?.sku || '',
+        unitPrice,
+        quantity: item.quantity,
+        lineTotal: unitPrice * item.quantity,
+      };
+    });
+
+    const subtotal = orderItems.reduce((sum, i) => sum + i.lineTotal, 0);
+    const shippingCost = o.deliveryMethod === 'EXPRESS_TEHRAN' ? 95000 : 65000;
+    const totalAmount = subtotal + shippingCost;
+
+    const order = {
+      id: orderId,
+      orderNumber,
+      userId: o.customerUid,
+      customerName: o.customerName,
+      customerMobile: o.customerMobile,
+      customerEmail: undefined,
+      province: o.province,
+      city: o.city,
+      addressLine: o.addressLine,
+      postalCode: o.postalCode,
+      orderNote: 'سفارش نمایشی برای پنل مدیریت',
+      deliveryMethod: o.deliveryMethod,
+      items: orderItems,
+      subtotal,
+      discountAmount: 0,
+      shippingCost,
+      totalAmount,
+      status: o.status,
+      paymentStatus: o.paymentStatus,
+      stockDeducted: false,
+      isSimulatedDemo: true,
+      lastAttemptRef: attemptRef,
+      createdAt: nowIso,
+      updatedAt: nowIso,
+    };
+
+    const paymentAttempt = {
+      id: `pay-${attemptSeq}`,
+      attemptRef,
+      orderId: order.id,
+      orderNumber: order.orderNumber,
+      userId: o.customerUid,
+      amount: order.totalAmount,
+      status: (o.attemptAction === 'SUCCEEDED' ? 'SUCCEEDED' : 'FAILED') as PaymentStatus,
+      isSimulatedDemo: true,
+      createdAt: nowIso,
+      updatedAt: nowIso,
+      expiresAt: new Date(Date.now() + 15 * 60 * 1000).toISOString(),
+      completedAt: o.attemptAction !== 'PENDING' ? nowIso : undefined,
+      failureReason:
+        o.attemptAction === 'FAILED'
+          ? 'تراکنش آزمایشی توسط شبیه‌ساز ناموفق اعلام شد.'
+          : undefined,
+    };
+
+    const historyEntry = {
+      id: `hist-${historySeq + 1}`,
+      orderId: order.id,
+      userId: o.customerUid,
+      status: o.status,
+      paymentStatus: o.paymentStatus,
+      note: o.historyNote,
+      actor: o.attemptAction === 'SUCCEEDED' ? 'payment-simulator' : 'customer',
+      createdAt: nowIso,
+    };
+
+    // Check for duplicate order number before inserting
+    if (!state.orders.find((ord) => ord.orderNumber === orderNumber)) {
+      state.orders.push(order);
+      state.paymentAttempts.push(paymentAttempt);
+      state.orderStatusHistory.push(historyEntry);
+      historySeq++;
+      mutated = true;
+    }
+  }
+
+  // ------------------------------------------------------------------
+  // 4. Persistent demo session tokens for new customers
+  // ------------------------------------------------------------------
+
+
+  if (mutated) {
+    saveDatabase(state);
+  }
+}
 
 function getAuthenticatedUser(req: Request): SessionRecord | null {
   const authHeader = req.headers.authorization;
@@ -667,12 +953,7 @@ async function startServer() {
       return;
     }
 
-    const token =
-      cleanEmail === DEMO_ADMIN_EMAIL
-        ? 'demo-token-admin-ravaq'
-        : cleanEmail === DEMO_CUSTOMER_EMAIL
-        ? 'demo-token-customer-sara'
-        : crypto.randomBytes(24).toString('hex');
+const token = crypto.randomBytes(32).toString('hex');
     const session: SessionRecord = {
       token,
       userId: user.id,

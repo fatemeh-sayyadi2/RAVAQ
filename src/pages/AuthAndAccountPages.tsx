@@ -26,6 +26,7 @@ import {
   formatToman,
   toPersianDigits,
   formatJalaliDate,
+  formatAddress,
   IRAN_PROVINCES,
 } from '../lib/persian.ts';
 
@@ -698,7 +699,7 @@ export const AccountPage: React.FC<AccountPageProps> = ({
                             {addr.recipientName} · {toPersianDigits(addr.mobile)}
                           </div>
                           <div className="text-[#77716A]">
-                            {addr.province}، {addr.city} — {addr.addressLine}
+                            {formatAddress(addr.province, addr.city, addr.addressLine)}
                           </div>
                           <div className="font-mono text-[#77716A]">
                             کد پستی: {toPersianDigits(addr.postalCode)}

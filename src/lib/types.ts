@@ -205,7 +205,7 @@ export interface InventoryMovement {
   delta: number; // negative for deduction, positive for restock/release
   previousStock: number;
   newStock: number;
-  reason: 'ORDER_PAID' | 'ADMIN_ADJUSTMENT' | 'BUNDLE_COMPONENT_PAID';
+  reason: 'ORDER_PAID' | 'ADMIN_ADJUSTMENT' | 'BUNDLE_COMPONENT_PAID' | 'ORDER_CANCELLED';
   referenceId: string;
   createdAt: string;
 }

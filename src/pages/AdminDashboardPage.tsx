@@ -19,6 +19,7 @@ import {
   formatToman,
   toPersianDigits,
   formatJalaliDate,
+  formatAddress,
 } from '../lib/persian.ts';
 import { OrderStatus } from '../lib/types.ts';
 import { AUTHORIZED_ADMIN_EMAIL } from '../lib/firebase.ts';
@@ -80,7 +81,6 @@ const PAYMENT_STATUS_PERSIAN: Record<string, string> = {
   PENDING_PAYMENT: 'در انتظار پرداخت',
   FAILED: 'ناموفق',
   EXPIRED: 'منقضی‌شده',
-  REFUNDED: 'بازپرداخت‌شده',
 };
 
   // New Product form
@@ -815,7 +815,7 @@ const PAYMENT_STATUS_PERSIAN: Record<string, string> = {
                         </div>
 
                         <div className="text-[#77716A]">
-                          نشانی ثبت‌شده هنگام سفارش: {ord.province}، {ord.city}، {ord.addressLine} — کد پستی:{' '}
+                          نشانی ثبت‌شده هنگام سفارش: {formatAddress(ord.province, ord.city, ord.addressLine)} — کد پستی:{' '}
                           {toPersianDigits(ord.postalCode)}
                         </div>
 
